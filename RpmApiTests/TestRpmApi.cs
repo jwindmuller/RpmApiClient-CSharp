@@ -56,6 +56,8 @@ namespace RpmApiTests
 			Client client = getApiClient();
 			AccountResponse account = client.Account(firstAccount.Supplier, firstAccount.Account);
 
+			// getFirstAccount uses the Accounts API call which does not return Reps
+			firstAccount.Reps = account.Reps;
 			Assert.IsTrue(firstAccount.Equals(account));
 		}
 

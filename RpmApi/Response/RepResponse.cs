@@ -13,5 +13,15 @@ namespace RPM.Api.Response
 		//List<AssignmentCode> AssignmentCodes;
 		public string Rep;
 		public int RepID;
+
+		public override bool Equals(object obj)
+		{
+			RepResponse other = (RepResponse)obj;
+			return
+				this.Agency == other.Agency &&
+				this.AgencyID == other.AgencyID &&
+				this.Rep == other.Rep &&
+				this.RepID == other.RepID;
+		}
 	}
 }
