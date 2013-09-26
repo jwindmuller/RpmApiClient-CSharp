@@ -5,12 +5,12 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	public class ProcFormsResult
+	public class ProcFormResponse
     {
         public string Process { get; set; }
         public int ProcessID { get; set; }
         public string View { get; set; }
-        public List<string> Columns { get; set; }
-        public List<ProcForm> Forms { get; set; }
+        public List<string> Columns { get; set; }    
+        public ProcForm Form { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPM.Api.Response
 {
-	public class ProcResult
+	public class ProcResponse
     {
         public string Process { get; set; }
         public int ProcessID { get; set; }

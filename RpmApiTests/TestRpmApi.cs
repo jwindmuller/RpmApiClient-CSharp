@@ -11,16 +11,26 @@ namespace RpmApiTests
 	[TestClass]
 	public class TestRpmApi
 	{
+		private Client _client;
+		private Client getApiClient()
+		{
+			if (_client == null)
+			{
+				_client = new Client(ApiSettings.url, ApiSettings.key);	
+			}
+			return _client;
+		}
 		[TestMethod]
 		public void TestIncorrectApiURL()
 		{
 			try
 			{
-				Client client = new Client("badurl", "nokey");
+				Client client = new Client("badurl", ApiSettings.key);
+				Assert.Fail("Expected UriFormatException");
 			}
 			catch (Exception e)
 			{
-				Assert.AreEqual(e.GetType().Name, "WebException");
+				Assert.AreEqual(e.GetType().Name, "UriFormatException");
 			}
 		}
 
@@ -30,20 +40,20 @@ namespace RpmApiTests
 			Client client = new Client(ApiSettings.url, "badkey");
 			try
 			{
-				InfoResult info = client.info();
+				InfoResponse info = client.Info();
+				Assert.Fail("Expected RPMApiError Exception");
 			}
 			catch (RPMApiError e)
 			{
 				Assert.AreEqual(e.Message, "Valid key required");
 			}
-
 		}
 
 		[TestMethod]
 		public void TestInfo()
 		{
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
-			InfoResult info = client.info();
+			Client client = getApiClient();
+			InfoResponse info = client.Info();
 			Assert.IsNotNull(info.Role);
 			Assert.IsNotNull(info.Subscriber);
 			Assert.IsNotNull(info.User);
@@ -54,8 +64,8 @@ namespace RpmApiTests
 		public void TestAccount()
 		{
 			AccountResponse firstAccount = getFirstAccount();
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
-			AccountResponse account = client.Account(firstAccount.Supplier, Account: firstAccount.Account);
+			Client client = getApiClient();
+			AccountResponse account = client.Account(firstAccount.Supplier, firstAccount.Account);
 
 			Assert.IsTrue(firstAccount.Equals(account));
 		}
@@ -67,8 +77,8 @@ namespace RpmApiTests
 				supplier = this.getFirstSupplier();	
 			}
 
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
-			List<AccountResponse> accounts = client.Accounts(supplier.Supplier);
+			Client client = getApiClient();
+			List<AccountResponse> accounts = client.AccountsForSupplier(supplier.Supplier);
 
 			if (accounts.Count == 0)
 			{
@@ -94,9 +104,9 @@ namespace RpmApiTests
 		[TestMethod]
 		public void TestAgencies()
 		{
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
-			AgenciesResponse agencies = client.Agencies();
-			AgencyResponse agency = agencies.Agencies[0];
+			Client client = getApiClient();
+			List<AgencyResponse> agencies = client.Agencies();
+			AgencyResponse agency = agencies[0];
 			Assert.IsNotNull(agency.Agency);
 			Assert.IsTrue(agency.AgencyID > 0);
 		}
@@ -104,14 +114,22 @@ namespace RpmApiTests
 		[TestMethod]
 		public void TestAgency()
 		{
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
-			AgenciesResponse agencies = client.Agencies();
-			AgencyResponse agency0 = agencies.Agencies[0];
+			Client client = getApiClient();
+			List<AgencyResponse> agencies = client.Agencies();
+			AgencyResponse agency0 = agencies[0];
 
-			AgencyResponse agency = client.Agency(null, agency0.AgencyID);
-
+			AgencyResponse agency = client.Agency(agency0.AgencyID);
+			
+			// The Agencies call only returns these 2 fields
 			Assert.AreEqual(agency0.Agency, agency.Agency);
 			Assert.AreEqual(agency0.AgencyID, agency.AgencyID);
+		}
+
+		[TestMethod]
+		public void TestCommAccounts()
+		{
+			Client client = getApiClient();
+			List<CommAccountResponse> accounts = client.CommAccounts(Client.Var.Referral, Client.Run._this);
 		}
 
 		[TestMethod]
@@ -124,7 +142,7 @@ namespace RpmApiTests
 
 		private SupplierResponse getFirstSupplier()
 		{
-			Client client = new Client(ApiSettings.url, ApiSettings.key);
+			Client client = getApiClient();
 			List<SupplierResponse> suppliers = client.Suppliers();
 
 			return suppliers[0];

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPM.Api.Response
 {
-    public class InfoResult
+    public class InfoResponse
     {
         public string Subscriber {get; set;}
         public string User { get; set; }

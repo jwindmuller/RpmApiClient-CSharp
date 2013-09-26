@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\RpmApi.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,21 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\CommAccountResponse.cs" />
     <Compile Include="Response\Abstract\Response.cs" />
-    <Compile Include="Response\AgenciesResponse.cs" />
     <Compile Include="Response\AgencyResponse.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Response\AccountResponse.cs" />
     <Compile Include="Response\ContactResponse.cs" />
     <Compile Include="Response\FieldResponse.cs" />
-    <Compile Include="Response\InfoResult.cs" />
+    <Compile Include="Response\InfoResponse.cs" />
     <Compile Include="Response\NoteResponse.cs" />
     <Compile Include="Response\ProcForm.cs" />
-    <Compile Include="Response\ProcFormData.cs" />
+    <Compile Include="Response\ProcFormResponse.cs" />
     <Compile Include="Response\ProcFormField.cs" />
-    <Compile Include="Response\ProcFormsResult.cs" />
-    <Compile Include="Response\ProcResult.cs" />
-    <Compile Include="Response\ProcsResult.cs" />
+    <Compile Include="Response\ProcFormsResponse.cs" />
+    <Compile Include="Response\ProcResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response\RepResponse.cs" />
     <Compile Include="Response\RPMApiError.cs" />
