@@ -204,7 +204,7 @@ namespace RPM.Api
 		/// </summary>
 		/// <param name="AgencyID">The agency ID.</param>
 		/// <returns>AgencyResponse object with the response data</returns>
-		public AgencyResponse Agency(int AgencyID )
+		public AgencyResponse Agency(int AgencyID)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.AgencyID = AgencyID;

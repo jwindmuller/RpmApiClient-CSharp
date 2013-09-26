@@ -1,25 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System.Collections.Generic;
 using RPM.Api;
 using RPM.Api.Response;
-
-using System.Collections.Generic;
 
 namespace RpmApiTests
 {
 	[TestClass]
-	public class TestRpmApi
+	public class TestRpmApi : TestBase
 	{
-		private Client _client;
-		private Client getApiClient()
-		{
-			if (_client == null)
-			{
-				_client = new Client(ApiSettings.url, ApiSettings.key);	
-			}
-			return _client;
-		}
 		[TestMethod]
 		public void TestIncorrectApiURL()
 		{
@@ -125,12 +114,7 @@ namespace RpmApiTests
 			Assert.AreEqual(agency0.AgencyID, agency.AgencyID);
 		}
 
-		[TestMethod]
-		public void TestCommAccounts()
-		{
-			Client client = getApiClient();
-			List<CommAccountResponse> accounts = client.CommAccounts(Client.Var.Referral, Client.Run._this);
-		}
+		
 
 		[TestMethod]
 		public void TestSuppliers()
