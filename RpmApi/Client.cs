@@ -105,7 +105,7 @@ namespace RPM.Api
 
 		/// <summary>
 		/// Execute the "Account" API Endpoint.
-		/// http://rpmsoftware.wordpress.com/api/account/
+		/// http://rpmsoftware.wordpress.com/api/Account/
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
 		/// <returns>AccountResponse object with the response data</returns>
@@ -115,9 +115,10 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Return a list of Accounts for a Supplier Name
-		/// Execute the "Accounts" API endpoint
-		/// http://rpmsoftware.wordpress.com/api/Accounts/.
+		/// <para>Return a list of Accounts for a Supplier ID.</para>
+		/// <remarks>Note: Expect AccountResponse.Rep to be null. Use Account call to get Account's Reps.</remarks>
+		/// <para>Executes the "Accounts" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Accounts/ </para>
 		/// </summary>
 		/// <param name="SupplierID">The supplier identifier.</param>
 		/// <returns>List of AccountResponse object with the response data</returns>
@@ -129,9 +130,10 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Return a list of Accounts for a Supplier ID
-		/// Execute the "Accounts" API endpoint
-		/// http://rpmsoftware.wordpress.com/api/Accounts/.
+		/// <para>Return a list of Accounts for a Supplier ID.</para>
+		/// <remarks>Note: Expect AccountResponse.Rep to be null. Use Account call to get Account's Reps.</remarks>
+		/// <para>Executes the "Accounts" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Accounts/ </para>
 		/// </summary>
 		/// <param name="SupplierID">The supplier identifier.</param>
 		/// <returns>List of AccountResponse object with the response data</returns>
@@ -143,9 +145,10 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Return a list of Accounts for a Customer ID
-		/// Execute the "Accounts" API endpoint
-		/// http://rpmsoftware.wordpress.com/api/Accounts/
+		/// <para>Return a list of Accounts for a Supplier ID.</para>
+		/// <remarks>Note: Expect AccountResponse.Rep to be null. Use Account call to get Account's Reps.</remarks>
+		/// <para>Executes the "Accounts" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Accounts/ </para>
 		/// </summary>
 		/// <param name="CustomerID">The customer ID.</param>
 		/// <returns>List of AccountResponse object with the response data</returns>
@@ -157,9 +160,10 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Return a list of Accounts for a Customer Name
-		/// Execute the "Accounts" API endpoint
-		/// http://rpmsoftware.wordpress.com/api/Accounts/
+		/// <para>Return a list of Accounts for a Supplier ID.</para>
+		/// <remarks>Note: Expect AccountResponse.Rep to be null. Use Account call to get Account's Reps.</remarks>
+		/// <para>Executes the "Accounts" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Accounts/ </para>
 		/// </summary>
 		/// <param name="CustomerName">Name of the customer.</param>
 		public List<AccountResponse> AccountsForCustomer(string CustomerName)
@@ -171,7 +175,10 @@ namespace RPM.Api
 
 
 		/// <summary>
-		/// Accountses the specified API parameters.
+		/// Execute the "Accounts" API endpoint
+		/// <para>
+		/// http://rpmsoftware.wordpress.com/api/Accounts/
+		/// </para>
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
 		/// <returns>List of AccountResponse object with the response data</returns>
