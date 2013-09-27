@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\CustomerResponse.cs" />
     <Compile Include="Response\CommAccountResponse.cs" />
     <Compile Include="Response\Abstract\Response.cs" />
     <Compile Include="Response\AgencyResponse.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Response\FieldResponse.cs" />
     <Compile Include="Response\InfoResponse.cs" />
     <Compile Include="Response\NoteResponse.cs" />
+    <Compile Include="Response\PhoneNumberResponse.cs" />
     <Compile Include="Response\ProcForm.cs" />
     <Compile Include="Response\ProcFormResponse.cs" />
     <Compile Include="Response\ProcFormField.cs" />

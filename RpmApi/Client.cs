@@ -320,6 +320,48 @@ namespace RPM.Api
 		}
 
 		/// <summary>
+		///   <para>Return Customer information by providing their Name.</para>
+		///   <para>Executes the "Customer" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Customer/ </para>
+		/// </summary>
+		/// <param name="CustomerName">The customer Name.</param>
+		/// <returns>
+		/// CustomerResponse containing the reponse data.
+		/// </returns>
+		public CustomerResponse Customer(string CustomerName)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Customer = CustomerName;
+			return this.Customer(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Return Customer information by providing their ID.</para>
+		///   <para>Executes the "Customer" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Customer/ </para>
+		/// </summary>
+		/// <param name="CustomerID">The customer ID.</param>
+		/// <returns>
+		/// CustomerResponse containing the reponse data.
+		/// </returns>
+		public CustomerResponse Customer(int CustomerID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CustomerID = CustomerID;
+			return this.Customer(apiParameters);
+		}
+
+		/// <summary>
+		/// Customers the specified API parameters.
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns></returns>
+		private CustomerResponse Customer(dynamic apiParameters)
+		{
+			return this.sendRequest<CustomerResponse>("Customer", apiParameters);
+		}
+
+		/// <summary>
 		/// Execute the "Info" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/info/
 		/// </summary>

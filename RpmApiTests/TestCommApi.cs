@@ -6,6 +6,9 @@ using RPM.Api.Response;
 
 namespace RpmApiTests
 {
+	/// <summary>
+	/// Test API endpoints that begin with Comm.
+	/// </summary>
 	[TestClass]
 	public class TestCommApi : TestBase
 	{

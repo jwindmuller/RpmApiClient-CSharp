@@ -52,20 +52,21 @@ namespace RPM.Api.Response
 		public string Supplier { get; set; }
 		public int SupplierID { get; set; }
 
-		public bool Equals(AccountResponse r)
+		public override bool Equals(object obj)
 		{
+			AccountResponse other = (AccountResponse)obj;
 			bool areEquals =
-				this.Account == r.Account &&
-				this.AccountID == r.AccountID &&
-				this.AccountGroup == r.AccountGroup &&
-				this.AccountGroupID == r.AccountGroupID &&
-				this.Added.Equals(r.Added) &&
-				this.Customer == r.Customer &&
-				this.CustomerID == r.CustomerID &&
-				this.Supplier == r.Supplier &&
-				this.SupplierID == r.SupplierID &&
-				this.CollectionsAreEqual(this.Fields, r.Fields) &&
-				this.CollectionsAreEqual(this.Reps, r.Reps);
+				this.Account == other.Account &&
+				this.AccountID == other.AccountID &&
+				this.AccountGroup == other.AccountGroup &&
+				this.AccountGroupID == other.AccountGroupID &&
+				this.Added.Equals(other.Added) &&
+				this.Customer == other.Customer &&
+				this.CustomerID == other.CustomerID &&
+				this.Supplier == other.Supplier &&
+				this.SupplierID == other.SupplierID &&
+				this.CollectionsAreEqual(this.Fields, other.Fields) &&
+				this.CollectionsAreEqual(this.Reps, other.Reps);
 
 			return areEquals;
 		}

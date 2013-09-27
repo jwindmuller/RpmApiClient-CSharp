@@ -93,6 +93,18 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomer()
+		{
+			SupplierResponse supplier = this.getFirstSupplier();
+			AccountResponse account = getFirstAccount(supplier);
+
+			CustomerResponse customerByID = getApiClient().Customer(account.CustomerID);
+			CustomerResponse customerByName = getApiClient().Customer(account.Customer);
+
+			Assert.IsTrue(customerByID.Equals(customerByName));
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();
