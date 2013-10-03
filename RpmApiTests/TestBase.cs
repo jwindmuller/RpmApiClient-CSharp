@@ -13,7 +13,7 @@ namespace RpmApiTests
 		{
 			if (_client == null)
 			{
-				_client = new Client(ApiSettings.url, ApiSettings.key);
+				_client = new Client(ApiSettings.url, ApiSettings.key, new MockResponseRestClient(ApiSettings.url + "Api2.svc"));
 			}
 			return _client;
 		}

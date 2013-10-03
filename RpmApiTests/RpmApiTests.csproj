@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=104.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.2.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -52,6 +56,7 @@
   <ItemGroup>
     <Compile Include="ApiSettings.cs" />
     <Compile Include="ApiSettingsSample.cs" />
+    <Compile Include="MockResponseRestClient.cs" />
     <Compile Include="TestRpmApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCommApi.cs" />
@@ -62,6 +67,9 @@
       <Project>{35a75673-92fa-4b69-8156-9ecc5c55809b}</Project>
       <Name>RpmApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

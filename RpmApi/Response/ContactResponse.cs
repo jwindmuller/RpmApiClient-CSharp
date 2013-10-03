@@ -10,7 +10,8 @@ namespace RPM.Api.Response
 		public int ContactID { get; set; }
 		public string Email { get; set; }
 		public string FirstName { get; set; }
-		public List<PhoneNumberResponse> _PhoneNumbers { get; set; }
+		public string LastName { get; set; }
+		private List<PhoneNumberResponse> _PhoneNumbers { get; set; }
 		public List<PhoneNumberResponse> PhoneNumbers {
 			get {
 				if (_PhoneNumbers == null)

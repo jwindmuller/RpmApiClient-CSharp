@@ -105,6 +105,45 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomerAdd()
+		{
+			Client client = getApiClient();
+			CustomerResponse newCustomerData = new CustomerResponse();
+			newCustomerData.Name = "Tester";
+			CustomerResponse response = client.CustomerAdd(newCustomerData);
+
+			newCustomerData.Added = response.Added;
+			newCustomerData.Modified = response.Modified;
+			newCustomerData.CustomerID = response.CustomerID;
+			newCustomerData.Fields = response.Fields;
+
+			Assert.IsTrue(newCustomerData.Equals(response));
+		}
+
+		[TestMethod]
+		public void TestCustomerContactAdd()
+		{
+
+			int CustomerID = 77777777; // Fake ID for Mock testing
+			Client client = getApiClient();
+			ContactResponse contact = new ContactResponse();
+			contact.FirstName = "Contact";
+			contact.LastName = "Contactson";
+			contact.Salutation = "Mr.";
+			contact.Title = "Title";
+
+			PhoneNumberResponse phone = new PhoneNumberResponse();
+			phone.PhoneNumber = "555-0035";
+			phone.Type = 1;
+			contact.PhoneNumbers.Add(phone);
+
+			ContactResponse  response = client.CustomerContactAdd(CustomerID, contact, true);
+
+			Assert.IsTrue(response.Equals(contact));
+
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

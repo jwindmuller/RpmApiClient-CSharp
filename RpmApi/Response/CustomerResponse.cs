@@ -7,7 +7,7 @@ namespace RPM.Api.Response
 {
 	public class CustomerResponse : Abstract.Response
 	{
-		public List<AccountResponse> _Accounts { get; set; }
+		private List<AccountResponse> _Accounts { get; set; }
 		public List<AccountResponse> Accounts {
 			get{
 				if (_Accounts == null)
@@ -23,7 +23,7 @@ namespace RPM.Api.Response
 
 		//public List<string> Aliases { get; set; }
 
-		public List<ContactResponse> _Contacts { get; set; }
+		private List<ContactResponse> _Contacts { get; set; }
 		public List<ContactResponse> Contacts {
 			get {
 				if (_Contacts == null)
@@ -37,7 +37,7 @@ namespace RPM.Api.Response
 
 		public int CustomerID { get; set; }
 
-		public List<FieldResponse> _Fields { get; set; }
+		private List<FieldResponse> _Fields { get; set; }
 		public List<FieldResponse> Fields { 
 			get {
 				if (_Fields == null)
@@ -52,9 +52,24 @@ namespace RPM.Api.Response
 		//public List<LocationResponse> _Locations { get; set; }
 
 		public DateTime Modified { get; set; }
-		public string Name { get; set; }
+		private string _Name;
+		public string Name
+		{
+			get
+			{
+				if (_Name == null)
+				{
+					return "";
+				}
+				return _Name;
+			}
+			set
+			{
+				_Name = value;
+			}
+		}
 
-		public List<NoteResponse> _Notes { get; set; }
+		private List<NoteResponse> _Notes { get; set; }
 		public List<NoteResponse> Notes { 
 			get {
 				if (_Notes == null)
@@ -66,7 +81,7 @@ namespace RPM.Api.Response
 			set { _Notes = value; } 
 		}
 
-		public List<NoteResponse> _NotesForStaff { get; set; }
+		private List<NoteResponse> _NotesForStaff { get; set; }
 		public List<NoteResponse> NotesForStaff
 		{
 			get
@@ -80,7 +95,22 @@ namespace RPM.Api.Response
 			set { _NotesForStaff = value; }
 		}
 
-		public string Website { get; set; }
+		private string _Website;
+		public string Website
+		{
+			get
+			{
+				if (_Website == null)
+				{
+					return "";
+				}
+				return _Website;
+			}
+			set
+			{
+				_Website = value;
+			}
+		}
 
 		public override bool Equals(object obj)
 		{

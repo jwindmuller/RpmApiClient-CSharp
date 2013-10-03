@@ -27,7 +27,7 @@ namespace RPM.Api
 		/// <param name="apiURL">The API URL.</param>
 		/// <param name="apiKey">The API key.</param>
 		/// <exception cref="System.UriFormatException">Invalid URL</exception>
-		public Client(string apiURL, string apiKey)
+		public Client(string apiURL, string apiKey, RestClient client = null)
         {
             this.url = apiURL;
             if (!this.url.EndsWith("/"))
@@ -39,7 +39,15 @@ namespace RPM.Api
 			{
 				throw new UriFormatException("Invalid URL: " + this.url);
 			}
-            this.client = new RestClient(url);
+			if (client == null)
+			{
+				this.client = new RestClient(url);
+			}
+			else
+			{
+				this.client = client;
+			}
+            
             this.key = apiKey;
         }
 
@@ -359,6 +367,55 @@ namespace RPM.Api
 		private CustomerResponse Customer(dynamic apiParameters)
 		{
 			return this.sendRequest<CustomerResponse>("Customer", apiParameters);
+		}
+
+		public CustomerResponse CustomerAdd(CustomerResponse newCustomerData)
+		{
+			newCustomerData.Contacts.Clear();
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Customer = newCustomerData;
+			return this.CustomerAdd(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Create Customer information by providing their ID.</para>
+		///   <para>Executes the "Customer" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerAdd/ </para>
+		/// </summary>
+		/// <returns>CustomerResponse containing the newly created customer.</returns>
+		private CustomerResponse CustomerAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<CustomerResponse>("CustomerAdd", apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Add Contact Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerContactAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerContactAdd/ </para>
+		/// </summary>
+		/// <param name="CustomerID">The customer identifier.</param>
+		/// <param name="ContactData">The contact data.</param>
+		/// <param name="MakePrimary">if set to <c>true</c> [make primary contact].</param>
+		/// <returns></returns>
+		public ContactResponse CustomerContactAdd(int CustomerID, ContactResponse ContactData, Boolean MakePrimary = false)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CustomerID = CustomerID;
+			apiParameters.Contact = ContactData;
+			apiParameters.IsPrimary = MakePrimary;
+			return this.CustomerContactAdd(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Add Contact Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerContactAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerContactAdd/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns></returns>
+		private ContactResponse CustomerContactAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<ContactResponse>("CustomerContactAdd", apiParameters);
 		}
 
 		/// <summary>
