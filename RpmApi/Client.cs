@@ -415,7 +415,10 @@ namespace RPM.Api
 		/// <returns></returns>
 		private ContactResponse CustomerContactAdd(dynamic apiParameters)
 		{
-			return this.sendRequest<ContactResponse>("CustomerContactAdd", apiParameters);
+			Dictionary<string, ContactResponse> response =
+				this.sendRequest<Dictionary<string, ContactResponse>>("CustomerContactAdd", apiParameters);
+			return response["Contact"];
+
 		}
 
 		/// <summary>
@@ -660,7 +663,7 @@ namespace RPM.Api
             JsonDeserializer js = new JsonDeserializer();
             response.Content = response.Content.Replace("{\"Result\":", "");
             response.Content = response.Content.Substring(0, response.Content.Length - 1);
-
+				
             if (response.Content.StartsWith("{\"Error\""))
             {
                 RPMApiError parsedError = js.Deserialize<RPMApiError>(response);

@@ -8,9 +8,44 @@ namespace RPM.Api.Response
 	public class ContactResponse : Abstract.Response
 	{
 		public int ContactID { get; set; }
-		public string Email { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
+		private string _Email { get; set; }
+		public string Email 
+		{ 
+			get {
+				if (_Email == null)
+				{
+					_Email = "";
+				}
+				return _Email;
+			}
+			set { _Email = value; } 
+		}
+		private string _FirstName { get; set; }
+		public string FirstName
+		{
+			get
+			{
+				if (_FirstName == null)
+				{
+					_FirstName = "";
+				}
+				return _FirstName;
+			}
+			set { _FirstName = value; }
+		}
+		private string _LastName { get; set; }
+		public string LastName
+		{
+			get
+			{
+				if (_LastName == null)
+				{
+					_LastName = "";
+				}
+				return _LastName;
+			}
+			set { _LastName = value; }
+		}
 		private List<PhoneNumberResponse> _PhoneNumbers { get; set; }
 		public List<PhoneNumberResponse> PhoneNumbers {
 			get {
@@ -22,8 +57,32 @@ namespace RPM.Api.Response
 			}
 			set { _PhoneNumbers = value; } 
 		}
-		public string Salutation { get; set; }
-		public string Title { get; set; }
+		private string _Salutation { get; set; }
+		public string Salutation
+		{
+			get
+			{
+				if (_Salutation == null)
+				{
+					_Salutation = "";
+				}
+				return _Salutation;
+			}
+			set { _Salutation = value; }
+		}
+		private string _Title { get; set; }
+		public string Title
+		{
+			get
+			{
+				if (_Title == null)
+				{
+					_Title = "";
+				}
+				return _Title;
+			}
+			set { _Title = value; }
+		}
 
 		public override bool Equals(object obj)
 		{

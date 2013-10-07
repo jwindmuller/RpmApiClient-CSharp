@@ -23,12 +23,13 @@ namespace RPM.Api.Response
 
 		//public List<string> Aliases { get; set; }
 
-		private List<ContactResponse> _Contacts { get; set; }
-		public List<ContactResponse> Contacts {
+		private List<ContactResponseWrapper> _Contacts { get; set; }
+		public List<ContactResponseWrapper> Contacts
+		{
 			get {
 				if (_Contacts == null)
 				{
-					_Contacts = new List<ContactResponse>();
+					_Contacts = new List<ContactResponseWrapper>();
 				}
 				return _Contacts;
 			}

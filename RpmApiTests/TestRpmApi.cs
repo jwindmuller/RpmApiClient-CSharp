@@ -123,7 +123,6 @@ namespace RpmApiTests
 		[TestMethod]
 		public void TestCustomerContactAdd()
 		{
-
 			int CustomerID = 77777777; // Fake ID for Mock testing
 			Client client = getApiClient();
 			ContactResponse contact = new ContactResponse();
@@ -131,13 +130,29 @@ namespace RpmApiTests
 			contact.LastName = "Contactson";
 			contact.Salutation = "Mr.";
 			contact.Title = "Title";
-
+			
 			PhoneNumberResponse phone = new PhoneNumberResponse();
-			phone.PhoneNumber = "555-0035";
-			phone.Type = 1;
+			phone.Number = "555-0035";
+			phone.Type = PhoneNumberResponse.NumberType.Business;
 			contact.PhoneNumbers.Add(phone);
+			
+			ContactResponse response = client.CustomerContactAdd(CustomerID, contact, true);
 
-			ContactResponse  response = client.CustomerContactAdd(CustomerID, contact, true);
+			foreach (PhoneNumberResponse responsePhone in response.PhoneNumbers)
+			{
+				if (responsePhone.Type == phone.Type)
+				{
+					phone.PhoneNumberID = responsePhone.PhoneNumberID;
+					Assert.IsTrue(responsePhone.Equals(phone));
+					break;
+				}
+
+			}
+
+			// The response comes with the 4 phone number entries
+			response.PhoneNumbers = contact.PhoneNumbers;
+
+			contact.ContactID = response.ContactID;
 
 			Assert.IsTrue(response.Equals(contact));
 
@@ -166,8 +181,6 @@ namespace RpmApiTests
 			Assert.AreEqual(agency0.Agency, agency.Agency);
 			Assert.AreEqual(agency0.AgencyID, agency.AgencyID);
 		}
-
-		
 
 		[TestMethod]
 		public void TestSuppliers()
