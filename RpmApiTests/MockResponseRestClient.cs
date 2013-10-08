@@ -27,9 +27,18 @@ namespace RpmApiTests
 				"{\"Result\":{\"Contact\":{\"ContactID\":130349,\"Salutation\":\"Mr.\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"Title\":\"Title\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312754,\"Type\":1,\"Number\":\"555-0035\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
 			);
 			this.fakeResponses.Add(
-				"CustomerContactAdd@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":0,\"Email\":\"\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"PhoneNumbers\":[{\"Number\":\"none\",\"PhoneNumberID\":0,\"Type\":1}],\"Salutation\":\"Mr.\",\"Title\":\"Title\"},\"IsPrimary\":true}",
+				"CustomerContactAdd@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":0,\"Email\":\"\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"PhoneNumbers\":[{\"Number\":\"\",\"PhoneNumberID\":0,\"Type\":1}],\"Salutation\":\"Mr.\",\"Title\":\"Title\"},\"IsPrimary\":true}",
 				"{\"Result\":{\"Contact\":{\"ContactID\":130380,\"Salutation\":\"Mr.\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"Title\":\"Title\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312792,\"Type\":1,\"Number\":\"none\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
 			);
+			this.fakeResponses.Add(
+				"Customer@{\"Key\":\"\",\"CustomerID\":77777777}",
+				"{\"Result\":{\"CustomerID\":77777777,\"Name\":\"Customer\",\"Aliases\":[],\"Website\":\"\",\"Added\":\"2013-09-19\",\"Modified\":\"2013-09-20\",\"Locations\":[{\"IsPrimary\":true,\"LocationID\":1,\"Name\":\"Primary\",\"Address\":\"\",\"City\":\"Calgary\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"}],\"Contacts\":[{\"IsPrimary\":true,\"Contact\":{\"ContactID\":130387,\"Salutation\":\"\",\"FirstName\":\"ert\",\"LastName\":\"wertert\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312802,\"Type\":1,\"Number\":\"1-800-0RPM\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":312806,\"Type\":3,\"Number\":\"555-FAXS\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}],\"Fields\":[{\"Field\":\"quantity 1\",\"Value\":\"\"}],\"Accounts\":[{\"Account\":\"Acc\",\"AccountID\":67619,\"Supplier\":\"Acceris\",\"SupplierID\":2}],\"Notes\":[],\"NotesForStaff\":[]}}"
+			);
+			this.fakeResponses.Add(
+				"CustomerContactEdit@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":130387,\"Email\":\"\",\"FirstName\":\"Name\",\"LastName\":\"Last\",\"PhoneNumbers\":[{\"Number\":\"1-800-1RPM\",\"PhoneNumberID\":312802,\"Type\":1},{\"Number\":\"none\",\"PhoneNumberID\":312806,\"Type\":3}],\"Salutation\":\"\",\"Title\":\"\"},\"IsPrimary\":false}",
+				"{\"Result\":{\"Contact\":{\"ContactID\":130387,\"Salutation\":\"\",\"FirstName\":\"Name\",\"LastName\":\"Last\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312802,\"Type\":1,\"Number\":\"1-800-1RPM\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":312806,\"Type\":3,\"Number\":\"none\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
+			);
+
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

@@ -191,6 +191,46 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomerContactEdit()
+		{
+			int CustomerID = 77777777; // Fake ID for Mock testing
+			Client client = getApiClient();
+
+			CustomerResponse customer = client.Customer(CustomerID);
+			ContactResponseWrapper original = customer.Contacts[0];
+
+			ContactResponse contact = original.Contact;
+
+			// Fax is set to 555-FAXS
+			Assert.AreEqual(contact.getPhoneNumber(PhoneNumberResponse.NumberType.Fax).Number, "555-FAXS");
+			Assert.AreNotEqual(contact.getPhoneNumber(PhoneNumberResponse.NumberType.Fax).PhoneNumberID, 0);
+
+			// Home was not set
+			Assert.AreEqual(contact.getPhoneNumber(PhoneNumberResponse.NumberType.Home).Number, "");
+			Assert.AreEqual(contact.getPhoneNumber(PhoneNumberResponse.NumberType.Home).PhoneNumberID, 0);
+
+			// Now let's update the contact phones
+			contact.setPhoneNumber("1-800-1RPM", PhoneNumberResponse.NumberType.Business);
+			contact.setPhoneNumber("", PhoneNumberResponse.NumberType.Fax);
+			contact.setPhoneNumber("", PhoneNumberResponse.NumberType.Home);
+
+			// And name
+			contact.FirstName = "Name";
+			contact.LastName = "Last";
+			ContactResponse response = client.CustomerContactEdit(CustomerID, contact);
+
+			Assert.AreEqual(response.getPhoneNumber(PhoneNumberResponse.NumberType.Business).Number, "1-800-1RPM");
+			// Because The Fax Number was already set the value is now "none"
+			Assert.AreEqual(response.getPhoneNumber(PhoneNumberResponse.NumberType.Fax).Number, "none");
+			// Home didn't exist before so it's not set.
+			Assert.AreEqual(response.getPhoneNumber(PhoneNumberResponse.NumberType.Home).Number, "");
+
+			contact.PhoneNumbers = response.PhoneNumbers;
+
+			Assert.AreEqual<ContactResponse>(response, contact);
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

@@ -95,5 +95,30 @@ namespace RPM.Api.Response
 				this.Salutation == other.Salutation &&
 				this.Title == other.Title;
 		}
+
+		public void setPhoneNumber(string Number, PhoneNumberResponse.NumberType type)
+		{
+			PhoneNumberResponse phoneNumberToChange = this.getPhoneNumber(type);
+			phoneNumberToChange.Number = Number;
+		}
+
+		public PhoneNumberResponse getPhoneNumber(PhoneNumberResponse.NumberType type)
+		{
+			PhoneNumberResponse phoneNumber = null;
+			foreach (PhoneNumberResponse phone in this.PhoneNumbers)
+			{
+				if (phone.Type == type)
+				{
+					phoneNumber = phone;
+					break;
+				}
+			}
+			if (phoneNumber == null)
+			{
+				phoneNumber = new PhoneNumberResponse();
+				phoneNumber.Type = type;
+			}
+			return phoneNumber;
+		}
 	}
 }

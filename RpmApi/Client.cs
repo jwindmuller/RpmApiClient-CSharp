@@ -363,7 +363,9 @@ namespace RPM.Api
 		/// Customers the specified API parameters.
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns></returns>
+		/// <returns>
+		/// CustomerResponse containing the reponse data.
+		/// </returns>
 		private CustomerResponse Customer(dynamic apiParameters)
 		{
 			return this.sendRequest<CustomerResponse>("Customer", apiParameters);
@@ -396,7 +398,7 @@ namespace RPM.Api
 		/// <param name="CustomerID">The customer identifier.</param>
 		/// <param name="ContactData">The contact data.</param>
 		/// <param name="MakePrimary">if set to <c>true</c> [make primary contact].</param>
-		/// <returns></returns>
+		/// <returns>CustomerResponse containing the customer information including the Contact Information.</returns>
 		public ContactResponse CustomerContactAdd(int CustomerID, ContactResponse ContactData, Boolean MakePrimary = false)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -412,13 +414,48 @@ namespace RPM.Api
 		/// http://rpmsoftware.wordpress.com/api/CustomerContactAdd/ </para>
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns></returns>
+		/// <returns>CustomerResponse containing the customer information including the Contact Information.</returns>
 		private ContactResponse CustomerContactAdd(dynamic apiParameters)
 		{
 			Dictionary<string, ContactResponse> response =
 				this.sendRequest<Dictionary<string, ContactResponse>>("CustomerContactAdd", apiParameters);
 			return response["Contact"];
+		}
 
+		/// <summary>
+		///   <para>Edit Contact Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerContactEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerContactEdit/ </para>
+		/// </summary>
+		/// <param name="CustomerID">The customer identifier.</param>
+		/// <param name="ContactData">The contact data.</param>
+		/// <param name="MakePrimary">if set to <c>true</c> [make primary].</param>
+		/// <returns>CustomerResponse containing the customer information including the Contact Information.</returns>
+		public ContactResponse CustomerContactEdit(int CustomerID, ContactResponse ContactData, Boolean MakePrimary = false)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CustomerID = CustomerID;
+			apiParameters.Contact = ContactData;
+			apiParameters.IsPrimary = MakePrimary;
+			return this.CustomerContactEdit(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Edit Contact Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerContactEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerContactEdit/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>CustomerResponse containing the customer information including the Contact Information.</returns>
+		private ContactResponse CustomerContactEdit(dynamic apiParameters)
+		{
+			ContactResponse Contact = apiParameters.Contact;
+			// Remove any phone that has no ID and was left empty
+			Contact.PhoneNumbers.RemoveAll(phone => phone.Number == "" && phone.PhoneNumberID == 0);
+
+			Dictionary<string, ContactResponse> response =
+				this.sendRequest<Dictionary<string, ContactResponse>>("CustomerContactEdit", apiParameters);
+			return response["Contact"];
 		}
 
 		/// <summary>
