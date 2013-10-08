@@ -155,7 +155,39 @@ namespace RpmApiTests
 			contact.ContactID = response.ContactID;
 
 			Assert.IsTrue(response.Equals(contact));
+		}
 
+		/// <summary>
+		/// Tests the customer contact adding empty phone.
+		/// The resulting phone number will be "none" instead of ""
+		/// </summary>
+		[TestMethod]
+		public void TestCustomerContactAddEmptyPhone()
+		{
+			int CustomerID = 77777777; // Fake ID for Mock testing
+			Client client = getApiClient();
+			ContactResponse contact = new ContactResponse();
+			contact.FirstName = "Contact";
+			contact.LastName = "Contactson";
+			contact.Salutation = "Mr.";
+			contact.Title = "Title";
+
+			PhoneNumberResponse phone = new PhoneNumberResponse();
+			phone.Number = "";
+			phone.Type = PhoneNumberResponse.NumberType.Business;
+			contact.PhoneNumbers.Add(phone);
+
+			ContactResponse response = client.CustomerContactAdd(CustomerID, contact, true);
+
+			foreach (PhoneNumberResponse responsePhone in response.PhoneNumbers)
+			{
+				if (responsePhone.Type == phone.Type)
+				{
+					phone.PhoneNumberID = responsePhone.PhoneNumberID;
+					Assert.AreEqual<string>(responsePhone.Number, "none");
+					break;
+				}
+			}
 		}
 
 		[TestMethod]

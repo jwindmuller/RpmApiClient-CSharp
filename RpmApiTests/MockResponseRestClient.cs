@@ -26,7 +26,10 @@ namespace RpmApiTests
 				"CustomerContactAdd@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":0,\"Email\":\"\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"PhoneNumbers\":[{\"Number\":\"555-0035\",\"PhoneNumberID\":0,\"Type\":1}],\"Salutation\":\"Mr.\",\"Title\":\"Title\"},\"IsPrimary\":true}",
 				"{\"Result\":{\"Contact\":{\"ContactID\":130349,\"Salutation\":\"Mr.\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"Title\":\"Title\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312754,\"Type\":1,\"Number\":\"555-0035\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
 			);
-
+			this.fakeResponses.Add(
+				"CustomerContactAdd@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":0,\"Email\":\"\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"PhoneNumbers\":[{\"Number\":\"none\",\"PhoneNumberID\":0,\"Type\":1}],\"Salutation\":\"Mr.\",\"Title\":\"Title\"},\"IsPrimary\":true}",
+				"{\"Result\":{\"Contact\":{\"ContactID\":130380,\"Salutation\":\"Mr.\",\"FirstName\":\"Contact\",\"LastName\":\"Contactson\",\"Title\":\"Title\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312792,\"Type\":1,\"Number\":\"none\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)
