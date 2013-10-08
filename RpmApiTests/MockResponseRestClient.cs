@@ -38,6 +38,14 @@ namespace RpmApiTests
 				"CustomerContactEdit@{\"Key\":\"\",\"CustomerID\":77777777,\"Contact\":{\"ContactID\":130387,\"Email\":\"\",\"FirstName\":\"Name\",\"LastName\":\"Last\",\"PhoneNumbers\":[{\"Number\":\"1-800-1RPM\",\"PhoneNumberID\":312802,\"Type\":1},{\"Number\":\"none\",\"PhoneNumberID\":312806,\"Type\":3}],\"Salutation\":\"\",\"Title\":\"\"},\"IsPrimary\":false}",
 				"{\"Result\":{\"Contact\":{\"ContactID\":130387,\"Salutation\":\"\",\"FirstName\":\"Name\",\"LastName\":\"Last\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312802,\"Type\":1,\"Number\":\"1-800-1RPM\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":312806,\"Type\":3,\"Number\":\"none\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}}"
 			);
+			this.fakeResponses.Add(
+				"CustomerLocationAdd@{\"Key\":\"\",\"CustomerID\":77777777,\"Location\":{\"CustomerLocationID\":0,\"IsPrimary\":false,\"LocationID\":0,\"Name\":\"Home Office\",\"Address\":\"205 - 5th Avenue SW\",\"City\":\"Calgary\",\"StateProvince\":\"Alberta\",\"Country\":\"Canada\",\"ZipPostalCode\":\"T2P 2V7\"}}",
+				"{\"Result\":{\"CustomerLocationID\":13}}"
+			);
+			this.fakeResponses.Add(
+				"CustomerLocationEdit@{\"Key\":\"\",\"CustomerID\":77777777,\"Location\":{\"CustomerLocationID\":0,\"IsPrimary\":true,\"LocationID\":1,\"Name\":\"Same Location, new name\",\"Address\":\"\",\"City\":\"Calgary\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"}}",
+				"{\"Result\":{\"CustomerLocationID\":1}}"
+			);
 
 		}
 

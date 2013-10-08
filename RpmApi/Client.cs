@@ -459,6 +459,62 @@ namespace RPM.Api
 		}
 
 		/// <summary>
+		///   <para>Add Location Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerLocationAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerLocationAdd/ </para>
+		/// </summary>
+		/// <param name="CustomerID">The customer identifier.</param>
+		/// <param name="Location">The location data.</param>
+		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
+		public LocationResponse CustomerLocationAdd(int CustomerID, LocationResponse Location)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CustomerID = CustomerID;
+			apiParameters.Location = Location;
+			return this.CustomerLocationAdd(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Add Location Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerLocationAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerLocationAdd/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
+		private LocationResponse CustomerLocationAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<LocationResponse>("CustomerLocationAdd", apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Edit Current Location Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerLocationEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerLocationEdit/ </para>
+		/// </summary>
+		/// <param name="CustomerID">The customer identifier.</param>
+		/// <param name="Location">The location data.</param>
+		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
+		public LocationResponse CustomerLocationEdit(int CustomerID, LocationResponse Location)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CustomerID = CustomerID;
+			apiParameters.Location = Location;
+			return this.CustomerLocationEdit(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Edit Current Location Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerLocationEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerLocationEdit/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
+		private LocationResponse CustomerLocationEdit(dynamic apiParameters)
+		{
+			return this.sendRequest<LocationResponse>("CustomerLocationEdit", apiParameters);
+		}
+
+		/// <summary>
 		/// Execute the "Info" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/info/
 		/// </summary>

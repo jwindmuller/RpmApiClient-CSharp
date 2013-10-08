@@ -231,6 +231,50 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomerLocationAdd()
+		{
+			int CustomerID = 77777777; // Fake ID for Mock testing
+			Client client = this.getApiClient();
+
+			LocationResponse location = new LocationResponse();
+			location.Name = "Home Office";
+			location.Address = "205 - 5th Avenue SW";
+			location.City = "Calgary";
+			location.StateProvince = "Alberta";
+			location.Country = "Canada";
+			location.ZipPostalCode = "T2P 2V7";
+
+			LocationResponse response = client.CustomerLocationAdd(CustomerID, location);
+
+			Assert.IsTrue(response.CustomerLocationID > 0);
+
+			LocationResponse emptyResponse = new LocationResponse();
+			emptyResponse.CustomerLocationID = response.CustomerLocationID;
+			Assert.AreEqual<LocationResponse>(emptyResponse, response);
+		}
+
+		[TestMethod]
+		public void TestCustomerLocationEdit()
+		{
+			int CustomerID = 77777777; // Fake ID for Mock testing
+			Client client = this.getApiClient();
+
+			CustomerResponse customer = client.Customer(CustomerID);
+
+			LocationResponse location = customer.Locations[0];
+			location.Name = "Same Location, new name";
+
+			LocationResponse response = client.CustomerLocationEdit(CustomerID, location);
+
+			Assert.AreEqual(location.LocationID, response.CustomerLocationID);
+
+			// The response only contains CustomerLocationID
+			LocationResponse emptyResponse = new LocationResponse();
+			emptyResponse.CustomerLocationID = response.CustomerLocationID;
+			Assert.AreEqual<LocationResponse>(emptyResponse, response);
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

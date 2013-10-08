@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\LocationResponse.cs" />
     <Compile Include="Response\ContactResponseWrapper.cs" />
     <Compile Include="Response\CustomerResponse.cs" />
     <Compile Include="Response\CommAccountResponse.cs" />

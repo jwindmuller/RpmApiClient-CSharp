@@ -50,7 +50,19 @@ namespace RPM.Api.Response
 			set { _Fields = value; } 
 		}
 
-		//public List<LocationResponse> _Locations { get; set; }
+		private List<LocationResponse> _Locations { get; set; }
+		public List<LocationResponse> Locations
+		{
+			get
+			{
+				if (_Locations == null)
+				{
+					_Locations = new List<LocationResponse>();
+				}
+				return _Locations;
+			}
+			set { _Locations = value; }
+		}
 
 		public DateTime Modified { get; set; }
 		private string _Name;
