@@ -291,6 +291,24 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomerUpdate()
+		{
+			Client client = this.getApiClient();
+			CustomerResponse c = client.Customer(41801);
+			c.Contacts[0].Contact.setPhoneNumber("abc", PhoneNumberResponse.NumberType.Business);
+			c.Website = "joe";
+
+			ContactResponse contact = c.getPrimaryContact();
+			contact.FirstName = "Joe";
+			contact.LastName = "Contact";
+			contact.Email = "mail@joecontact";
+
+			CustomerResponse response = client.CustomerUpdate(c);
+			Assert.Inconclusive("Do not use CustomerUpdate");
+
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

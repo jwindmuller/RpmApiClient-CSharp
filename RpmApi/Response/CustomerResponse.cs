@@ -154,5 +154,17 @@ namespace RPM.Api.Response
 				this.CollectionsAreEqual(this.NotesForStaff, other.NotesForStaff) &&
 				this.Website == other.Website;
 		}
+
+		public ContactResponse getPrimaryContact()
+		{
+			foreach (ContactResponseWrapper c in this.Contacts)
+			{
+				if (c.IsPrimary)
+				{
+					return c.Contact;
+				}
+			}
+			return null;
+		}
 	}
 }

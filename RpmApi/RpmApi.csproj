@@ -56,6 +56,7 @@
     <Compile Include="Response\InfoResponse.cs" />
     <Compile Include="Response\NoteResponse.cs" />
     <Compile Include="Response\PhoneNumberResponse.cs" />
+    <Compile Include="Response\Private\CustomerUpdateData.cs" />
     <Compile Include="Response\ProcForm.cs" />
     <Compile Include="Response\ProcFormResponse.cs" />
     <Compile Include="Response\ProcFormField.cs" />

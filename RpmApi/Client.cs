@@ -524,6 +524,24 @@ namespace RPM.Api
 		}
 
 		/// <summary>
+		/// <para>Update limited Customer Data.</para>
+		///   <para>Executes the "Customers" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Customers/ </para>
+		/// <para>It's not recommended to use this method as it is very limited and will be removed in the future.</para>
+		/// </summary>
+		/// <param name="CustomerData">The customer data.</param>
+		/// <returns></returns>
+		[Obsolete("Use CustomerEdit, CustomerLocationEdit and CustomerContactEdit")]
+		public CustomerResponse CustomerUpdate(CustomerResponse CustomerData)
+		{
+			CustomerUpdateData data = new CustomerUpdateData(CustomerData);
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Customer = data;
+			return this.sendRequest<CustomerResponse>("CustomerUpdate", apiParameters);
+		}
+
+
+		/// <summary>
 		///   <para>Edit Current Location Information for an existing Customer.</para>
 		///   <para>Executes the "CustomerLocationEdit" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/CustomerLocationEdit/ </para>
