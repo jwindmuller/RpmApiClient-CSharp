@@ -50,6 +50,10 @@ namespace RpmApiTests
 				"CustomerUpdate@{\"Key\":\"\",\"Customer\":{\"ID\":77777777,\"Name\":\"Joaquin Customer\",\"Website\":\"joe\",\"Address\":\"\",\"City\":\"Calgary\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\",\"Fields\":[{\"Field\":\"quantity 1\",\"Value\":\"\"}]}}",
 				"{\"Result\":{\"CustomerID\":77777777,\"Name\":\"Joaquin Customer\",\"Aliases\":[],\"Website\":\"joe\",\"Added\":\"2013-09-19\",\"Modified\":\"2013-10-10\",\"Locations\":[{\"IsPrimary\":true,\"LocationID\":1,\"Name\":\"Same Location, new name\",\"Address\":\"\",\"City\":\"Calgary\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"},{\"IsPrimary\":false,\"LocationID\":14,\"Name\":\"Home Office\",\"Address\":\"205 - 5th Avenue SW\",\"City\":\"Calgary\",\"StateProvince\":\"Alberta\",\"Country\":\"Canada\",\"ZipPostalCode\":\"T2P 2V7\"}],\"Contacts\":[{\"IsPrimary\":true,\"Contact\":{\"ContactID\":130387,\"Salutation\":\"\",\"FirstName\":\"ert\",\"LastName\":\"wertert\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":312802,\"Type\":1,\"Number\":\"1-800-1RPM\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":312806,\"Type\":3,\"Number\":\"none\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}],\"Fields\":[{\"Field\":\"quantity 1\",\"Value\":\"\"}],\"Accounts\":[{\"Account\":\"Acc\",\"AccountID\":67619,\"Supplier\":\"Acceris\",\"SupplierID\":2}],\"Notes\":[],\"NotesForStaff\":[]}}"
 			);
+			this.fakeResponses.Add(
+				"ProcActionsDue@{\"Key\":\"\"}",
+				"{\"Result\":{\"Procs\":[{\"Staff\":\"gfhgfh gfhgf\",\"StaffID\":5,\"Due\":[{\"Process\":\"WS T1\",\"ProcessID\":25,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1}]},{\"Staff\":\"RPM Support\",\"StaffID\":1,\"Due\":[{\"Process\":\"cosa\",\"ProcessID\":9,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1},{\"Process\":\"WS T1\",\"ProcessID\":25,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1}]}]}}"
+			);
 
 		}
 

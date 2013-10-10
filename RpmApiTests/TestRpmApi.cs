@@ -305,7 +305,21 @@ namespace RpmApiTests
 
 			CustomerResponse response = client.CustomerUpdate(c);
 			Assert.Inconclusive("Do not use CustomerUpdate");
+		}
 
+		[TestMethod]
+		public void TestProcActionsDue()
+		{
+			Client client = this.getApiClient();
+
+			List<ProcActionDueResponse> response = client.ProcActionsDue();
+
+			foreach (ProcActionDueResponse procDue in response)
+			{
+				Assert.IsTrue(procDue.Due.Count >= 0);
+				Assert.IsNotNull(procDue.Staff);
+				Assert.IsTrue(procDue.StaffID > 0);
+			}
 		}
 
 		[TestMethod]

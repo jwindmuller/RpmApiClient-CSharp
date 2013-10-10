@@ -562,6 +562,13 @@ namespace RPM.Api
             return result;
         }
 
+		public List<ProcActionDueResponse> ProcActionsDue()
+		{
+			Dictionary<string, List<ProcActionDueResponse>> response =
+				this.sendRequest<Dictionary<string, List<ProcActionDueResponse>>>("ProcActionsDue");
+			return response["Procs"];
+		}
+
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/
