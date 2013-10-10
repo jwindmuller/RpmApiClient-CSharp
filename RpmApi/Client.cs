@@ -511,6 +511,18 @@ namespace RPM.Api
 		}
 
 		/// <summary>
+		///   <para>Edit Current Location Information for an existing Customer.</para>
+		///   <para>Executes the "CustomerLocationEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerLocationEdit/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
+		private LocationResponse CustomerLocationEdit(dynamic apiParameters)
+		{
+			return this.sendRequest<LocationResponse>("CustomerLocationEdit", apiParameters);
+		}
+
+		/// <summary>
 		/// <para>Returns a list of all the Customers registered (Customer Name and ID only)</para>
 		///   <para>Executes the "Customers" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/Customers/ </para>
@@ -538,19 +550,6 @@ namespace RPM.Api
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.Customer = data;
 			return this.sendRequest<CustomerResponse>("CustomerUpdate", apiParameters);
-		}
-
-
-		/// <summary>
-		///   <para>Edit Current Location Information for an existing Customer.</para>
-		///   <para>Executes the "CustomerLocationEdit" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/CustomerLocationEdit/ </para>
-		/// </summary>
-		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns>LocationResponse with only the newly created ID in CustomerLocationID.</returns>
-		private LocationResponse CustomerLocationEdit(dynamic apiParameters)
-		{
-			return this.sendRequest<LocationResponse>("CustomerLocationEdit", apiParameters);
 		}
 
 		/// <summary>
