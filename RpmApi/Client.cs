@@ -360,7 +360,9 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Customers the specified API parameters.
+		///   <para>Return Customer information by providing their ID.</para>
+		///   <para>Executes the "Customer" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Customer/ </para>
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
 		/// <returns>
@@ -371,6 +373,12 @@ namespace RPM.Api
 			return this.sendRequest<CustomerResponse>("Customer", apiParameters);
 		}
 
+		/// <summary>
+		///   <para>Add Customer information.</para>
+		///   <para>Executes the "CustomerAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerAdd/ </para>
+		/// </summary>
+		/// <returns>CustomerResponse containing the newly created customer.</returns>
 		public CustomerResponse CustomerAdd(CustomerResponse newCustomerData)
 		{
 			newCustomerData.Contacts.Clear();
@@ -500,6 +508,19 @@ namespace RPM.Api
 			apiParameters.CustomerID = CustomerID;
 			apiParameters.Location = Location;
 			return this.CustomerLocationEdit(apiParameters);
+		}
+
+		/// <summary>
+		/// <para>Returns a list of all the Customers registered (Customer Name and ID only)</para>
+		///   <para>Executes the "Customers" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Customers/ </para>
+		/// </summary>
+		/// <returns>List of CustomerResponse. Note: only CustomerID and Customer fields will be filled in</returns>
+		public List<CustomerResponse> Customers()
+		{
+			Dictionary<String, List<CustomerResponse>> response = this.sendRequest<Dictionary<String, List<CustomerResponse>>>("Customers");
+			List<CustomerResponse> customers = response["Customers"];
+			return customers;
 		}
 
 		/// <summary>

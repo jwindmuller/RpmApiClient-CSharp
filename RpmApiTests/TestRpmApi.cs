@@ -275,6 +275,22 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomers()
+		{
+			Client client = this.getApiClient();
+
+			List<CustomerResponse> customers = client.Customers();
+
+			foreach (CustomerResponse customer in customers)
+			{
+				// Only these 2 fields are received
+				Assert.IsNotNull(customer.Customer);
+				Assert.AreEqual(customer.Name, customer.Customer);
+				Assert.IsTrue(customer.CustomerID > 0);
+			}
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

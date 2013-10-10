@@ -82,6 +82,20 @@ namespace RPM.Api.Response
 			}
 		}
 
+		/// <summary>
+		/// Alias for Name
+		/// </summary>
+		/// <value>
+		/// The customer's Name.
+		/// </value>
+		public string Customer
+		{
+			get {
+				return this.Name;
+			}
+			set { _Name = value; }
+		}
+
 		private List<NoteResponse> _Notes { get; set; }
 		public List<NoteResponse> Notes { 
 			get {
