@@ -21,19 +21,6 @@ namespace RPM.Api.Response
 
         public int ProcessID { get; set; }
 
-		private string _View { get; set; }
-        public string View
-		{
-			get {
-				if (_View == null)
-				{
-					_View = "";
-				}
-				return _View;
-			}
-			set { _View = value; } 
-		}
-
         private List<string> _Columns { get; set; }
 		public List<string> Columns
 		{ 
@@ -66,7 +53,6 @@ namespace RPM.Api.Response
 			return
 				this.Process == other.Process &&
 				this.ProcessID == other.ProcessID &&
-				this.View == other.View &&
 				this.CollectionsAreEqual(this.Columns, other.Columns) &&
 				this.Form.Equals(other.Form);
 		}
