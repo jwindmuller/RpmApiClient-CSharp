@@ -294,7 +294,7 @@ namespace RpmApiTests
 		public void TestCustomerUpdate()
 		{
 			Client client = this.getApiClient();
-			CustomerResponse c = client.Customer(41801);
+			CustomerResponse c = client.Customer(77777777);
 			c.Contacts[0].Contact.setPhoneNumber("abc", PhoneNumberResponse.NumberType.Business);
 			c.Website = "joe";
 
