@@ -323,6 +323,48 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcForm()
+		{
+			Client client = this.getApiClient();
+			List<ProcResponse> procs = client.Procs();
+
+			ProcResponse procWithForms = null;
+			foreach (ProcResponse proc in procs)
+			{
+				if (proc.Forms > 0)
+				{
+					procWithForms = proc;
+					break;
+				}
+			}
+			if (procWithForms == null)
+			{
+				Assert.Inconclusive("Could not find a Process with forms");
+				return;
+			}
+			// ProcForms retrieves the data from a View, so it won't be 100% complete compared to ProcForm
+			ProcFormsResponse allForms = client.ProcForms(procWithForms.ProcessID, 0);
+			ProcForm firstForm = allForms.Forms[0];
+
+			ProcFormResponse byID = client.ProcForm(firstForm.FormID);
+			ProcFormResponse byProcessID = client.ProcForm(procWithForms.ProcessID, firstForm.Number);
+			ProcFormResponse byProcessName = client.ProcForm(procWithForms.Process, firstForm.Number);
+
+			Assert.AreEqual<ProcFormResponse>(byID, byProcessID);
+			Assert.AreEqual<ProcFormResponse>(byID, byProcessName);
+
+			// ProcForm obtained via ProcForms will only have the data available on the selected View.
+			if (firstForm.Equals(byID.Form))
+			{
+				Assert.Inconclusive("ProcForm obtained from ProcForms will not necessaryly be equal to the ones from ProcForm.");
+			}
+			else
+			{
+				Assert.Inconclusive("ProcForm obtained from ProcForms will not necessaryly be equal to the ones from ProcForm.");
+			}
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();

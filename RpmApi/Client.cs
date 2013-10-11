@@ -570,6 +570,60 @@ namespace RPM.Api
 		}
 
 		/// <summary>
+		/// Execute the "ProcForm" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForm/
+		/// </summary>
+		/// <param name="FormID">The FormID.</param>
+		/// <returns>ProcFormResponse containing the response data.</returns>
+		public ProcFormResponse ProcForm(int FormID)
+		{
+			dynamic parameters = this.apiParameters();
+			parameters.FormID = FormID;
+			return this.sendRequest<ProcFormResponse>("ProcForm", parameters);
+		}
+
+		/// <summary>
+		/// Execute the "ProcForm" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForm/
+		/// </summary>
+		/// <param name="ProcessID">The ProcessID.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <returns>ProcFormResponse containing the response data.</returns>
+		public ProcFormResponse ProcForm(int ProcessID, string FormNumber)
+		{
+			dynamic parameters = this.apiParameters();
+			parameters.ProcessID = ProcessID;
+			parameters.FormNumber = FormNumber;
+			return this.ProcForm(parameters);
+		}
+
+		/// <summary>
+		/// Execute the "ProcForm" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForm/
+		/// </summary>
+		/// <param name="ProcessName">Name of the process.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <returns>ProcFormResponse containing the response data.</returns>
+		public ProcFormResponse ProcForm(string ProcessName, string FormNumber)
+		{
+			dynamic parameters = this.apiParameters();
+			parameters.Process = ProcessName;
+			parameters.FormNumber = FormNumber;
+			return this.ProcForm(parameters);
+		}
+
+		/// <summary>
+		/// Execute the "ProcForm" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForm/
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>ProcFormResponse containing the response data.</returns>
+		private ProcFormResponse ProcForm(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormResponse>("ProcForm", apiParameters);
+		}
+
+		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/
 		/// </summary>
@@ -577,7 +631,7 @@ namespace RPM.Api
         public List<ProcResponse>Procs()
         {
 			Dictionary<String, List<ProcResponse>> response =
-				this.sendRequest<Dictionary<String, List<ProcResponse>>>("ProcResult");
+				this.sendRequest<Dictionary<String, List<ProcResponse>>>("Procs");
 
 			return response["Procs"];
         }
@@ -643,60 +697,6 @@ namespace RPM.Api
 			parameters.Form = FormData;
             return this.sendRequest<ProcFormResponse>("ProcFormAdd", parameters);
         }
-
-		/// <summary>
-		/// Execute the "ProcForm" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForm/
-		/// </summary>
-		/// <param name="FormID">The FormID.</param>
-		/// <returns>ProcFormResponse containing the response data.</returns>
-        public ProcFormResponse ProcForm(int FormID)
-        {
-            dynamic parameters = this.apiParameters();
-			parameters.FormID = FormID;
-            return this.sendRequest<ProcFormResponse>("ProcForm", parameters);
-        }
-
-		/// <summary>
-		/// Execute the "ProcForm" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForm/
-		/// </summary>
-		/// <param name="ProcessID">The ProcessID.</param>
-		/// <param name="FormNumber">The form number.</param>
-		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponse ProcForm(int ProcessID, int FormNumber)
-		{
-			dynamic parameters = this.apiParameters();
-			parameters.ProcessID = ProcessID;
-			parameters.FormNumber = FormNumber;
-			return this.ProcForm(parameters);
-		}
-
-		/// <summary>
-		/// Execute the "ProcForm" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForm/
-		/// </summary>
-		/// <param name="ProcessName">Name of the process.</param>
-		/// <param name="FormNumber">The form number.</param>
-		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponse ProcForm(string ProcessName, int FormNumber)
-		{
-			dynamic parameters = this.apiParameters();
-			parameters.Process = ProcessName;
-			parameters.FormNumber = FormNumber;
-			return this.ProcForm(parameters);
-		}
-
-		/// <summary>
-		/// Execute the "ProcForm" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForm/
-		/// </summary>
-		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns>ProcFormResponse containing the response data.</returns>
-		private ProcFormResponse ProcForm(dynamic apiParameters)
-		{
-			return this.sendRequest<ProcFormResponse>("ProcForm", apiParameters);
-		}
 
 		/// <summary>
 		/// Execute the "ProcForm" API endpoint.

@@ -61,7 +61,6 @@
     <Compile Include="Response\Private\CustomerUpdateData.cs" />
     <Compile Include="Response\ProcForm.cs" />
     <Compile Include="Response\ProcFormResponse.cs" />
-    <Compile Include="Response\ProcFormField.cs" />
     <Compile Include="Response\ProcFormsResponse.cs" />
     <Compile Include="Response\ProcResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
