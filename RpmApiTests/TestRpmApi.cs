@@ -344,14 +344,14 @@ namespace RpmApiTests
 			}
 			// ProcForms retrieves the data from a View, so it won't be 100% complete compared to ProcForm
 			ProcFormsResponse allForms = client.ProcForms(procWithForms.ProcessID, 0);
-			ProcForm firstForm = allForms.Forms[0];
+			ProcFormResponse firstForm = allForms.Forms[0];
 
-			ProcFormResponse byID = client.ProcForm(firstForm.FormID);
-			ProcFormResponse byProcessID = client.ProcForm(procWithForms.ProcessID, firstForm.Number);
-			ProcFormResponse byProcessName = client.ProcForm(procWithForms.Process, firstForm.Number);
+			ProcFormResponseWrapper byID = client.ProcForm(firstForm.FormID);
+			ProcFormResponseWrapper byProcessID = client.ProcForm(procWithForms.ProcessID, firstForm.Number);
+			ProcFormResponseWrapper byProcessName = client.ProcForm(procWithForms.Process, firstForm.Number);
 
-			Assert.AreEqual<ProcFormResponse>(byID, byProcessID);
-			Assert.AreEqual<ProcFormResponse>(byID, byProcessName);
+			Assert.AreEqual<ProcFormResponseWrapper>(byID, byProcessID);
+			Assert.AreEqual<ProcFormResponseWrapper>(byID, byProcessName);
 
 			// ProcForm obtained via ProcForms will only have the data available on the selected View.
 			if (firstForm.Equals(byID.Form))

@@ -12,14 +12,14 @@ namespace RPM.Api.Response
         public string View { get; set; }
         public List<string> Columns { get; set; }
 
-        private List<ProcForm> _Forms { get; set; }
-		public List<ProcForm> Forms
+        private List<ProcFormResponse> _Forms { get; set; }
+		public List<ProcFormResponse> Forms
 		{
 			get
 			{
 				if (_Forms == null)
 				{
-					_Forms = new List<ProcForm>();
+					_Forms = new List<ProcFormResponse>();
 				}
 				return _Forms;
 			}
@@ -37,13 +37,13 @@ namespace RPM.Api.Response
 
 		private void initializeForms()
 		{
-			foreach (ProcForm item in this.Forms)
+			foreach (ProcFormResponse item in this.Forms)
 			{
 				this.initializeBasicFormFields(item);
 			}
 		}
 
-		private void initializeBasicFormFields(ProcForm form)
+		private void initializeBasicFormFields(ProcFormResponse form)
 		{
 			form.Number = this.initializeFormField<string>(form, "Number");
 			form.Owner = this.initializeFormField<string>(form, "Owner");
@@ -53,7 +53,7 @@ namespace RPM.Api.Response
 			form.Modified = this.initializeFormField<DateTime>(form, "Modified");
 		}
 
-		private T initializeFormField<T>(ProcForm form, string fieldName)
+		private T initializeFormField<T>(ProcFormResponse form, string fieldName)
 		{
 			int index = this.Columns.IndexOf(fieldName);
 			if (index == -1)

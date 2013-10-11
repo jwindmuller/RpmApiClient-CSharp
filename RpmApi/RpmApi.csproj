@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\ProcFormResponse.cs" />
     <Compile Include="Response\ActionDueResponse.cs" />
     <Compile Include="Response\ProcActionDueResponse.cs" />
     <Compile Include="Response\LocationResponse.cs" />
@@ -59,8 +60,7 @@
     <Compile Include="Response\NoteResponse.cs" />
     <Compile Include="Response\PhoneNumberResponse.cs" />
     <Compile Include="Response\Private\CustomerUpdateData.cs" />
-    <Compile Include="Response\ProcForm.cs" />
-    <Compile Include="Response\ProcFormResponse.cs" />
+    <Compile Include="Response\ProcFormResponseWrapper.cs" />
     <Compile Include="Response\ProcFormsResponse.cs" />
     <Compile Include="Response\ProcResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
