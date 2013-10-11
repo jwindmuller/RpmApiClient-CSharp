@@ -624,19 +624,6 @@ namespace RPM.Api
 		}
 
 		/// <summary>
-		/// Execute the "Procs" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/procs/
-		/// </summary>
-		/// <returns>List of ProcResponse containing the response data.</returns>
-        public List<ProcResponse>Procs()
-        {
-			Dictionary<String, List<ProcResponse>> response =
-				this.sendRequest<Dictionary<String, List<ProcResponse>>>("Procs");
-
-			return response["Procs"];
-        }
-
-		/// <summary>
 		/// Execute the "ProcForms" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcForms/
 		/// </summary>
@@ -756,6 +743,19 @@ namespace RPM.Api
 		private ProcFormResponseWrapper ProcFormEdit(dynamic apiParameters)
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
+		}
+
+		/// <summary>
+		/// Execute the "Procs" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/procs/
+		/// </summary>
+		/// <returns>List of ProcResponse containing the response data.</returns>
+		public List<ProcResponse> Procs()
+		{
+			Dictionary<String, List<ProcResponse>> response =
+				this.sendRequest<Dictionary<String, List<ProcResponse>>>("Procs");
+
+			return response["Procs"];
 		}
 
 		/// <summary>

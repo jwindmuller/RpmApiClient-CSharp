@@ -365,6 +365,33 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcForms()
+		{
+			Client client = this.getApiClient();
+			List<ProcResponse> procs = client.Procs();
+
+			ProcResponse procWithForms = null;
+			foreach (ProcResponse proc in procs)
+			{
+				if (proc.Forms > 0)
+				{
+					procWithForms = proc;
+					break;
+				}
+			}
+			if (procWithForms == null)
+			{
+				Assert.Inconclusive("Could not find a Process with forms");
+				return;
+			}
+
+			ProcFormsResponse byID = client.ProcForms(procWithForms.ProcessID);
+			ProcFormsResponse byName = client.ProcForms(procWithForms.Process);
+
+			Assert.AreEqual<ProcFormsResponse>(byID, byName);
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();
