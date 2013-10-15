@@ -328,15 +328,7 @@ namespace RpmApiTests
 			Client client = this.getApiClient();
 			List<ProcResponse> procs = client.Procs();
 
-			ProcResponse procWithForms = null;
-			foreach (ProcResponse proc in procs)
-			{
-				if (proc.Forms > 0)
-				{
-					procWithForms = proc;
-					break;
-				}
-			}
+			ProcResponse procWithForms = this.getProcessWithForms();
 			if (procWithForms == null)
 			{
 				Assert.Inconclusive("Could not find a Process with forms");
@@ -367,28 +359,39 @@ namespace RpmApiTests
 		[TestMethod]
 		public void TestProcForms()
 		{
-			Client client = this.getApiClient();
-			List<ProcResponse> procs = client.Procs();
-
-			ProcResponse procWithForms = null;
-			foreach (ProcResponse proc in procs)
-			{
-				if (proc.Forms > 0)
-				{
-					procWithForms = proc;
-					break;
-				}
-			}
+			ProcResponse procWithForms = this.getProcessWithForms();
 			if (procWithForms == null)
 			{
 				Assert.Inconclusive("Could not find a Process with forms");
 				return;
 			}
-
+			Client client = this.getApiClient();
 			ProcFormsResponse byID = client.ProcForms(procWithForms.ProcessID);
 			ProcFormsResponse byName = client.ProcForms(procWithForms.Process);
 
 			Assert.AreEqual<ProcFormsResponse>(byID, byName);
+		}
+
+		[TestMethod]
+		public void TestProcFormUnexistantView()
+		{
+			ProcResponse procWithForms = this.getProcessWithForms();
+			if (procWithForms == null)
+			{
+				Assert.Inconclusive("Could not find a Process with forms");
+				return;
+			}
+			Client client = this.getApiClient();
+			try
+			{
+				ProcFormsResponse byID = client.ProcForms(procWithForms.ProcessID, 77777777);
+				Assert.Inconclusive("Expected 'View not found' error");
+			}
+			catch (RPMApiError error)
+			{
+
+				Assert.AreEqual(error.Message, "View not found");
+			}
 		}
 
 		[TestMethod]
@@ -423,6 +426,7 @@ namespace RpmApiTests
 			Assert.IsTrue(supplier.SupplierID > 0);
 		}
 
+		#region Helper Functions
 		private SupplierResponse getFirstSupplier()
 		{
 			Client client = getApiClient();
@@ -430,5 +434,23 @@ namespace RpmApiTests
 
 			return suppliers[0];
 		}
+
+		private ProcResponse getProcessWithForms()
+		{
+			Client client = this.getApiClient();
+			List<ProcResponse> procs = client.Procs();
+
+			ProcResponse procWithForms = null;
+			foreach (ProcResponse proc in procs)
+			{
+				if (proc.Forms > 0)
+				{
+					procWithForms = proc;
+					break;
+				}
+			}
+			return procWithForms;
+		}
+		#endregion
 	}
 }
