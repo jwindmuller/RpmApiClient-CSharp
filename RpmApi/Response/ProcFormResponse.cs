@@ -135,6 +135,34 @@ namespace RPM.Api.Response
 			set { _Sets = value; }
 		}
 
+		private List<NoteResponse> _Notes { get; set; }
+		public List<NoteResponse> Notes
+		{
+			get
+			{
+				if (_Notes == null)
+				{
+					_Notes = new List<NoteResponse>();
+				}
+				return _Notes;
+			}
+			set { _Notes = value; }
+		}
+
+		private List<NoteResponse> _NotesForStaff { get; set; }
+		public List<NoteResponse> NotesForStaff
+		{
+			get
+			{
+				if (_NotesForStaff == null)
+				{
+					_NotesForStaff = new List<NoteResponse>();
+				}
+				return _NotesForStaff;
+			}
+			set { _NotesForStaff = value; }
+		}
+
         // TODO: rest of properties for form, see: http://rpmsoftware.wordpress.com/json-structure-for-forms/
 		public override bool Equals(object obj)
 		{

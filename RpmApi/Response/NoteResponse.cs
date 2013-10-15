@@ -7,5 +7,47 @@ namespace RPM.Api.Response
 {
 	public class NoteResponse
 	{
+
+		private DateTime _Added { get; set; }
+		public DateTime Added
+		{
+			get
+			{
+				if (_Added == null)
+				{
+					_Added = new DateTime();
+				}
+				return _Added;
+			}
+			set { _Added = value; }
+		}
+
+		private string _By { get; set; }
+		public string By
+		{
+			get
+			{
+				if (_By == null)
+				{
+					_By = "";
+				}
+				return _By;
+			}
+			set { _By = value; }
+		}
+
+		private string _Note { get; set; }
+		public string Note
+		{
+			get
+			{
+				if (_Note == null)
+				{
+					_Note = "";
+				}
+				return _Note;
+			}
+			set { _Note = value; }
+		}
 	}
 }

@@ -776,6 +776,49 @@ namespace RPM.Api
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
 		}
 
+		public ProcFormResponseWrapper ProcFormNoteAdd(string ProcessName, string FormNumber, string Note, string NoteForStaff)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Process = ProcessName;
+			apiParameters.Form = new
+			{
+				Number = FormNumber,
+				Note = Note,
+				NoteForStaff = NoteForStaff
+			};
+			return this.ProcFormNoteAdd(apiParameters);
+		}
+
+		public ProcFormResponseWrapper ProcFormNoteAdd(int ProcessID, string FormNumber, string Note, string NoteForStaff)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcesID = ProcessID;
+			apiParameters.Form = new
+			{
+				Number = FormNumber,
+				Note = Note,
+				NoteForStaff = NoteForStaff
+			};
+			return this.ProcFormNoteAdd(apiParameters);
+		}
+
+		public ProcFormResponseWrapper ProcFormNoteAdd(int FormID, string Note, string NoteForStaff)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Form = new
+			{
+				FormID = FormID,
+				Note = Note,
+				NoteForStaff = NoteForStaff
+			};
+			return this.ProcFormNoteAdd(apiParameters);
+		}
+
+		private ProcFormResponseWrapper ProcFormNoteAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormResponseWrapper>("ProcFormNoteAdd", apiParameters);
+		}
+
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/

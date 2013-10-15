@@ -357,6 +357,26 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcFormNoteAdd()
+		{
+			Client client = this.getApiClient();
+
+			ProcFormResponseWrapper original = client.ProcForm(77777777);
+
+			ProcFormResponseWrapper response = client.ProcFormNoteAdd(77777777, "Note", "NoteForStaff");
+			NoteResponse note = response.Form.Notes[response.Form.Notes.Count - 1];
+			original.Form.Notes.Add(note);
+			Assert.AreEqual(note.Note, "Note");
+			NoteResponse noteForStaff = response.Form.NotesForStaff[response.Form.NotesForStaff.Count - 1];
+			original.Form.NotesForStaff.Add(noteForStaff);
+			Assert.AreEqual(noteForStaff.Note, "NoteForStaff");
+
+
+			Assert.AreEqual<ProcFormResponseWrapper>(original, response);
+
+		}
+
+		[TestMethod]
 		public void TestProcForms()
 		{
 			ProcResponse procWithForms = this.getProcessWithForms();

@@ -62,8 +62,10 @@ namespace RpmApiTests
 				"ProcFormSetAdd@{\"Key\":\"\",\"Form\":{\"FormID\":77777777,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"Value1\"}]}}",
 				"{\"Result\":{\"Process\":\"Rep\",\"ProcessID\":26,\"Form\":{\"Number\":\"0001\",\"FormID\":77777777,\"Owner\":\"RPM Support\",\"Status\":\"New\",\"ApprovalResult\":\"\",\"Started\":\"2013-10-15\",\"Modified\":\"2013-10-15\",\"Fields\":[{\"Field\":\"Non Rep\",\"Value\":\"\"}],\"Worksheets\":[],\"Sets\":[{\"FormID\":77777777,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"\"}]},{\"FormID\":77777778,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"Value1\"}]}],\"Participants\":[{\"Name\":\"RPM Support\",\"Role\":\"System Manager\",\"Read\":\"2013-10-15\"}],\"Actions\":[],\"Notes\":[],\"NotesForStaff\":[]}}}"
 			);
-
-
+			this.fakeResponses.Add(
+				"ProcFormNoteAdd@{\"Key\":\"\",\"Form\":{\"FormID\":77777777,\"Note\":\"Note\",\"NoteForStaff\":\"NoteForStaff\"}}",
+				"{\"Result\": {\"Form\": {\"Actions\": [],\"ApprovalResult\": \"\",\"Fields\": [{\"Field\": \"Non Rep\",\"Value\": \"\"}],\"FormID\": 77777777,\"Modified\": \"2013-10-15\",\"Notes\": [{\"Added\": \"2013-10-15\",\"By\": \"Joaquin W\",\"Note\": \"Note\"}],\"NotesForStaff\": [{\"Added\": \"2013-10-15\",\"By\": \"Joaquin W\",\"Note\": \"NoteForStaff\"}],\"Number\": \"0001\",\"Owner\": \"RPM Support\",\"Participants\": [{\"Name\": \"RPM Support\",\"Read\": \"2013-10-15\",\"Role\": \"System Manager\"}],\"Sets\": [{\"Fields\": [{\"Field\": \"Field1\",\"Value\": \"\"}],\"FormID\": 77777777}],\"Started\": \"2013-10-15\",\"Status\": \"New\",\"Worksheets\": []},\"Process\": \"Rep\",\"ProcessID\": 26}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)
