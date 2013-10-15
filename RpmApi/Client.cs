@@ -642,6 +642,37 @@ namespace RPM.Api
         }
 
 		/// <summary>
+		/// <para>Add values to a set of repeating fields.</para>
+		///   <para>Executes the "ProcFormSetAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="Fields">The fields to add.</param>
+		/// <returns>ProcFormResponse with the entire Form Data.</returns>
+		public ProcFormResponseWrapper ProcFormSetAdd(int FormID, List<FieldResponse> Fields)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Form = new
+			{
+				FormID = FormID,
+				Fields = Fields
+			};
+			return this.ProcFormSetAdd(apiParameters);
+		}
+
+		/// <summary>
+		/// <para>Add values to a set of repeating fields.</para>
+		///   <para>Executes the "ProcFormSetAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>ProcFormResponse with the entire Form Data.</returns>
+		private ProcFormResponseWrapper ProcFormSetAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormResponseWrapper>("ProcFormSetAdd", apiParameters);
+		}
+
+		/// <summary>
 		/// Execute the "ProcForms" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcForms/
 		/// </summary>

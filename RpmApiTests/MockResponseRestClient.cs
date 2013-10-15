@@ -54,6 +54,15 @@ namespace RpmApiTests
 				"ProcActionsDue@{\"Key\":\"\"}",
 				"{\"Result\":{\"Procs\":[{\"Staff\":\"gfhgfh gfhgf\",\"StaffID\":5,\"Due\":[{\"Process\":\"WS T1\",\"ProcessID\":25,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1}]},{\"Staff\":\"RPM Support\",\"StaffID\":1,\"Due\":[{\"Process\":\"cosa\",\"ProcessID\":9,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1},{\"Process\":\"WS T1\",\"ProcessID\":25,\"ActionsDueNormal\":1,\"ActionsDueHigh\":0,\"ActionsDue\":1}]}]}}"
 			);
+			this.fakeResponses.Add(
+				"ProcForm@{\"Key\":\"\",\"FormID\":77777777}",
+				"{\"Result\":{\"Process\":\"Rep\",\"ProcessID\":26,\"Form\":{\"Number\":\"0001\",\"FormID\":77777777,\"Owner\":\"RPM Support\",\"Status\":\"New\",\"ApprovalResult\":\"\",\"Started\":\"2013-10-15\",\"Modified\":\"2013-10-15\",\"Fields\":[{\"Field\":\"Non Rep\",\"Value\":\"\"}],\"Worksheets\":[],\"Sets\":[{\"FormID\":77777777,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"\"}]}],\"Participants\":[{\"Name\":\"RPM Support\",\"Role\":\"System Manager\",\"Read\":\"2013-10-15\"}],\"Actions\":[],\"Notes\":[],\"NotesForStaff\":[]}}}"
+			);
+			this.fakeResponses.Add(
+				"ProcFormSetAdd@{\"Key\":\"\",\"Form\":{\"FormID\":77777777,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"Value1\"}]}}",
+				"{\"Result\":{\"Process\":\"Rep\",\"ProcessID\":26,\"Form\":{\"Number\":\"0001\",\"FormID\":77777777,\"Owner\":\"RPM Support\",\"Status\":\"New\",\"ApprovalResult\":\"\",\"Started\":\"2013-10-15\",\"Modified\":\"2013-10-15\",\"Fields\":[{\"Field\":\"Non Rep\",\"Value\":\"\"}],\"Worksheets\":[],\"Sets\":[{\"FormID\":77777777,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"\"}]},{\"FormID\":77777778,\"Fields\":[{\"Field\":\"Field1\",\"Value\":\"Value1\"}]}],\"Participants\":[{\"Name\":\"RPM Support\",\"Role\":\"System Manager\",\"Read\":\"2013-10-15\"}],\"Actions\":[],\"Notes\":[],\"NotesForStaff\":[]}}}"
+			);
+
 
 		}
 

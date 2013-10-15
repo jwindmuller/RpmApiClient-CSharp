@@ -395,6 +395,24 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcSetAdd()
+		{
+			Client client = getApiClient();
+
+			ProcFormResponseWrapper original = client.ProcForm(77777777);
+
+			List<FieldResponse> Fields = new List<FieldResponse>();
+			FieldResponse CustomField1 = new FieldResponse();
+			CustomField1.Field = "Field1";
+			CustomField1.Value = "Value1";
+			Fields.Add(CustomField1);
+			ProcFormResponseWrapper response = client.ProcFormSetAdd(77777777, Fields);
+
+			original.Form.Sets.Add(response.Form.Sets[response.Form.Sets.Count - 1]);
+			Assert.AreEqual<ProcFormResponseWrapper>(original, response);
+		}
+
+		[TestMethod]
 		public void TestAgencies()
 		{
 			Client client = getApiClient();
