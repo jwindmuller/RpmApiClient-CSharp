@@ -708,7 +708,7 @@ namespace RPM.Api
 		/// <param name="ProcessID">The process identifier.</param>
 		/// <param name="FormData">The form data.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-        public ProcFormResponseWrapper ProcFormAdd(int ProcessID, dynamic FormData)
+        public ProcFormResponseWrapper ProcFormAdd(int ProcessID, ProcFormResponse FormData)
         {
             dynamic parameters = this.apiParameters();
 			parameters.ProcessID = ProcessID;
@@ -723,7 +723,7 @@ namespace RPM.Api
 		/// <param name="FormID">The form identifier.</param>
 		/// <param name="FormData">The form data.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponseWrapper ProcFormEdit(int FormID, dynamic FormData = null)
+		public ProcFormResponse ProcFormEdit(int FormID, ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.FormID = FormID;
@@ -739,7 +739,7 @@ namespace RPM.Api
 		/// <param name="FormNumber">The form number.</param>
 		/// <param name="FormData">The form data to modify, any field missing will not be modified.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponseWrapper ProcFormEdit(int ProcessID, int FormNumber, dynamic FormData = null)
+		public ProcFormResponse ProcFormEdit(int ProcessID, string FormNumber, ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.ProcessID = ProcessID;
@@ -756,7 +756,7 @@ namespace RPM.Api
 		/// <param name="FormNumber">The form number.</param>
 		/// <param name="FormData">The form data to modify, any field missing will not be modified.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponseWrapper ProcFormEdit(string ProcessName, int FormNumber, dynamic FormData = null)
+		public ProcFormResponse ProcFormEdit(string ProcessName, string FormNumber, ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.Process = ProcessName;
@@ -771,9 +771,13 @@ namespace RPM.Api
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		private ProcFormResponseWrapper ProcFormEdit(dynamic apiParameters)
+		private ProcFormResponse ProcFormEdit(dynamic apiParameters)
 		{
-			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
+			apiParameters.Form.Fields = null;
+			apiParameters.Form.Values = null;
+			apiParameters.Form.Participants = null;
+			apiParameters.Form.Sets = null;
+			return this.sendRequest<ProcFormResponse>("ProcFormEdit", apiParameters);
 		}
 
 		public ProcFormResponseWrapper ProcFormNoteAdd(string ProcessName, string FormNumber, string Note, string NoteForStaff)

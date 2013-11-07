@@ -357,6 +357,45 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcFormAdd()
+		{
+			int ProcessID = 77777777;
+
+			FieldResponse someField = new FieldResponse();
+			someField.Field = "Non Rep";
+			someField.Value = "The Value";
+
+			ProcFormResponse FormData = new ProcFormResponse();
+			FormData.Fields.Add(someField);
+			Client client = this.getApiClient();
+			ProcFormResponseWrapper response = client.ProcFormAdd(ProcessID, FormData);
+
+			Assert.AreEqual(response.ProcessID, ProcessID);
+			Assert.AreEqual(response.Form.Fields.Count, 1);
+			FieldResponse SavedField = response.Form.Fields[0];
+			Assert.AreEqual(someField, SavedField);
+		}
+
+		[TestMethod]
+		public void TestProcFormEdit()
+		{
+
+			int MockFormID = 77777777;
+
+			Client client = this.getApiClient();
+
+			ProcFormResponseWrapper formInformation = client.ProcForm(MockFormID);
+			ProcFormResponse formData = formInformation.Form;
+
+			FieldResponse firstField = formData.Fields[0];
+			firstField.Value = "Changed!";
+
+			ProcFormResponse response = client.ProcFormEdit(MockFormID, formData);
+
+			Assert.AreEqual<ProcFormResponse>(formData, response);
+		}
+
+		[TestMethod]
 		public void TestProcFormNoteAdd()
 		{
 			Client client = this.getApiClient();
