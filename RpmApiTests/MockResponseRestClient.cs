@@ -19,7 +19,7 @@ namespace RpmApiTests
 		{
 			this.fakeResponses = new Dictionary<string, string>();
 			this.fakeResponses.Add(
-				"CustomerAdd@{\"Key\":\"\",\"Customer\":{\"Accounts\":[],\"Added\":\"0001-01-01T07:00:00Z\",\"Contacts\":[],\"CustomerID\":0,\"Fields\":[],\"Modified\":\"0001-01-01T07:00:00Z\",\"Name\":\"Tester\",\"Notes\":[],\"NotesForStaff\":[],\"Website\":\"\"}}",
+				"CustomerAdd@{\"Key\":\"\",\"Customer\":{\"Accounts\":[],\"Added\":\"0001-01-01T07:00:00Z\",\"Contacts\":[],\"CustomerID\":0,\"Fields\":[],\"Locations\":[],\"Modified\":\"0001-01-01T07:00:00Z\",\"Name\":\"Tester\",\"Customer\":\"Tester\",\"Notes\":[],\"NotesForStaff\":[],\"Website\":\"\"}}",
 				"{\"Result\":{\"CustomerID\":77777777,\"Name\":\"Tester\",\"Aliases\":[],\"Website\":\"\",\"Added\":\"2013-10-02\",\"Modified\":\"2013-10-02\",\"Locations\":[{\"IsPrimary\":true,\"LocationID\":7,\"Name\":\"Primary\",\"Address\":\"\",\"City\":\"\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"}],\"Contacts\":[],\"Fields\":[{\"Field\":\"quantity 1\",\"Value\":\"\"}],\"Accounts\":[],\"Notes\":[],\"NotesForStaff\":[]}}"
 			);
 			this.fakeResponses.Add(
