@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPM.Api.Response.Abstract
 {
-	public class Response : System.Object
+	public class Response : ICloneable
 	{
 		public bool CollectionsAreEqual<T>(List<T> thisList, List<T> otherList)
 		{
@@ -32,5 +32,22 @@ namespace RPM.Api.Response.Abstract
 		{
 			throw new NotImplementedException(this.GetType().Name + ".Equals not implemented.");
 		}
+
+		public object Clone()
+		{
+			return null;
+		}
+
+
+		protected List<T> CloneCollection<T>(List<T> thisList) where T : ICloneable
+		{
+			List<T> cloned = new List<T>();
+			foreach (T t in thisList)
+			{
+				cloned.Add((T) t.Clone());
+			}
+			return cloned;
+		}
+			 
 	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	public class NoteResponse
+	public class NoteResponse : Abstract.Response
 	{
 
 		private DateTime _Added { get; set; }
@@ -48,6 +48,15 @@ namespace RPM.Api.Response
 				return _Note;
 			}
 			set { _Note = value; }
+		}
+
+		public object Clone()
+		{
+			NoteResponse clone = new NoteResponse();
+			clone.Added = this.Added;
+			clone.By = this.By.Clone() as string;
+			clone.Note = this.Note.Clone() as string;
+			return clone;
 		}
 	}
 }

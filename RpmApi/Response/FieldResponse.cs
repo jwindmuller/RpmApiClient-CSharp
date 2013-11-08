@@ -17,5 +17,14 @@ namespace RPM.Api.Response
 				this.Field == other.Field &&
 				this.Value == other.Value;
 		}
+
+		public object Clone()
+		{
+			FieldResponse clone = new FieldResponse();
+			clone.Field = (string)this.Field.Clone();
+			clone.Value = (string)this.Value.Clone();
+			return clone;
+		}
+
 	}
 }

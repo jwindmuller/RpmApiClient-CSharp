@@ -78,7 +78,10 @@ namespace RPM.Api.Response
 		{
 			foreach (ProcFormResponse item in this.Forms)
 			{
+				item.ProcessID = this.ProcessID;
+				item.ProcessName = this.Process;
 				this.initializeBasicFormFields(item);
+				//this.copyCustomFieldNames(item);
 			}
 		}
 
@@ -90,6 +93,18 @@ namespace RPM.Api.Response
 			form.ApprovalResult = this.initializeFormField<string>(form, "ApprovalResult");
 			form.Started = this.initializeFormField<DateTime>(form, "Started");
 			form.Modified = this.initializeFormField<DateTime>(form, "Modified");
+		}
+
+		private void copyCustomFieldNames(ProcFormResponse form)
+		{
+			for (int i = 0; i < this.Columns.Count; i++)
+			{
+				string fieldName = this.Columns[i];
+				FieldResponse field = new FieldResponse();
+				field.Field = fieldName;
+				field.Value = form.Values[i];
+				form.Fields.Add(field);
+			}
 		}
 
 		private T initializeFormField<T>(ProcFormResponse form, string fieldName)

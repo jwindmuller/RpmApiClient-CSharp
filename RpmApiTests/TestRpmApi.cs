@@ -390,9 +390,12 @@ namespace RpmApiTests
 			FieldResponse firstField = formData.Fields[0];
 			firstField.Value = "Changed!";
 
-			ProcFormResponse response = client.ProcFormEdit(MockFormID, formData);
+			ProcFormResponseWrapper response = client.ProcFormEdit(formData);
 
-			Assert.AreEqual<ProcFormResponse>(formData, response);
+			formData.Fields = new List<FieldResponse>();
+			formData.Fields.Add( firstField );
+			formData.Modified = response.Form.Modified;
+			Assert.AreEqual<ProcFormResponse>(formData, response.Form);
 		}
 
 		[TestMethod]
@@ -408,11 +411,41 @@ namespace RpmApiTests
 			Assert.AreEqual(note.Note, "Note");
 			NoteResponse noteForStaff = response.Form.NotesForStaff[response.Form.NotesForStaff.Count - 1];
 			original.Form.NotesForStaff.Add(noteForStaff);
+
 			Assert.AreEqual(noteForStaff.Note, "NoteForStaff");
-
-
 			Assert.AreEqual<ProcFormResponseWrapper>(original, response);
+		}
 
+		[TestMethod]
+		public void TestProcFormParticipantAddByAgency()
+		{
+			AgencyResponse agency = this.getFirstAgencyWithReps();
+			ProcFormResponse formBasicInfo = this.getFirstForm();
+			int FormID = formBasicInfo.FormID;
+			
+			
+			Client client = this.getApiClient();
+			ProcFormResponse formBefore = client.ProcForm(FormID).Form;
+			
+			ProcFormResponseWrapper updatedFormInformation = client.ProcFormParticipantAdd(FormID, agency);
+
+			Assert.IsTrue(updatedFormInformation.Form.Participants.Count == formBefore.Participants.Count + 1);
+
+
+			ParticipantResponse newParticipant;
+			foreach (ParticipantResponse participant in updatedFormInformation.Form.Participants)
+			{
+				ParticipantResponse found = formBefore.Participants.Find(delegate(ParticipantResponse p)
+				{
+					return p.Equals(participant);
+				});
+				if (found == null)
+				{
+					newParticipant = participant;
+					Assert.AreEqual(agency.Reps[0].Rep, newParticipant.Name);
+					break;
+				}
+			}
 		}
 
 		[TestMethod]
@@ -527,6 +560,30 @@ namespace RpmApiTests
 				}
 			}
 			return procWithForms;
+		}
+
+		private ProcFormResponse getFirstForm()
+		{
+			ProcResponse proc = this.getProcessWithForms();
+			Client client = this.getApiClient();
+			ProcFormsResponse formsInformation = client.ProcForms(proc.ProcessID);
+			return formsInformation.Forms[0];
+		}
+
+		private AgencyResponse getFirstAgencyWithReps()
+		{
+			Client client = this.getApiClient();
+			
+			List<AgencyResponse> agencies = client.Agencies();
+			foreach (AgencyResponse agencyInfo in agencies)
+			{
+				AgencyResponse agency = client.Agency(agencyInfo.AgencyID);
+				if (agency.Reps.Count > 0)
+				{
+					return agency;
+				}
+			}
+			return null;
 		}
 		#endregion
 	}

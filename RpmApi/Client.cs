@@ -723,10 +723,9 @@ namespace RPM.Api
 		/// <param name="FormID">The form identifier.</param>
 		/// <param name="FormData">The form data.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponse ProcFormEdit(int FormID, ProcFormResponse FormData = null)
+		public ProcFormResponseWrapper ProcFormEdit(ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
-			apiParameters.FormID = FormID;
 			apiParameters.Form = FormData;
 			return this.ProcFormEdit(apiParameters);
 		}
@@ -739,7 +738,7 @@ namespace RPM.Api
 		/// <param name="FormNumber">The form number.</param>
 		/// <param name="FormData">The form data to modify, any field missing will not be modified.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponse ProcFormEdit(int ProcessID, string FormNumber, ProcFormResponse FormData = null)
+		public ProcFormResponseWrapper ProcFormEdit(int ProcessID, string FormNumber, ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.ProcessID = ProcessID;
@@ -756,7 +755,7 @@ namespace RPM.Api
 		/// <param name="FormNumber">The form number.</param>
 		/// <param name="FormData">The form data to modify, any field missing will not be modified.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		public ProcFormResponse ProcFormEdit(string ProcessName, string FormNumber, ProcFormResponse FormData = null)
+		public ProcFormResponseWrapper ProcFormEdit(string ProcessName, string FormNumber, ProcFormResponse FormData = null)
 		{
 			dynamic apiParameters = this.apiParameters();
 			apiParameters.Process = ProcessName;
@@ -771,13 +770,15 @@ namespace RPM.Api
 		/// </summary>
 		/// <param name="apiParameters">The API parameters.</param>
 		/// <returns>ProcFormResponse containing the response data.</returns>
-		private ProcFormResponse ProcFormEdit(dynamic apiParameters)
+		private ProcFormResponseWrapper ProcFormEdit(dynamic apiParameters)
 		{
+			ProcFormResponse FormData = apiParameters.Form;
+			apiParameters.Form = FormData.Clone();
 			apiParameters.Form.Fields = null;
 			apiParameters.Form.Values = null;
 			apiParameters.Form.Participants = null;
 			apiParameters.Form.Sets = null;
-			return this.sendRequest<ProcFormResponse>("ProcFormEdit", apiParameters);
+			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
 		}
 
 		public ProcFormResponseWrapper ProcFormNoteAdd(string ProcessName, string FormNumber, string Note, string NoteForStaff)
@@ -823,6 +824,96 @@ namespace RPM.Api
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormNoteAdd", apiParameters);
 		}
 
+		#region ProcFormParticipantAdd FormID
+		public ProcFormResponseWrapper ProcFormParticipantAdd(int FormID, string ParticipantUsername)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Form = new {FormID = FormID};
+			apiParameters.Username = ParticipantUsername;
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+
+		public ProcFormResponseWrapper ProcFormParticipantAdd(int FormID, AgencyResponse agency)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Form = new { FormID = FormID };
+			if (agency.AgencyID > 0)
+			{
+				apiParameters.AgencyID = agency.AgencyID;
+			}
+			else
+			{
+				apiParameters.Agency = agency.Agency;
+			}
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+		#endregion
+
+		#region ProcFormParticipantAdd ProcessID + FormNumber
+		public ProcFormResponseWrapper ProcFormParticipantAdd(int ProcessID, string FormNumber, string ParticipantUsername)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcessID = ProcessID;
+			apiParameters.Form = new { FormNumber = FormNumber };
+			apiParameters.ParticipantUsername = ParticipantUsername;
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+
+		public ProcFormResponseWrapper ProcFormParticipantAdd(int ProcessID, string FormNumber, AgencyResponse agency)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcessID = ProcessID;
+			apiParameters.Form = new { FormNumber = FormNumber };
+			if (agency.AgencyID > 0)
+			{
+				apiParameters.AgencyID = agency.AgencyID;
+			}
+			else
+			{
+				apiParameters.Agency = agency.Agency;
+			}
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+		#endregion
+
+		#region ProcFormParticipantAdd ProcessName + FormNumber
+		public ProcFormResponseWrapper ProcFormParticipantAdd(string ProcessName, string FormNumber, string ParticipantUsername)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcessName = ProcessName;
+			apiParameters.Form = new { FormNumber = FormNumber };
+			apiParameters.ParticipantUsername = ParticipantUsername;
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+
+		public ProcFormResponseWrapper ProcFormParticipantAdd(string ProcessName, string FormNumber, AgencyResponse agency)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcessName = ProcessName;
+			apiParameters.Form = new { FormNumber = FormNumber };
+			if (agency.AgencyID > 0)
+			{
+				apiParameters.AgencyID = agency.AgencyID;
+			}
+			else
+			{
+				apiParameters.Agency = agency.Agency;
+			}
+			return this.ProcFormParticipantAdd(apiParameters);
+		}
+		#endregion
+
+
+		/// <summary>
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>ProcFormResponseWrapper</returns>
+		private ProcFormResponseWrapper ProcFormParticipantAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormResponseWrapper>("ProcFormParticipantAdd", apiParameters);
+		}
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/

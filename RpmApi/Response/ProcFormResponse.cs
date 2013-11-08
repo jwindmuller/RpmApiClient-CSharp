@@ -5,8 +5,24 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	public class ProcFormResponse : Abstract.Response
+	public class ProcFormResponse : ProcFormSet //Abstract.Response
     {
+
+		public int ProcessID { get; set; }
+		private string _ProcessName { get; set; }
+		public string ProcessName
+		{
+			get
+			{
+				if (_ProcessName == null)
+				{
+					_ProcessName = "";
+				}
+				return _ProcessName;
+			}
+			set { _ProcessName = value; }
+		}
+
 		private string _Number { get; set; }
 		public string Number
 		{
@@ -21,8 +37,6 @@ namespace RPM.Api.Response
 			set { _Number = value; }
 		}
 
-        public int FormID { get; set; }
-
 		private string _Owner { get; set; }
 		public string Owner
 		{
@@ -35,6 +49,20 @@ namespace RPM.Api.Response
 				return _Owner;
 			}
 			set { _Owner = value; }
+		}
+
+		private List<ParticipantResponse> _Participants { get; set; }
+		public List<ParticipantResponse> Participants
+		{
+			get
+			{
+				if (_Participants == null)
+				{
+					_Participants = new List<ParticipantResponse>();
+				}
+				return _Participants;
+			}
+			set { _Participants = value; }
 		}
 
 		private string _Status { get; set; }
@@ -93,20 +121,6 @@ namespace RPM.Api.Response
 			set { _Modified = value; }
 		}
 
-        private List<FieldResponse> _Fields { get; set; }
-		public List<FieldResponse> Fields
-		{
-			get
-			{
-				if (_Fields == null)
-				{
-					_Fields = new List<FieldResponse>();
-				}
-				return _Fields;
-			}
-			set { _Fields = value; }
-		}
-
 		private List<string> _Values { get; set; }
 		public List<string> Values
 		{
@@ -121,14 +135,14 @@ namespace RPM.Api.Response
 			set { _Values = value; }
 		}
 
-		private List<ProcFormResponse> _Sets { get; set; }
-		public List<ProcFormResponse> Sets
+		private List<ProcFormSet> _Sets { get; set; }
+		public List<ProcFormSet> Sets
 		{
 			get
 			{
 				if (_Sets == null)
 				{
-					_Sets = new List<ProcFormResponse>();
+					_Sets = new List<ProcFormSet>();
 				}
 				return _Sets;
 			}
@@ -168,14 +182,13 @@ namespace RPM.Api.Response
 		{
 			ProcFormResponse other = (ProcFormResponse)obj;
 			return
+				base.Equals(obj) &&
 				this.Number == other.Number &&
-				this.FormID == other.FormID &&
 				this.Owner == other.Owner &&
 				this.Status == other.Status &&
 				this.ApprovalResult == other.ApprovalResult &&
 				this.Started.Equals(other.Started) &&
 				this.Modified.Equals(other.Modified) &&
-				this.CollectionsAreEqual(this.Fields, other.Fields) &&
 				this.CollectionsAreEqual(this.Values, other.Values) &&
 				this.CollectionsAreEqual(this.Sets, other.Sets);
 		}
@@ -197,5 +210,26 @@ namespace RPM.Api.Response
             }
             throw new KeyNotFoundException(fieldName + " Not Found");
         }
+
+		public object Clone()
+		{
+			ProcFormResponse clone = new ProcFormResponse();
+			clone.FormID = this.FormID;
+			clone.Fields = this.CloneCollection<FieldResponse>(this.Fields);
+			clone.ProcessID = this.ProcessID;
+			clone.ProcessName = (string)this.ProcessName.Clone();
+			clone.Number = (string)this.Number.Clone();
+			clone.Owner = (string)this.Owner.Clone();
+			clone.Participants = this.CloneCollection<ParticipantResponse>(this.Participants);
+			clone.Status = (string)this.Status.Clone();
+			clone.ApprovalResult = (string)this.ApprovalResult.Clone();
+			clone.Started = this.Started;
+			clone.Modified = this.Modified;
+			clone.Values = this.CloneCollection<string>(this.Values);
+			clone.Sets = this.CloneCollection<ProcFormSet>(this.Sets);
+			clone.Notes = this.CloneCollection<NoteResponse>(this.Notes);
+			clone.NotesForStaff = this.CloneCollection<NoteResponse>(this.NotesForStaff);
+			return clone;
+		}
     }
 }
