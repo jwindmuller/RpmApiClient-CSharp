@@ -13,7 +13,8 @@ using RPM.Api.Response;
 namespace RPM.Api
 {
     public class Client
-    {
+	{
+		#region Client
 		private string url;
         private string key;
         private RestClient client;
@@ -50,7 +51,9 @@ namespace RPM.Api
             
             this.key = apiKey;
         }
+		#endregion
 
+		#region Account
 		/// <summary>
 		/// Execute the "Account" API Endpoint.
 		/// http://rpmsoftware.wordpress.com/api/account/
@@ -121,7 +124,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<AccountResponse>("Account", apiParameters);
 		}
+		#endregion
 
+		#region Accounts
 		/// <summary>
 		/// <para>Return a list of Accounts for a Supplier ID.</para>
 		/// <remarks>Note: Expect AccountResponse.Rep to be null. Use Account call to get Account's Reps.</remarks>
@@ -196,7 +201,9 @@ namespace RPM.Api
 				this.sendRequest<Dictionary<String, List<AccountResponse>>>("Accounts", apiParameters);
 			return response["Accounts"];
 		}
+		#endregion
 
+		#region Agencies
 		/// <summary>
 		/// Execute the "Agencies" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/Agencies/
@@ -212,7 +219,9 @@ namespace RPM.Api
 			List<AgencyResponse> agencies = response["Agencies"];
 			return agencies;
 		}
+		#endregion
 
+		#region Agency
 		/// <summary>
 		/// Execute the "Agency" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/Agency/
@@ -249,7 +258,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<AgencyResponse>("Agency", apiParameters);
 		}
+		#endregion
 
+		#region CommAccounts
 		/// <summary>
 		/// User facing Enum to provide the Variable to report on.
 		/// </summary>
@@ -326,7 +337,9 @@ namespace RPM.Api
 
 			return response["Accounts"];
 		}
+		#endregion
 
+		#region Customer
 		/// <summary>
 		///   <para>Return Customer information by providing their Name.</para>
 		///   <para>Executes the "Customer" API endpoint.
@@ -372,7 +385,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<CustomerResponse>("Customer", apiParameters);
 		}
+		#endregion
 
+		#region CustomerAdd
 		/// <summary>
 		///   <para>Add Customer information.</para>
 		///   <para>Executes the "CustomerAdd" API endpoint.
@@ -397,7 +412,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<CustomerResponse>("CustomerAdd", apiParameters);
 		}
+		#endregion
 
+		#region CustomerContactAdd
 		/// <summary>
 		///   <para>Add Contact Information for an existing Customer.</para>
 		///   <para>Executes the "CustomerContactAdd" API endpoint.
@@ -429,7 +446,9 @@ namespace RPM.Api
 				this.sendRequest<Dictionary<string, ContactResponse>>("CustomerContactAdd", apiParameters);
 			return response["Contact"];
 		}
+		#endregion
 
+		#region CustomerContactEdit
 		/// <summary>
 		///   <para>Edit Contact Information for an existing Customer.</para>
 		///   <para>Executes the "CustomerContactEdit" API endpoint.
@@ -465,7 +484,9 @@ namespace RPM.Api
 				this.sendRequest<Dictionary<string, ContactResponse>>("CustomerContactEdit", apiParameters);
 			return response["Contact"];
 		}
+		#endregion
 
+		#region CustomerLocationAdd
 		/// <summary>
 		///   <para>Add Location Information for an existing Customer.</para>
 		///   <para>Executes the "CustomerLocationAdd" API endpoint.
@@ -493,7 +514,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<LocationResponse>("CustomerLocationAdd", apiParameters);
 		}
+		#endregion
 
+		#region CustomerLocationEdit
 		/// <summary>
 		///   <para>Edit Current Location Information for an existing Customer.</para>
 		///   <para>Executes the "CustomerLocationEdit" API endpoint.
@@ -521,7 +544,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<LocationResponse>("CustomerLocationEdit", apiParameters);
 		}
+		#endregion
 
+		#region Customers
 		/// <summary>
 		/// <para>Returns a list of all the Customers registered (Customer Name and ID only)</para>
 		///   <para>Executes the "Customers" API endpoint.
@@ -534,7 +559,9 @@ namespace RPM.Api
 			List<CustomerResponse> customers = response["Customers"];
 			return customers;
 		}
+		#endregion
 
+		#region CustomerUpdate
 		/// <summary>
 		/// <para>Update limited Customer Data.</para>
 		///   <para>Executes the "Customers" API endpoint.
@@ -551,7 +578,9 @@ namespace RPM.Api
 			apiParameters.Customer = data;
 			return this.sendRequest<CustomerResponse>("CustomerUpdate", apiParameters);
 		}
+		#endregion
 
+		#region Info
 		/// <summary>
 		/// Execute the "Info" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/info/
@@ -561,14 +590,18 @@ namespace RPM.Api
             InfoResponse result = this.sendRequest<InfoResponse>("Info");
             return result;
         }
+		#endregion
 
+		#region ProcActionsDue
 		public List<ProcActionDueResponse> ProcActionsDue()
 		{
 			Dictionary<string, List<ProcActionDueResponse>> response =
 				this.sendRequest<Dictionary<string, List<ProcActionDueResponse>>>("ProcActionsDue");
 			return response["Procs"];
 		}
+		#endregion
 
+		#region ProcForm
 		/// <summary>
 		/// Execute the "ProcForm" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcForm/
@@ -622,7 +655,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcForm", apiParameters);
 		}
+		#endregion
 
+		#region ProcForms
 		/// <summary>
 		/// Execute the "ProcForms" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcForms/
@@ -640,7 +675,9 @@ namespace RPM.Api
 			}
             return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
         }
+		#endregion
 
+		#region ProcFormSetAdd
 		/// <summary>
 		/// <para>Add values to a set of repeating fields.</para>
 		///   <para>Executes the "ProcFormSetAdd" API endpoint.
@@ -671,7 +708,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormSetAdd", apiParameters);
 		}
+		#endregion
 
+		#region ProcForms
 		/// <summary>
 		/// Execute the "ProcForms" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcForms/
@@ -700,7 +739,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
 		}
+#endregion
 
+		#region ProcFormAdd
 		/// <summary>
 		/// Execute the "ProcFormAdd" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcFormAdd/
@@ -715,7 +756,9 @@ namespace RPM.Api
 			parameters.Form = FormData;
             return this.sendRequest<ProcFormResponseWrapper>("ProcFormAdd", parameters);
         }
+		#endregion
 
+		#region ProcFormEdit
 		/// <summary>
 		/// Execute the "ProcForm" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcFormEdit/
@@ -780,6 +823,7 @@ namespace RPM.Api
 			apiParameters.Form.Sets = null;
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
 		}
+		#endregion
 
 		#region ProcFormNoteAdd
 		/// <summary>
@@ -1000,6 +1044,7 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region Procs
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/
@@ -1012,7 +1057,9 @@ namespace RPM.Api
 
 			return response["Procs"];
 		}
+		#endregion
 
+		#region Suppliers
 		/// <summary>
 		/// Execute the "Suppliers" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/Suppliers/
@@ -1024,7 +1071,9 @@ namespace RPM.Api
 				this.sendRequest<Dictionary<String, List<SupplierResponse>>>("Suppliers");
 			return response["Suppliers"];
 		}
+		#endregion
 
+		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.
 		/// http://rpmsoftware.wordpress.com/api/
@@ -1075,6 +1124,7 @@ namespace RPM.Api
             dynamic apiParameters = new ExpandoObject();
             apiParameters.Key = this.key;
             return apiParameters;
-        }
-    }
+		}
+		#endregion
+	}
 }
