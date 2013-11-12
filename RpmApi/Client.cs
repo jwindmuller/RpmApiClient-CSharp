@@ -1071,6 +1071,27 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:ProcFormUpp
+		private void ProcFormUpp(dynamic apiParameters)
+		{
+			throw new NotImplementedException();
+		}
+		#endregion
+
+		#region TODO:ProcFormUppUpdate
+		private void ProcFormUppUpdate(dynamic apiParameters)
+		{
+			throw new NotImplementedException();
+		}
+		#endregion
+
+		#region TODO:ProcFormWellDataUpdate
+		private void ProcFormWellDataUpdate(dynamic apiParameters)
+		{
+			throw new NotImplementedException();
+		}
+		#endregion
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.
