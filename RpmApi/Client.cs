@@ -781,6 +781,17 @@ namespace RPM.Api
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormEdit", apiParameters);
 		}
 
+		#region ProcFormNoteAdd
+		/// <summary>
+		/// <para>Add a notes to a Form (Process Name + Form Number)</para>
+		/// Execute the "ProcFormNoteAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormNoteAdd/
+		/// </summary>
+		/// <param name="ProcessName">Name of the process.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="Note">The note.</param>
+		/// <param name="NoteForStaff">The note for staff.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormNoteAdd(string ProcessName, string FormNumber, string Note, string NoteForStaff)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -794,6 +805,16 @@ namespace RPM.Api
 			return this.ProcFormNoteAdd(apiParameters);
 		}
 
+		/// <summary>
+		/// <para>Add a notes to a Form (Process ID + Form Number)</para>
+		/// Execute the "ProcFormNoteAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormNoteAdd/
+		/// </summary>
+		/// <param name="ProcessID">The process identifier.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="Note">The note.</param>
+		/// <param name="NoteForStaff">The note for staff.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormNoteAdd(int ProcessID, string FormNumber, string Note, string NoteForStaff)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -807,6 +828,15 @@ namespace RPM.Api
 			return this.ProcFormNoteAdd(apiParameters);
 		}
 
+		/// <summary>
+		///   <para>Add a notes to a Form (Form ID)</para>
+		/// Execute the "ProcFormNoteAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormNoteAdd/
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="Note">The note.</param>
+		/// <param name="NoteForStaff">The note for staff.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormNoteAdd(int FormID, string Note, string NoteForStaff)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -823,7 +853,9 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormNoteAdd", apiParameters);
 		}
+		#endregion
 
+		#region ProcFormParticipantAdd
 		#region ProcFormParticipantAdd FormID
 		/// <summary>
 		/// <para>Add a participant to a Form (Form ID)
@@ -966,6 +998,7 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormParticipantAdd", apiParameters);
 		}
+		#endregion
 
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
