@@ -1092,6 +1092,28 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region ProcFormWorksheet
+		/// <summary>
+		/// <para>Get a Worksheet's information</para>
+		/// Execute the "ProcFormWorksheet" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheet/
+		/// </summary>
+		/// <param name="WorksheetID">The worksheet identifier.</param>
+		/// <returns>WorksheetResponse with the Worksheet's information</returns>
+		public WorksheetResponse ProcFormWorksheet(int WorksheetID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.WorksheetID = WorksheetID;
+			return this.ProcFormWorksheet(apiParameters);
+		}
+
+		private WorksheetResponse ProcFormWorksheet(dynamic apiParameters)
+		{
+			Dictionary<string, WorksheetResponse> response =
+				this.sendRequest<Dictionary<string, WorksheetResponse>>("ProcFormWorksheet", apiParameters);
+			return response["Worksheet"];
+		}
+		#endregion
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.

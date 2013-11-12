@@ -488,6 +488,21 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcFormWorksheet()
+		{
+			ProcFormResponse form = this.getFirstFormWithWorksheet();
+			WorksheetResponse ws = form.Worksheets[0];
+			Client client = this.getApiClient();
+			WorksheetResponse wsInfo = client.ProcFormWorksheet(ws.WorksheetID);
+
+			// They seem to be the same
+			Assert.AreEqual(ws.Name, wsInfo.Name);
+			Assert.AreEqual(ws.WorksheetID, wsInfo.WorksheetID);
+			// getFirstFormWithWorksheet uses ProcForm which doesn't return the complete Worksheet Data Set.
+			Assert.AreNotEqual(ws, wsInfo);
+		}
+
+		[TestMethod]
 		public void TestProcSetAdd()
 		{
 			Client client = getApiClient();
@@ -546,7 +561,7 @@ namespace RpmApiTests
 			return suppliers[0];
 		}
 
-		private ProcResponse getProcessWithForms()
+		private ProcResponse getProcessWithFunc(Func<ProcResponse, bool> check)
 		{
 			Client client = this.getApiClient();
 			List<ProcResponse> procs = client.Procs();
@@ -554,7 +569,7 @@ namespace RpmApiTests
 			ProcResponse procWithForms = null;
 			foreach (ProcResponse proc in procs)
 			{
-				if (proc.Forms > 0)
+				if (check(proc))
 				{
 					procWithForms = proc;
 					break;
@@ -563,12 +578,60 @@ namespace RpmApiTests
 			return procWithForms;
 		}
 
+		private ProcResponse getProcessWithForms()
+		{
+			Func<ProcResponse, bool> f = (proc) =>
+			{
+				return proc.Forms > 0;
+			};
+			return this.getProcessWithFunc(f);
+		}
+
+		private ProcResponse getProcessWithFormsHavingWorksheets()
+		{
+			Client client = this.getApiClient();
+			Func<ProcResponse, bool> f = (proc) =>
+			{
+				if (proc.Forms == 0)
+				{
+					return false;
+				}
+				ProcFormsResponse forms = client.ProcForms(proc.ProcessID);
+				foreach (ProcFormResponse formInfo in forms.Forms)
+				{
+					ProcFormResponseWrapper form = client.ProcForm(formInfo.FormID);
+					if (form.Form.Worksheets.Count > 1)
+					{
+						return true;
+					}
+				}
+				return false;
+			};
+			return this.getProcessWithFunc(f);
+		}
+
 		private ProcFormResponse getFirstForm()
 		{
 			ProcResponse proc = this.getProcessWithForms();
 			Client client = this.getApiClient();
 			ProcFormsResponse formsInformation = client.ProcForms(proc.ProcessID);
 			return formsInformation.Forms[0];
+		}
+
+		private ProcFormResponse getFirstFormWithWorksheet()
+		{
+			ProcResponse proc = this.getProcessWithFormsHavingWorksheets();
+			Client client = this.getApiClient();
+			ProcFormsResponse formsInformation = client.ProcForms(proc.ProcessID);
+			foreach (ProcFormResponse formInfo in formsInformation.Forms)
+			{
+				ProcFormResponseWrapper form = client.ProcForm(formInfo.FormID);
+				if (form.Form.Worksheets.Count > 0)
+				{
+					return form.Form;
+				}
+			}
+			return null;
 		}
 
 		private AgencyResponse getFirstAgencyWithReps()

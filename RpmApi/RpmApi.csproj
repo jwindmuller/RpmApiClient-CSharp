@@ -71,6 +71,10 @@
     <Compile Include="Response\StaffAssignmentResponse.cs" />
     <Compile Include="Response\SupplierExclusionResponse.cs" />
     <Compile Include="Response\SupplierResponse.cs" />
+    <Compile Include="Response\WorksheetField.cs" />
+    <Compile Include="Response\WorksheetResponse.cs" />
+    <Compile Include="Response\WorksheetTable.cs" />
+    <Compile Include="Response\WorksheetTableColumn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -177,6 +177,20 @@ namespace RPM.Api.Response
 			set { _NotesForStaff = value; }
 		}
 
+		private List<WorksheetResponse> _Worksheets { get; set; }
+		public List<WorksheetResponse> Worksheets
+		{
+			get
+			{
+				if (_Worksheets == null)
+				{
+					_Worksheets = new List<WorksheetResponse>();
+				}
+				return _Worksheets;
+			}
+			set { _Worksheets = value; }
+		}
+
         // TODO: rest of properties for form, see: http://rpmsoftware.wordpress.com/json-structure-for-forms/
 		public override bool Equals(object obj)
 		{
@@ -190,7 +204,8 @@ namespace RPM.Api.Response
 				this.Started.Equals(other.Started) &&
 				this.Modified.Equals(other.Modified) &&
 				this.CollectionsAreEqual(this.Values, other.Values) &&
-				this.CollectionsAreEqual(this.Sets, other.Sets);
+				this.CollectionsAreEqual(this.Sets, other.Sets) &&
+				this.CollectionsAreEqual(this.Worksheets, other.Worksheets);
 		}
 
         private Dictionary<string, string> fieldsByName;
