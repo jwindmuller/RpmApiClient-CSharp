@@ -825,6 +825,14 @@ namespace RPM.Api
 		}
 
 		#region ProcFormParticipantAdd FormID
+		/// <summary>
+		/// <para>Add a participant to a Form (Form ID)
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="ParticipantUsername">The participant username.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(int FormID, string ParticipantUsername)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -833,6 +841,14 @@ namespace RPM.Api
 			return this.ProcFormParticipantAdd(apiParameters);
 		}
 
+		/// <summary>
+		/// <para>Add a participant to a Form (Form ID)
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="agency">Identify the new participant by agency (first manager if available, or rep).</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(int FormID, AgencyResponse agency)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -850,6 +866,15 @@ namespace RPM.Api
 		#endregion
 
 		#region ProcFormParticipantAdd ProcessID + FormNumber
+		/// <summary>
+		/// <para>Add a participant to a Form (Process ID + Form Number)
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="ProcessID">The process identifier.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="ParticipantUsername">The participant username.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(int ProcessID, string FormNumber, string ParticipantUsername)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -859,6 +884,15 @@ namespace RPM.Api
 			return this.ProcFormParticipantAdd(apiParameters);
 		}
 
+		/// <summary>
+		/// <para>Add a participant to a Form (Process ID + Form Number)
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="ProcessID">The process identifier.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="agency">Identify the new participant by agency (first manager if available, or rep).</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(int ProcessID, string FormNumber, AgencyResponse agency)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -877,6 +911,15 @@ namespace RPM.Api
 		#endregion
 
 		#region ProcFormParticipantAdd ProcessName + FormNumber
+		/// <summary>
+		/// <para>Add a participant to a Form (Process Name + Form Number)
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="ProcessName">Name of the process.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="ParticipantUsername">The participant username.</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(string ProcessName, string FormNumber, string ParticipantUsername)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -886,6 +929,15 @@ namespace RPM.Api
 			return this.ProcFormParticipantAdd(apiParameters);
 		}
 
+		/// <summary>
+		/// <para>Add a participant to a Form (Process Name + Form Number)</para>
+		/// Execute the "ProcFormParticipantAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
+		/// </summary>
+		/// <param name="ProcessName">Name of the process.</param>
+		/// <param name="FormNumber">The form number.</param>
+		/// <param name="agency">Identify the new participant by agency (first manager if available, or rep).</param>
+		/// <returns>ProcFormResponseWrapper witht the updated Form Information</returns>
 		public ProcFormResponseWrapper ProcFormParticipantAdd(string ProcessName, string FormNumber, AgencyResponse agency)
 		{
 			dynamic apiParameters = this.apiParameters();
@@ -903,8 +955,8 @@ namespace RPM.Api
 		}
 		#endregion
 
-
 		/// <summary>
+		/// <para>Add a participant to a Form</para>
 		/// Execute the "ProcFormParticipantAdd" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/ProcFormParticipantAdd/
 		/// </summary>
@@ -914,6 +966,7 @@ namespace RPM.Api
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormParticipantAdd", apiParameters);
 		}
+
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/procs/
