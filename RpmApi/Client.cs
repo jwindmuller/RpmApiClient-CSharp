@@ -657,90 +657,6 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region ProcForms
-		/// <summary>
-		/// Execute the "ProcForms" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForms/
-		/// </summary>
-		/// <param name="ProcessName">Name of the process.</param>
-		/// <param name="ViewID">The View ID to use.</param>
-		/// <returns>ProcFormsResult containing the response data.</returns>
-		public ProcFormsResponse ProcForms(string ProcessName, int ViewID = 0)
-        {
-			dynamic apiParameters = this.apiParameters();
-			apiParameters.Process = ProcessName;
-			if (ViewID > 0)
-			{
-				apiParameters.ViewID = ViewID;
-			}
-            return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
-        }
-		#endregion
-
-		#region ProcFormSetAdd
-		/// <summary>
-		/// <para>Add values to a set of repeating fields.</para>
-		///   <para>Executes the "ProcFormSetAdd" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
-		/// </summary>
-		/// <param name="FormID">The form identifier.</param>
-		/// <param name="Fields">The fields to add.</param>
-		/// <returns>ProcFormResponse with the entire Form Data.</returns>
-		public ProcFormResponseWrapper ProcFormSetAdd(int FormID, List<FieldResponse> Fields)
-		{
-			dynamic apiParameters = this.apiParameters();
-			apiParameters.Form = new
-			{
-				FormID = FormID,
-				Fields = Fields
-			};
-			return this.ProcFormSetAdd(apiParameters);
-		}
-
-		/// <summary>
-		/// <para>Add values to a set of repeating fields.</para>
-		///   <para>Executes the "ProcFormSetAdd" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
-		/// </summary>
-		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns>ProcFormResponse with the entire Form Data.</returns>
-		private ProcFormResponseWrapper ProcFormSetAdd(dynamic apiParameters)
-		{
-			return this.sendRequest<ProcFormResponseWrapper>("ProcFormSetAdd", apiParameters);
-		}
-		#endregion
-
-		#region ProcForms
-		/// <summary>
-		/// Execute the "ProcForms" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForms/
-		/// </summary>
-		/// <param name="ProcessID">The Process ID.</param>
-		/// <param name="ViewID">The view identifier.</param>
-		/// <returns>ProcFormsResult containing the response data.</returns>
-		public ProcFormsResponse ProcForms(int ProcessID, int ViewID = 0)
-		{
-			dynamic apiParameters = this.apiParameters();
-			apiParameters.ProcessID = ProcessID;
-			if (ViewID > 0)
-			{
-				apiParameters.ViewID = ViewID;
-			}
-			return this.ProcForms(apiParameters);
-		}
-
-		/// <summary>
-		/// Execute the "ProcForms" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/ProcForms/
-		/// </summary>
-		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns></returns>
-		private ProcFormsResponse ProcForms(dynamic apiParameters)
-		{
-			return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
-		}
-#endregion
-
 		#region ProcFormAdd
 		/// <summary>
 		/// Execute the "ProcFormAdd" API endpoint.
@@ -1041,6 +957,88 @@ namespace RPM.Api
 		private ProcFormResponseWrapper ProcFormParticipantAdd(dynamic apiParameters)
 		{
 			return this.sendRequest<ProcFormResponseWrapper>("ProcFormParticipantAdd", apiParameters);
+		}
+		#endregion
+
+		#region ProcForms
+		/// <summary>
+		/// Execute the "ProcForms" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForms/
+		/// </summary>
+		/// <param name="ProcessID">The Process ID.</param>
+		/// <param name="ViewID">The view identifier.</param>
+		/// <returns>ProcFormsResult containing the response data.</returns>
+		public ProcFormsResponse ProcForms(int ProcessID, int ViewID = 0)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.ProcessID = ProcessID;
+			if (ViewID > 0)
+			{
+				apiParameters.ViewID = ViewID;
+			}
+			return this.ProcForms(apiParameters);
+		}
+
+		/// <summary>
+		/// Execute the "ProcForms" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForms/
+		/// </summary>
+		/// <param name="ProcessName">Name of the process.</param>
+		/// <param name="ViewID">The View ID to use.</param>
+		/// <returns>ProcFormsResult containing the response data.</returns>
+		public ProcFormsResponse ProcForms(string ProcessName, int ViewID = 0)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Process = ProcessName;
+			if (ViewID > 0)
+			{
+				apiParameters.ViewID = ViewID;
+			}
+			return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
+		}
+
+		/// <summary>
+		/// Execute the "ProcForms" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcForms/
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns></returns>
+		private ProcFormsResponse ProcForms(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormsResponse>("ProcForms", apiParameters);
+		}
+		#endregion
+
+		#region ProcFormSetAdd
+		/// <summary>
+		/// <para>Add values to a set of repeating fields.</para>
+		///   <para>Executes the "ProcFormSetAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="Fields">The fields to add.</param>
+		/// <returns>ProcFormResponse with the entire Form Data.</returns>
+		public ProcFormResponseWrapper ProcFormSetAdd(int FormID, List<FieldResponse> Fields)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Form = new
+			{
+				FormID = FormID,
+				Fields = Fields
+			};
+			return this.ProcFormSetAdd(apiParameters);
+		}
+
+		/// <summary>
+		/// <para>Add values to a set of repeating fields.</para>
+		///   <para>Executes the "ProcFormSetAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormSetAdd/ </para>
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>ProcFormResponse with the entire Form Data.</returns>
+		private ProcFormResponseWrapper ProcFormSetAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<ProcFormResponseWrapper>("ProcFormSetAdd", apiParameters);
 		}
 		#endregion
 
