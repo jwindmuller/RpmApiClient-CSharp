@@ -94,19 +94,30 @@ namespace RpmApiTests
 			string parameters = (string)request.Parameters[0].Value;
 			parameters = removeKey.Replace(parameters, "\"Key\":\"\"");
 			var mockDataKey = String.Format("{0}@{1}", resource, parameters);
+
+			IRestResponse response;
 			if (this.fakeResponses.ContainsKey(mockDataKey))
 			{
 				string content = this.fakeResponses[mockDataKey];
-				RestResponse response = new RestResponse();
+				response = new RestResponse();
 				response.Content = content;
 				response.StatusDescription = "OK";
-				return response;
 			}
 			else
 			{
-				IRestResponse response = base.Execute(request);
-				return response;
+				response = base.Execute(request);
 			}
+			if (System.Diagnostics.Debugger.IsAttached)
+			{
+				var host = this.BaseUrl.Substring(this.BaseUrl.IndexOf("//") + 2);
+				host = host.Substring(0, host.IndexOf("/"));
+				string req = string.Format(
+					"---\n\nPOST {0} HTTP/1.1\nHost: {1}\n\n{2}\n\n---",
+					this.BaseUrl, host, request.Parameters[0].Value
+				);
+				System.Diagnostics.Debug.Print(req);
+			}
+			return response;
 		}
 	}
 }
