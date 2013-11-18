@@ -53,6 +53,11 @@ namespace RpmApiTests
 		public void TestAccount()
 		{
 			AccountResponse firstAccount = getFirstAccount();
+			if (firstAccount == null)
+			{
+				Assert.Inconclusive("Could not find an Account");
+				return;
+			}
 			Client client = getApiClient();
 			AccountResponse account = client.Account(firstAccount.Supplier, firstAccount.Account);
 
@@ -63,15 +68,25 @@ namespace RpmApiTests
 
 		private AccountResponse getFirstAccount(SupplierResponse supplier = null)
 		{
+			Client client = getApiClient();
+			List<AccountResponse> accounts = null;
 			if (supplier == null)
 			{
-				supplier = this.getFirstSupplier();	
+				List<SupplierResponse> suppliers = this.getSuppliers();
+				foreach (SupplierResponse s in suppliers)
+				{
+					accounts = client.AccountsForSupplier(s.Supplier);
+					if (accounts.Count > 0)
+					{
+						break;
+					}
+				}
 			}
-
-			Client client = getApiClient();
-			List<AccountResponse> accounts = client.AccountsForSupplier(supplier.Supplier);
-
-			if (accounts.Count == 0)
+			else
+			{
+				accounts = client.AccountsForSupplier(supplier.Supplier);
+			}
+			if (accounts == null || accounts.Count == 0)
 			{
 				return null;
 			}
@@ -340,9 +355,9 @@ namespace RpmApiTests
 
 			ProcFormResponseWrapper byID = client.ProcForm(firstForm.FormID);
 			ProcFormResponseWrapper byProcessID = client.ProcForm(procWithForms.ProcessID, firstForm.Number);
-			ProcFormResponseWrapper byProcessName = client.ProcForm(procWithForms.Process, firstForm.Number);
 
 			Assert.AreEqual<ProcFormResponseWrapper>(byID, byProcessID);
+			ProcFormResponseWrapper byProcessName = client.ProcForm(procWithForms.Process, firstForm.Number);
 			Assert.AreEqual<ProcFormResponseWrapper>(byID, byProcessName);
 
 			// ProcForm obtained via ProcForms will only have the data available on the selected View.
@@ -553,11 +568,15 @@ namespace RpmApiTests
 		}
 
 		#region Helper Functions
-		private SupplierResponse getFirstSupplier()
+		private List<SupplierResponse> getSuppliers()
 		{
 			Client client = getApiClient();
 			List<SupplierResponse> suppliers = client.Suppliers();
-
+			return suppliers;
+		}
+		private SupplierResponse getFirstSupplier()
+		{
+			List<SupplierResponse> suppliers = this.getSuppliers();
 			return suppliers[0];
 		}
 

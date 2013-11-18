@@ -612,7 +612,7 @@ namespace RPM.Api
 		{
 			dynamic parameters = this.apiParameters();
 			parameters.FormID = FormID;
-			return this.sendRequest<ProcFormResponseWrapper>("ProcForm", parameters);
+			return this.ProcForm(parameters);
 		}
 
 		/// <summary>
