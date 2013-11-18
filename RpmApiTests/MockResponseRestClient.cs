@@ -113,7 +113,7 @@ namespace RpmApiTests
 				host = host.Substring(0, host.IndexOf("/"));
 				string req = string.Format(
 					"---\n\nPOST {0} HTTP/1.1\nHost: {1}\n\n{2}\n\n---",
-					this.BaseUrl, host, request.Parameters[0].Value
+					this.BaseUrl + "/" + resource, host, request.Parameters[0].Value
 				);
 				System.Diagnostics.Debug.Print(req);
 			}
