@@ -593,6 +593,13 @@ namespace RPM.Api
 		#endregion
 
 		#region ProcActionsDue
+
+		/// <summary>
+		/// <para>Provides, for each Staff Users with actions due, a count of actions due per process.</para>
+		/// Execute the "ProcActionsDue" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcActionsDue/
+		/// </summary>
+		/// <returns>List<ProcActionDueResponse> with the information.</returns>
 		public List<ProcActionDueResponse> ProcActionsDue()
 		{
 			Dictionary<string, List<ProcActionDueResponse>> response =
@@ -1045,7 +1052,7 @@ namespace RPM.Api
 		#region Procs
 		/// <summary>
 		/// Execute the "Procs" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/procs/
+		/// http://rpmsoftware.wordpress.com/api/Procs/
 		/// </summary>
 		/// <returns>List of ProcResponse containing the response data.</returns>
 		public List<ProcResponse> Procs()
