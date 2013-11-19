@@ -108,6 +108,30 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestAgencies()
+		{
+			Client client = getApiClient();
+			List<AgencyResponse> agencies = client.Agencies();
+			AgencyResponse agency = agencies[0];
+			Assert.IsNotNull(agency.Agency);
+			Assert.IsTrue(agency.AgencyID > 0);
+		}
+
+		[TestMethod]
+		public void TestAgency()
+		{
+			Client client = getApiClient();
+			List<AgencyResponse> agencies = client.Agencies();
+			AgencyResponse agency0 = agencies[0];
+
+			AgencyResponse agency = client.Agency(agency0.AgencyID);
+
+			// The Agencies call only returns these 2 fields
+			Assert.AreEqual(agency0.Agency, agency.Agency);
+			Assert.AreEqual(agency0.AgencyID, agency.AgencyID);
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();
@@ -481,6 +505,24 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestProcFormSetAdd()
+		{
+			Client client = getApiClient();
+
+			ProcFormResponseWrapper original = client.ProcForm(77777777);
+
+			List<FieldResponse> Fields = new List<FieldResponse>();
+			FieldResponse CustomField1 = new FieldResponse();
+			CustomField1.Field = "Field1";
+			CustomField1.Value = "Value1";
+			Fields.Add(CustomField1);
+			ProcFormResponseWrapper response = client.ProcFormSetAdd(77777777, Fields);
+
+			original.Form.Sets.Add(response.Form.Sets[response.Form.Sets.Count - 1]);
+			Assert.AreEqual<ProcFormResponseWrapper>(original, response);
+		}
+
+		[TestMethod]
 		public void TestProcFormUnexistantView()
 		{
 			ProcResponse procWithForms = this.getProcessWithForms();
@@ -515,48 +557,6 @@ namespace RpmApiTests
 			Assert.AreEqual(ws.WorksheetID, wsInfo.WorksheetID);
 			// getFirstFormWithWorksheet uses ProcForm which doesn't return the complete Worksheet Data Set.
 			Assert.AreNotEqual(ws, wsInfo);
-		}
-
-		[TestMethod]
-		public void TestProcSetAdd()
-		{
-			Client client = getApiClient();
-
-			ProcFormResponseWrapper original = client.ProcForm(77777777);
-
-			List<FieldResponse> Fields = new List<FieldResponse>();
-			FieldResponse CustomField1 = new FieldResponse();
-			CustomField1.Field = "Field1";
-			CustomField1.Value = "Value1";
-			Fields.Add(CustomField1);
-			ProcFormResponseWrapper response = client.ProcFormSetAdd(77777777, Fields);
-
-			original.Form.Sets.Add(response.Form.Sets[response.Form.Sets.Count - 1]);
-			Assert.AreEqual<ProcFormResponseWrapper>(original, response);
-		}
-
-		[TestMethod]
-		public void TestAgencies()
-		{
-			Client client = getApiClient();
-			List<AgencyResponse> agencies = client.Agencies();
-			AgencyResponse agency = agencies[0];
-			Assert.IsNotNull(agency.Agency);
-			Assert.IsTrue(agency.AgencyID > 0);
-		}
-
-		[TestMethod]
-		public void TestAgency()
-		{
-			Client client = getApiClient();
-			List<AgencyResponse> agencies = client.Agencies();
-			AgencyResponse agency0 = agencies[0];
-
-			AgencyResponse agency = client.Agency(agency0.AgencyID);
-			
-			// The Agencies call only returns these 2 fields
-			Assert.AreEqual(agency0.Agency, agency.Agency);
-			Assert.AreEqual(agency0.AgencyID, agency.AgencyID);
 		}
 
 		[TestMethod]
