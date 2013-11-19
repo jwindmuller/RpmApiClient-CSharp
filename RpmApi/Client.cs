@@ -1121,6 +1121,68 @@ namespace RPM.Api
 			return response["Worksheet"];
 		}
 		#endregion
+
+		#region ProcFormWorksheetAdd
+
+		/// <summary>
+		///   <para>Add a worksheet to a Form by copying an existing Worksheet.</para>
+		/// Execute the "ProcFormWorksheet" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheetAdd/
+		/// </summary>
+		/// <param name="FormID">The form identifier.</param>
+		/// <param name="WorksheetID">The worksheet identifier.</param>
+		/// <returns>WorksheetResponse with the new Worksheet's information.</returns>
+		public WorksheetResponse ProcFormWorksheetAdd(int FormID, int WorksheetID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.FormID = FormID;
+			apiParameters.WorksheetID = WorksheetID;
+			return this.ProcFormWorksheetAdd(apiParameters);
+		}
+		/// <summary>
+		/// <para>Add a worksheet to a Form by copying an existing Worksheet.</para>
+		/// Execute the "ProcFormWorksheet" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheetAdd/
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>WorksheetResponse with the new Worksheet's information.</returns>
+		private WorksheetResponse ProcFormWorksheetAdd(dynamic apiParameters)
+		{
+			return this.sendRequest<WorksheetResponse>("ProcFormWorksheetAdd", apiParameters);
+		}
+		#endregion
+
+		#region ProcFormWorksheetTableAdd
+		/// <summary>
+		/// <para>Adds a Table to a Worksheet by copying an existent Table.</para>
+		/// Execute the "ProcFormWorksheetTableAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheetTableAdd/
+		/// </summary>
+		/// <param name="WorksheetID">The worksheet identifier.</param>
+		/// <param name="TableID">The table identifier.</param>
+		/// <returns>WorksheetResponse with entire worksheet information including the new table</returns>
+		public WorksheetResponse ProcFormWorksheetTableAdd(int WorksheetID, int TableID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.WorksheetID = WorksheetID;
+			apiParameters.TableID = TableID;
+			return this.ProcFormWorksheetTableAdd(apiParameters);
+		}
+		/// <summary>
+		/// <para>Adds a Table to a Worksheet by copying an existent Table.</para>
+		/// Execute the "ProcFormWorksheetTableAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheetTableAdd/
+		/// </summary>
+		/// <param name="apiParameters">The API parameters.</param>
+		/// <returns>WorksheetResponse with entire worksheet information including the new table</returns>
+		private WorksheetResponse ProcFormWorksheetTableAdd(dynamic apiParameters)
+		{
+			Dictionary<String, WorksheetResponse> response =
+				this.sendRequest<Dictionary<String, WorksheetResponse>>("ProcFormWorksheetTableAdd", apiParameters);
+			return response["Worksheet"];
+		}
+		#endregion
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.

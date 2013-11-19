@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	class WorksheetTable : Abstract.Response
+	public class WorksheetTable : Abstract.Response
 	{
 
 		private List<WorksheetTableColumn> _Columns { get; set; }
@@ -50,7 +50,19 @@ namespace RPM.Api.Response
 			set { _CommentName = value; }
 		}
 
-		//private List<??> _Data { get; set; }
+		private List<WorksheetTableData> _Data { get; set; }
+		public List<WorksheetTableData> Data
+		{
+			get
+			{
+				if (_Data == null)
+				{
+					_Data = new List<WorksheetTableData>();
+				}
+				return _Data;
+			}
+			set { _Data = value; }
+		}
 
 		public int ID { get; set; }
 		public bool IsEnabled { get; set; }
@@ -71,7 +83,7 @@ namespace RPM.Api.Response
 		}
 
 		public int Order { get; set; }
-		public bool PrefFixed { get; set; }
+		public bool RefFixed { get; set; }
 		public int RefID { get; set; }
 
 		private string _RefName { get; set; }
@@ -92,7 +104,19 @@ namespace RPM.Api.Response
 		public bool ShowComment { get; set; }
 		public bool ShowFooter { get; set; }
 
-		//private List<??> _SuperHeaders { get; set; }
+		private List<WorksheetTableSuperHeader> _SuperHeaders { get; set; }
+		public List<WorksheetTableSuperHeader> SuperHeaders
+		{
+			get
+			{
+				if (_SuperHeaders == null)
+				{
+					_SuperHeaders = new List<WorksheetTableSuperHeader>();
+				}
+				return _SuperHeaders;
+			}
+			set { _SuperHeaders = value; }
+		}
 
 		public int WSTemplateID { get; set; }
 
@@ -103,17 +127,19 @@ namespace RPM.Api.Response
 				this.CollectionsAreEqual(this.Columns, other.Columns) &&
 				this.Comment.Equals(other.Comment) &&
 				this.CommentName.Equals(other.CommentName) &&
+				this.CollectionsAreEqual(this.Data, other.Data) &&
 				this.ID == other.ID &&
 				this.IsEnabled == other.IsEnabled &&
 				this.IsIncluded == other.IsIncluded &&
 				this.Name.Equals(other.Name) &&
 				this.Order == other.Order &&
-				this.PrefFixed == other.PrefFixed &&
+				this.RefFixed == other.RefFixed &&
 				this.RefID == other.RefID &&
 				this.RefName.Equals(other.RefName) &&
 				this.RefType == other.RefType &&
 				this.ShowComment == other.ShowComment &&
 				this.ShowFooter == other.ShowFooter &&
+				this.CollectionsAreEqual(this.SuperHeaders, other.SuperHeaders) &&
 				this.WSTemplateID == other.WSTemplateID;
 		}
 	}

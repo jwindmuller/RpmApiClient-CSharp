@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	class WorksheetTableColumn : Abstract.Response
+	public class WorksheetTableColumn : Abstract.Response
 	{
 
 		public int ColType { get; set; }

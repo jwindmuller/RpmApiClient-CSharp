@@ -560,6 +560,48 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+
+		public void TestProcFormWorksheetAdd()
+		{
+
+			ProcFormResponse form = this.getFirstFormWithWorksheet();
+			if (form == null)
+			{
+				Assert.Inconclusive("No Forms With Worksheets Found");
+			}
+
+			WorksheetResponse ws = form.Worksheets[0];
+
+			Client client = this.getApiClient();
+			WorksheetResponse response = client.ProcFormWorksheetAdd(form.FormID, ws.WorksheetID);
+
+			Assert.AreNotEqual(ws.WorksheetID, response.WorksheetID);
+			ws.WorksheetID = response.WorksheetID;
+			Assert.AreEqual(ws, response);
+		}
+
+		[TestMethod]
+		public void TestProcFormWorksheetTableAdd()
+		{
+
+			ProcFormResponse form = this.getFirstFormWithWorksheet();
+			if (form == null)
+			{
+				Assert.Inconclusive("No Forms With Worksheets Found");
+			}
+
+			Client client = this.getApiClient();
+			WorksheetResponse ws = client.ProcFormWorksheet(form.Worksheets[0].WorksheetID);
+
+			WorksheetResponse response = client.ProcFormWorksheetTableAdd(ws.WorksheetID, ws.Tables[0].ID);
+
+			Assert.IsTrue(ws.WorksheetID == response.WorksheetID);
+			ws.DateModified = response.DateModified;
+			ws.Tables = response.Tables;
+			Assert.AreEqual(ws, response);
+		}
+
+		[TestMethod]
 		public void TestSuppliers()
 		{
 			SupplierResponse supplier = getFirstSupplier();

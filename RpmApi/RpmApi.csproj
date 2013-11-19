@@ -73,6 +73,8 @@
     <Compile Include="Response\SupplierResponse.cs" />
     <Compile Include="Response\WorksheetField.cs" />
     <Compile Include="Response\WorksheetResponse.cs" />
+    <Compile Include="Response\WorksheetTableData.cs" />
+    <Compile Include="Response\WorksheetTableSuperHeader.cs" />
     <Compile Include="Response\WorksheetTable.cs" />
     <Compile Include="Response\WorksheetTableColumn.cs" />
   </ItemGroup>
