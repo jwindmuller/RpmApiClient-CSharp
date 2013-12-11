@@ -123,7 +123,17 @@ namespace RPM.Api.Response
 				this.WorksheetID == other.WorksheetID &&
 				this.DateAdded == other.DateAdded &&
 				this.DateModified == other.DateModified &&
-				this.CollectionsAreEqual(this.Fields, other.Fields);
+				this.CollectionsAreEqual(this.Fields, other.Fields) &&
+				this.Header.Equals(other.Header) &&
+				this.Footer.Equals(other.Footer) &&
+				this.IsEnabled == other.IsEnabled &&
+				this.NumChildWorksheets == other.NumChildWorksheets &&
+				this.NumFields == other.NumFields &&
+				this.NumTables == other.NumTables &&
+				this.OwnerID == other.OwnerID &&
+				this.OwnerType == other.OwnerType &&
+				this.CollectionsAreEqual(this.Tables, other.Tables) &&
+				this.WSTemplateID == other.WSTemplateID;
 		}
 	}
 }

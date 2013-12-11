@@ -59,12 +59,21 @@ namespace RPM.Api.Response
 				{
 					_Data = new List<WorksheetTableData>();
 				}
+				this.updateDataIndexes();
 				return _Data;
 			}
 			set { _Data = value; }
 		}
 
 		public int ID { get; set; }
+		public int TableID {
+			get {
+				return ID;
+			}
+			set {
+				ID = value;
+			}
+		}
 		public bool IsEnabled { get; set; }
 		public bool IsIncluded { get; set; }
 
@@ -141,6 +150,42 @@ namespace RPM.Api.Response
 				this.ShowFooter == other.ShowFooter &&
 				this.CollectionsAreEqual(this.SuperHeaders, other.SuperHeaders) &&
 				this.WSTemplateID == other.WSTemplateID;
+		}
+
+		public int getColumnIndex(string name)
+		{
+			foreach (WorksheetTableColumn c in this.Columns)
+			{
+				if (c.Name.Equals(name))
+				{
+					return c.Order;
+				}
+			}
+			return -1;
+		}
+
+		public int getColumnIndex(int colID)
+		{
+			foreach (WorksheetTableColumn c in this.Columns)
+			{
+				if (c.ID == colID)
+				{
+					return c.Order;
+				}
+			}
+			return -1;
+		}
+
+		private void updateDataIndexes()
+		{
+			foreach (WorksheetTableData data in _Data)
+			{
+				if (data.ColIndex != -1)
+				{
+					continue;
+				}
+				data.ColIndex = this.getColumnIndex(data.ColID);
+			}
 		}
 	}
 }

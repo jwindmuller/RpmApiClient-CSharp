@@ -1183,6 +1183,24 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region ProcFormWorksheetTableDataEdit
+		public WorksheetResponse ProcFormWorksheetTableDataEdit(WorksheetTable TableInfo, bool RowOverwrite)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.TableID = TableInfo.ID;
+			apiParameters.Data = TableInfo.Data;
+			apiParameters.RowOverwrite = RowOverwrite;
+			return this.ProcFormWorksheetTableDataEdit(apiParameters);
+		}
+
+		private WorksheetResponse ProcFormWorksheetTableDataEdit(dynamic apiParameters)
+		{
+			Dictionary<String, WorksheetResponse> response = this.sendRequest<Dictionary<String, WorksheetResponse>>("ProcFormWorksheetTableDataEdit", apiParameters);
+			return response["Worksheet"];
+		}
+		#endregion
+
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.

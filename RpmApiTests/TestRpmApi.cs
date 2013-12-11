@@ -609,6 +609,41 @@ namespace RpmApiTests
 			Assert.IsTrue(supplier.SupplierID > 0);
 		}
 
+		[TestMethod]
+		public void TestProcFormWorksheetTableDataEdit()
+		{
+			Client client = this.getApiClient();
+			WorksheetResponse orig = client.ProcFormWorksheet(77777777); // Mock ID
+
+			WorksheetTable tableInfo = orig.Tables[0];
+			tableInfo.Data = new List<WorksheetTableData>();
+
+			WorksheetTableData cell1 = new WorksheetTableData();
+			cell1.Value = "Something";
+			cell1.ColIndex = tableInfo.getColumnIndex("Column 1");
+			cell1.Row = 0;
+			WorksheetTableData cell2 = new WorksheetTableData();
+			cell2.Value = "10";
+			cell2.ColIndex = tableInfo.getColumnIndex("Qty.");
+			cell2.Row = 0;
+			WorksheetTableData cell3 = new WorksheetTableData();
+			cell3.Value = "10";
+			cell3.ColIndex = tableInfo.getColumnIndex("Unit Cost");
+			cell3.Row = 0;
+
+			tableInfo.Data.Add(cell1);
+			tableInfo.Data.Add(cell2);
+			tableInfo.Data.Add(cell3);
+
+			WorksheetResponse ws = client.ProcFormWorksheetTableDataEdit(tableInfo, true);
+
+			WorksheetTable modifiedTable = ws.Tables[0];
+			cell1.ColID = modifiedTable.Data[modifiedTable.getColumnIndex("Column 1")].ColID;
+			cell2.ColID = modifiedTable.Data[modifiedTable.getColumnIndex("Qty.")].ColID;
+			cell3.ColID = modifiedTable.Data[modifiedTable.getColumnIndex("Unit Cost")].ColID;
+
+			Assert.AreEqual(ws, orig);
+		}
 		#region Helper Functions
 		private List<SupplierResponse> getSuppliers()
 		{

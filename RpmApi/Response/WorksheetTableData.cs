@@ -7,7 +7,22 @@ namespace RPM.Api.Response
 {
 	public class WorksheetTableData : Abstract.Response
 	{
-		public int ColID { get; set; }
+		private int _ID { get; set; }
+		public int ColID
+		{
+			get;
+			set;
+		}
+		public int ID {
+			get { return _ID; }
+			set { _ID = value; }
+		}
+
+		private int _ColIndex = -1;
+		public int ColIndex {
+			get { return _ColIndex; }
+			set { _ColIndex = value; }
+		}
 
 		private string _RefName { get; set; }
 		public string RefName
@@ -37,6 +52,17 @@ namespace RPM.Api.Response
 				return _Value;
 			}
 			set { _Value = value; }
+		}
+
+		public override bool Equals(object obj)
+		{
+			WorksheetTableData other = obj as WorksheetTableData;
+			return
+				this.ColID == other.ColID &&
+				this.ColIndex == other.ColIndex &&
+				this.RefName.Equals(other.RefName) &&
+				this.Row == other.Row &&
+				this.Value.Equals(other.Value);
 		}
 	}
 }

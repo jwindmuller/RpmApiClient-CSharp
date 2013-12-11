@@ -23,5 +23,15 @@ namespace RPM.Api.Response
 			}
 			set { _Text = value; }
 		}
+
+		public override bool Equals(object obj)
+		{
+			WorksheetTableSuperHeader other = obj as WorksheetTableSuperHeader;
+			return
+				this.Row == other.Row &&
+				this.Span == other.Span &&
+				this.Start == other.Start &&
+				this.Text.Equals(other.Text);
+		}
 	}
 }
