@@ -1049,21 +1049,6 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region Procs
-		/// <summary>
-		/// Execute the "Procs" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/Procs/
-		/// </summary>
-		/// <returns>List of ProcResponse containing the response data.</returns>
-		public List<ProcResponse> Procs()
-		{
-			Dictionary<String, List<ProcResponse>> response =
-				this.sendRequest<Dictionary<String, List<ProcResponse>>>("Procs");
-
-			return response["Procs"];
-		}
-		#endregion
-
 		#region Suppliers
 		/// <summary>
 		/// Execute the "Suppliers" API endpoint.
@@ -1183,6 +1168,13 @@ namespace RPM.Api
 		}
 		#endregion
 
+
+		#region TODO:ProcRemindersEval
+		public void ProcRemindersEval()
+		{
+			throw new NotImplementedException("ProcRemindersEval not implemented");
+		}
+		#endregion
 		#region ProcFormWorksheetTableDataEdit
 		/// <summary>
 		/// <para>Add/edit the data inside a Table.</para>
@@ -1208,7 +1200,22 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region Procs
+		/// <summary>
+		/// Execute the "Procs" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Procs/
+		/// </summary>
+		/// <returns>List of ProcResponse containing the response data.</returns>
+		public List<ProcResponse> Procs()
+		{
+			Dictionary<String, List<ProcResponse>> response =
+				this.sendRequest<Dictionary<String, List<ProcResponse>>>("Procs");
 
+			return response["Procs"];
+		}
+		#endregion
+
+		
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.
