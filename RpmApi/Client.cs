@@ -1049,20 +1049,6 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region Suppliers
-		/// <summary>
-		/// Execute the "Suppliers" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/Suppliers/
-		/// </summary>
-		/// <returns>SupplierResponse containing the response data.</returns>
-		public List<SupplierResponse> Suppliers()
-		{
-			Dictionary<String, List<SupplierResponse>> response =
-				this.sendRequest<Dictionary<String, List<SupplierResponse>>>("Suppliers");
-			return response["Suppliers"];
-		}
-		#endregion
-
 		#region TODO:ProcFormUpp
 		private void ProcFormUpp(dynamic apiParameters)
 		{
@@ -1302,6 +1288,19 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region Suppliers
+		/// <summary>
+		/// Execute the "Suppliers" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Suppliers/
+		/// </summary>
+		/// <returns>SupplierResponse containing the response data.</returns>
+		public List<SupplierResponse> Suppliers()
+		{
+			Dictionary<String, List<SupplierResponse>> response =
+				this.sendRequest<Dictionary<String, List<SupplierResponse>>>("Suppliers");
+			return response["Suppliers"];
+		}
+		#endregion
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.
