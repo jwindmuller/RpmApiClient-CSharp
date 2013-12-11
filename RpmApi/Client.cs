@@ -1215,7 +1215,86 @@ namespace RPM.Api
 		}
 		#endregion
 
-		
+		#region Rep
+		/// <summary>
+		/// <para>Get information for one Rep by ID.</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Rep/
+		/// </summary>
+		/// <param name="RepID">The rep identifier.</param>
+		/// <returns>RepResponse with the Rep's information</returns>
+		public RepResponse Rep(int RepID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.RepID = RepID;
+			return this.Rep(apiParameters);
+		}
+		/// <summary>
+		/// <para>Get information for one Rep Rep Name + Agency ID.</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Rep/
+		/// </summary>
+		/// <param name="Rep">The rep name.</param>
+		/// <param name="AgencyID">The agency identifier.</param>
+		/// <returns>RepResponse with the Rep's information</returns>
+		public RepResponse RepByName(string Rep, int AgencyID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Rep = Rep;
+			apiParameters.AgencyID = AgencyID;
+			return this.Rep(apiParameters);
+		}
+		/// <summary>
+		/// <para>Get information for one Rep Name + Agency Name</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Rep/
+		/// </summary>
+		/// <param name="Rep">The rep name.</param>
+		/// <param name="Agency">The agency name.</param>
+		/// <returns>RepResponse with the Rep's information</returns>
+		public RepResponse RepByName(string Rep, string Agency)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Rep = Rep;
+			apiParameters.Agency = Agency;
+			return this.Rep(apiParameters);
+		}
+		/// <summary>
+		/// <para>Get information for one Rep by Assignment Code + Supplier ID.</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Rep/
+		/// </summary>
+		/// <param name="AssignmentCode">The assignment code.</param>
+		/// <param name="SupplierID">The supplier identifier.</param>
+		/// <returns>RepResponse with the Rep's information</returns>
+		public RepResponse RepByAssignmentCode(int AssignmentCode, int SupplierID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.AssignmentCode = AssignmentCode;
+			apiParameters.SupplierID = SupplierID;
+			return this.Rep(apiParameters);
+		}
+		/// <summary>
+		/// <para>Get information for one Rep by Assignment Code + Supplier Name.</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/Rep/
+		/// </summary>
+		/// <param name="AssignmentCode">The assignment code.</param>
+		/// <param name="Supplier">The supplier name.</param>
+		/// <returns>RepResponse with the Rep's information</returns>
+		public RepResponse RepByAssignmentCode(int AssignmentCode, string Supplier)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.AssignmentCode = AssignmentCode;
+			apiParameters.Supplier = Supplier;
+			return this.Rep(apiParameters);
+		}
+		private RepResponse Rep(dynamic apiParameters)
+		{
+			return this.sendRequest<RepResponse>("Rep", apiParameters);
+		}
+		#endregion
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.

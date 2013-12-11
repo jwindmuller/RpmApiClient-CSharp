@@ -644,6 +644,38 @@ namespace RpmApiTests
 
 			Assert.AreEqual(ws, orig);
 		}
+
+		[TestMethod]
+		public void TestRep()
+		{
+			Client client = this.getApiClient();
+			RepResponse rep = this.getFirstRep();
+			if (rep == null)
+			{
+				Assert.Inconclusive("No Reps Found");
+				return;
+			}
+
+			RepResponse byID = client.Rep(rep.RepID);
+			Assert.AreEqual(rep, byID);
+
+			// Get Rep by Agency
+			RepResponse byAgencyID = client.RepByName(rep.Rep, rep.AgencyID);
+			Assert.AreEqual(rep, byAgencyID);
+			RepResponse byAgencyName = client.RepByName(rep.Rep, rep.Agency);
+			Assert.AreEqual(rep, byAgencyName);
+
+
+			// By assignment code + supplier
+			if (rep.AssignmentCodes.Count > 0)
+			{
+				AssignmentCodeResponse r = rep.AssignmentCodes[0];
+				RepResponse byAssignmentCodeAndSupplierID = client.RepByAssignmentCode(r.AssignmentCode, r.SupplierID);
+				Assert.AreEqual(rep, byAssignmentCodeAndSupplierID);
+				RepResponse byAssignmentCodeAndSupplier = client.RepByAssignmentCode(r.AssignmentCode, r.Supplier);
+				Assert.AreEqual(rep, byAssignmentCodeAndSupplier);
+			}
+		}
 		#region Helper Functions
 		private List<SupplierResponse> getSuppliers()
 		{
@@ -741,6 +773,22 @@ namespace RpmApiTests
 				if (agency.Reps.Count > 0)
 				{
 					return agency;
+				}
+			}
+			return null;
+		}
+
+		private RepResponse getFirstRep()
+		{
+			Client client = this.getApiClient();
+			List<AgencyResponse> agencies = client.Agencies();
+			foreach (AgencyResponse agency in agencies)
+			{
+				AgencyResponse fullInfo = client.Agency(agency.AgencyID);
+				if (fullInfo.Reps.Count > 0)
+				{
+					RepResponse rep = client.Rep(fullInfo.Reps[0].RepID);
+					return rep;
 				}
 			}
 			return null;
