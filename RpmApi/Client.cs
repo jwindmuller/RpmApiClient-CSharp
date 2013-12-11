@@ -1295,6 +1295,13 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:ServiceUsers
+		public void ServiceUsers()
+		{
+			throw new NotImplementedException("ServiceUsers not Implemented");
+		}
+		#endregion
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.
