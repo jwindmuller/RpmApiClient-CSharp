@@ -1184,6 +1184,14 @@ namespace RPM.Api
 		#endregion
 
 		#region ProcFormWorksheetTableDataEdit
+		/// <summary>
+		/// <para>Add/edit the data inside a Table.</para>
+		/// Execute the "ProcFormWorksheetTableDataEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/ProcFormWorksheetTableDataEdit/
+		/// </summary>
+		/// <param name="TableInfo">The table information.</param>
+		/// <param name="RowOverwrite">if set to <c>false</c> the data will be inserted at the end of the table, true will replace the specific row’s data.</param>
+		/// <returns>WorksheetResponse containing the entire Worksheet information including the newly added or edited data.</returns>
 		public WorksheetResponse ProcFormWorksheetTableDataEdit(WorksheetTable TableInfo, bool RowOverwrite)
 		{
 			dynamic apiParameters = this.apiParameters();
