@@ -470,7 +470,6 @@ namespace RpmApiTests
 
 			Assert.IsTrue(updatedFormInformation.Form.Participants.Count == formBefore.Participants.Count + 1);
 
-
 			ParticipantResponse newParticipant;
 			foreach (ParticipantResponse participant in updatedFormInformation.Form.Participants)
 			{
@@ -486,7 +485,6 @@ namespace RpmApiTests
 				}
 			}
 		}
-
 
 		[TestMethod]
 		public void TestProcForms()
@@ -570,14 +568,22 @@ namespace RpmApiTests
 				Assert.Inconclusive("No Forms With Worksheets Found");
 			}
 
-			WorksheetResponse ws = form.Worksheets[0];
-
 			Client client = this.getApiClient();
+			WorksheetResponse ws = form.Worksheets[0];
+			ws = client.ProcFormWorksheet(ws.WorksheetID);
+			
 			WorksheetResponse response = client.ProcFormWorksheetAdd(form.FormID, ws.WorksheetID);
 
 			Assert.AreNotEqual(ws.WorksheetID, response.WorksheetID);
 			ws.WorksheetID = response.WorksheetID;
-			Assert.AreEqual(ws, response);
+			Assert.AreNotEqual(ws.Name, response.Name);
+			Assert.AreEqual(response.Name.Substring(0, ws.Name.Length), ws.Name);
+			response.Name = ws.Name;
+			Assert.AreNotEqual(ws.DateAdded, response.DateAdded);
+			response.DateAdded = ws.DateAdded;
+
+
+			Assert.AreNotEqual(ws, response); // new IDs for the copy so not exactly equal
 		}
 
 		[TestMethod]
@@ -598,6 +604,9 @@ namespace RpmApiTests
 			Assert.IsTrue(ws.WorksheetID == response.WorksheetID);
 			ws.DateModified = response.DateModified;
 			ws.Tables = response.Tables;
+
+			Assert.IsTrue(ws.NumTables == response.NumTables - 1);
+			ws.NumTables = response.NumTables;
 			Assert.AreEqual(ws, response);
 		}
 

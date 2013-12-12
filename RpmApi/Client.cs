@@ -1119,7 +1119,9 @@ namespace RPM.Api
 		/// <returns>WorksheetResponse with the new Worksheet's information.</returns>
 		private WorksheetResponse ProcFormWorksheetAdd(dynamic apiParameters)
 		{
-			return this.sendRequest<WorksheetResponse>("ProcFormWorksheetAdd", apiParameters);
+			Dictionary<String, WorksheetResponse> response = 
+				this.sendRequest<Dictionary<String, WorksheetResponse>>("ProcFormWorksheetAdd", apiParameters);
+			return response["Worksheet"];
 		}
 		#endregion
 
