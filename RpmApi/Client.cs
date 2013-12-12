@@ -1156,13 +1156,13 @@ namespace RPM.Api
 		}
 		#endregion
 
-
 		#region TODO:ProcRemindersEval
 		public void ProcRemindersEval()
 		{
 			throw new NotImplementedException("ProcRemindersEval not implemented");
 		}
 		#endregion
+
 		#region ProcFormWorksheetTableDataEdit
 		/// <summary>
 		/// <para>Add/edit the data inside a Table.</para>
@@ -1303,6 +1303,26 @@ namespace RPM.Api
 			return response["Suppliers"];
 		}
 		#endregion
+
+		#region UserPasswordEdit
+		/// <summary>
+		/// <para>Change user's password</para>
+		/// Execute the "UserPasswordEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/UserPasswordEdit/
+		/// </summary>
+		/// <param name="Username">The username.</param>
+		/// <param name="Password">The password.</param>
+		/// <returns>Username provided</returns>
+		public string UserPasswordEdit(string Username, string Password)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Username = Username;
+			apiParameters.Password = Password;
+			Dictionary<string, string> response = this.sendRequest<Dictionary<string, string>>("UserPasswordEdit", apiParameters);
+			return response["Username"];
+		}
+		#endregion
+
 		#region Helper Methods
 		/// <summary>
 		/// Sends a Request to the RPM API.

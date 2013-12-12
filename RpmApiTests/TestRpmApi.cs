@@ -685,6 +685,17 @@ namespace RpmApiTests
 				Assert.AreEqual(rep, byAssignmentCodeAndSupplier);
 			}
 		}
+
+		[TestMethod]
+		public void TestUserPasswordEdit()
+		{
+			string username = "Joaquin";
+			string password = "LePass1245";
+
+			Client client = this.getApiClient();
+			client.UserPasswordEdit(username, password);
+		}
+
 		#region Helper Functions
 		private List<SupplierResponse> getSuppliers()
 		{
