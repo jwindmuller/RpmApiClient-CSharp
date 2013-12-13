@@ -126,6 +126,9 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:AccountAdd
+		#endregion
+
 		#region Accounts
 		/// <summary>
 		/// <para>Return a list of Accounts for a Supplier ID.</para>
@@ -339,6 +342,27 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:CommAgencies
+		#endregion
+
+		#region TODO:CommAgency
+		#endregion
+
+		#region TODO:CommCustomers
+		#endregion
+
+		#region TODO:CommItem
+		#endregion
+
+		#region TODO:CommPayments
+		#endregion
+
+		#region TODO:CommRep
+		#endregion
+
+		#region TODO:CommReps
+		#endregion
+
 		#region Customer
 		/// <summary>
 		///   <para>Return Customer information by providing their Name.</para>
@@ -486,6 +510,9 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:CustomerEdit
+		#endregion
+
 		#region CustomerLocationAdd
 		/// <summary>
 		///   <para>Add Location Information for an existing Customer.</para>
@@ -580,13 +607,17 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:GetClassDefinition
+		#endregion
+
 		#region Info
 		/// <summary>
 		/// Execute the "Info" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/info/
 		/// </summary>
 		/// <returns>InfoResponse containing the response data.</returns>
-        public InfoResponse Info() {
+		public InfoResponse Info()
+		{
             InfoResponse result = this.sendRequest<InfoResponse>("Info");
             return result;
         }
@@ -823,7 +854,7 @@ namespace RPM.Api
 		#endregion
 
 		#region ProcFormParticipantAdd
-		#region ProcFormParticipantAdd FormID
+		#region ProcFormParticipantAdd //FormID
 		/// <summary>
 		/// <para>Add a participant to a Form (Form ID)
 		/// Execute the "ProcFormParticipantAdd" API endpoint.
@@ -864,7 +895,7 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region ProcFormParticipantAdd ProcessID + FormNumber
+		#region ProcFormParticipantAdd //ProcessID + FormNumber
 		/// <summary>
 		/// <para>Add a participant to a Form (Process ID + Form Number)
 		/// Execute the "ProcFormParticipantAdd" API endpoint.
@@ -909,7 +940,7 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region ProcFormParticipantAdd ProcessName + FormNumber
+		#region ProcFormParticipantAdd //ProcessName + FormNumber
 		/// <summary>
 		/// <para>Add a participant to a Form (Process Name + Form Number)
 		/// Execute the "ProcFormParticipantAdd" API endpoint.
@@ -1290,6 +1321,15 @@ namespace RPM.Api
 		}
 		#endregion
 
+		#region TODO:SpectatorLogAdd
+		#endregion
+		#region TODO:SpectatorLogClose
+		#endregion
+		#region TODO:SpectatorLogOpen
+		#endregion
+		#region TODO:SpectatorLogUpdate
+		#endregion
+
 		#region Suppliers
 		/// <summary>
 		/// Execute the "Suppliers" API endpoint.
@@ -1302,6 +1342,12 @@ namespace RPM.Api
 				this.sendRequest<Dictionary<String, List<SupplierResponse>>>("Suppliers");
 			return response["Suppliers"];
 		}
+		#endregion
+
+		#region TODO:UPPUsers
+		#endregion
+
+		#region User
 		#endregion
 
 		#region UserPasswordEdit
@@ -1323,7 +1369,7 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region Helper Methods
+		#region Helper Methods // Non API
 		/// <summary>
 		/// Sends a Request to the RPM API.
 		/// http://rpmsoftware.wordpress.com/api/
