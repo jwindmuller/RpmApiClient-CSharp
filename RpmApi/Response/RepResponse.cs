@@ -10,6 +10,29 @@ namespace RPM.Api.Response
 	{
 		public DateTime Added { get; set; }
 
+		private List<string> _AssignmentCodeIDs { get; set; }
+		public List<string> AssignmentCodeIDs { 
+			get {
+				return _AssignmentCodeIDs;
+			} 
+			set {
+				_AssignmentCodeIDs = value;
+				if (value == null)
+				{
+					return;
+				}
+				if (this.AssignmentCodes.Count < this._AssignmentCodeIDs.Count)
+				{
+					for (int i = 0; i < this.AssignmentCodeIDs.Count; i++)
+					{
+						AssignmentCodeResponse ac = new AssignmentCodeResponse();
+						ac.AssignmentCode = Int32.Parse( _AssignmentCodeIDs[i] );
+						this.AssignmentCodes.Add(ac);
+					}
+				}
+			}
+		}
+
 		private List<AssignmentCodeResponse> _AssignmentCodes { get; set; }
 		public List<AssignmentCodeResponse> AssignmentCodes
 		{

@@ -122,7 +122,12 @@ namespace RPM.Api
 		/// <returns>AccountResponse object with the response data</returns>
 		private AccountResponse Account(dynamic apiParameters)
 		{
-			return this.sendRequest<AccountResponse>("Account", apiParameters);
+			// FIX: The Account endpoint 
+			Func<string, string> FixResponse = delegate(string response)
+			{
+				return response.Replace("AssignmentCodes", "AssignmentCodeIDs");
+			};
+			return this.sendRequest<AccountResponse>("Account", apiParameters, FixResponse);
 		}
 		#endregion
 
@@ -1380,7 +1385,7 @@ namespace RPM.Api
 		/// <returns>Generic return type dependant on the specific endpoint.</returns>
 		/// <exception cref="System.Net.WebException">If the request returns HTTP errors (Not Found, Bad Request).</exception>
 		/// <exception cref="RPM.Api.Response.RPMApiError">An RPM API Error occurred.</exception>
-        private T sendRequest<T>(string endpoint, dynamic apiParameters = null)
+		private T sendRequest<T>(string endpoint, dynamic apiParameters = null, Func<string, string> beforeDeserialize = null)
         {
             if (apiParameters == null)
             {
@@ -1407,6 +1412,10 @@ namespace RPM.Api
                 RPMApiError parsedError = js.Deserialize<RPMApiError>(response);
                 throw parsedError;
             }
+			if (beforeDeserialize != null)
+			{
+				response.Content = beforeDeserialize(response.Content);
+			}
             T parsedResponse = js.Deserialize<T>(response);
             return parsedResponse;
         }
