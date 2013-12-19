@@ -64,6 +64,11 @@ namespace RpmApiTests
 			// getFirstAccount uses the Accounts API call which does not return Reps
 			firstAccount.Reps = account.Reps;
 			Assert.IsTrue(firstAccount.Equals(account));
+
+			AccountResponse accountByID = client.Account(firstAccount.SupplierID, firstAccount.AccountID);
+			firstAccount.Reps = accountByID.Reps;
+
+			Assert.IsTrue(firstAccount.Equals(accountByID));
 		}
 
 		private AccountResponse getFirstAccount(SupplierResponse supplier = null)
