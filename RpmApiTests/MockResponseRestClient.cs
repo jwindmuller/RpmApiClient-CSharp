@@ -158,6 +158,14 @@ namespace RpmApiTests
 				"CommAgency@{\"Key\":\"\",\"AgencyID\":1,\"Var\":\"NetBilled\"}",
 				"{\"Result\":{\"Val\":\"NetBilled\",\"Values\":[{\"Run\":\"201301\",\"Value\":200}]}}"
 			);
+			this.fakeResponses.Add(
+				"CommCustomers@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"this\"}",
+				"{\"Result\":{\"Customers\":[{\"Customer\":\"Customer test\",\"CustomerID\":41810,\"Value\":100},{\"Customer\":\"Joaquin Customer\",\"CustomerID\":41801,\"Value\":100}]}}"
+			);
+			this.fakeResponses.Add(
+				"CommCustomers@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"201301\"}",
+				"{\"Result\":{\"Customers\":[{\"Customer\":\"Customer test\",\"CustomerID\":41810,\"Value\":100},{\"Customer\":\"Joaquin Customer\",\"CustomerID\":41801,\"Value\":100}]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

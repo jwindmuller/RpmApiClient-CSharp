@@ -192,6 +192,22 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommCustomers()
+		{
+			Client client = this.getApiClient();
+			List<CommCustomerResponse> reports = client.CommCustomers(Client.Var.NetBilled, Client.Run._this); // Mocked
+			List<CommCustomerResponse> reportsYYYYMM = client.CommCustomers(Client.Var.NetBilled, "2013", "01"); // Mocked
+
+			Assert.IsTrue(reports.Count == reportsYYYYMM.Count);
+			for (int i = 0; i < reports.Count; i++)
+			{
+				CommCustomerResponse r1 = reports[i];
+				CommCustomerResponse r2 = reportsYYYYMM[i];
+				Assert.IsTrue(r1.Equals(r2));
+			}
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();

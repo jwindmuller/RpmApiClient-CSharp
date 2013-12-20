@@ -379,7 +379,6 @@ namespace RPM.Api
 			return this.CommReport<CommAgencyResponse>("Agencies", Var, Run);
 		}
 		#endregion
-		#endregion
 
 		#region CommAgency
 		/// <summary>
@@ -400,7 +399,35 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CommCustomers
+		#region CommCustomers
+		/// <summary>
+		///   <para>Get a commission metric report for an Agency for all commission months.</para>
+		/// Execute the "CommAgency" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommCustomers/
+		/// </summary>
+		/// <param name="variable">The variable to report on.</param>
+		/// <param name="run">Which run report on.</param>
+		/// <returns>List of CommCustomerResponse containing the results.</returns>
+		public List<CommCustomerResponse> CommCustomers(Var variable, Run run)
+		{
+			return this.CommReport<CommCustomerResponse>("Customers", variable, run);
+		}
+
+		/// <summary>
+		///   <para>Get a commission metric report for an Agency for all commission months.</para>
+		/// Execute the "CommAgency" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommCustomers/
+		/// </summary>
+		/// <param name="variable">The variable to report on.</param>
+		/// <param name="yyyy">Year in yyyy format.</param>
+		/// <param name="mm">Month in mm format.</param>
+		/// <returns>List of CommCustomerResponse containing the results.</returns>
+		public List<CommCustomerResponse> CommCustomers(Var variable, string yyyy, string mm = "")
+		{
+			string Var = VarStr[(int)variable];
+			string Run = yyyy + mm;
+			return this.CommReport<CommCustomerResponse>("Customers", Var, Run);
+		}
 		#endregion
 
 		#region TODO:CommItem
@@ -413,6 +440,7 @@ namespace RPM.Api
 		#endregion
 
 		#region TODO:CommReps
+		#endregion
 		#endregion
 
 		#region Customer
