@@ -169,6 +169,29 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommAgency()
+		{
+			Client client = this.getApiClient();
+
+			int AgencyID = 1; // Mocked
+			CommAgencyReport agencyReport = client.CommAgency(AgencyID, Client.Var.NetBilled);
+
+			foreach (CommAgencyRunResponse runReport in agencyReport.Values)
+			{
+				List<CommAgencyResponse> allAgencies = client.CommAgencies(Client.Var.NetBilled, runReport.Run); // This works because Run will always be in YYYYMM format
+				int total = 0;
+				foreach (CommAgencyResponse agencyResult in allAgencies)
+				{
+					if (agencyResult.AgencyID == AgencyID)
+					{
+						total += agencyResult.Value;
+					}
+				}
+				Assert.IsTrue(total == runReport.Value);
+			}
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();

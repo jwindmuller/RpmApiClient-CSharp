@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommAgencyResponse.cs" />
+    <Compile Include="Response\CommAgencyReport.cs" />
     <Compile Include="Response\AssignmentCode.cs" />
+    <Compile Include="Response\CommAgencyResponse.cs" />
+    <Compile Include="Response\CommAgencyRunResponse.cs" />
     <Compile Include="Response\ParticipantResponse.cs" />
     <Compile Include="Response\ProcFormResponse.cs" />
     <Compile Include="Response\ActionDueResponse.cs" />

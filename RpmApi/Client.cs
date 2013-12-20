@@ -381,7 +381,23 @@ namespace RPM.Api
 		#endregion
 		#endregion
 
-		#region TODO:CommAgency
+		#region CommAgency
+		/// <summary>
+		///   <para>Get a commission metric report for an Agency for all commission months.</para>
+		/// Execute the "CommAgency" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommAgency/
+		/// </summary>
+		/// <param name="AgencyID">The agency identifier.</param>
+		/// <param name="variable">The variable to report on.</param>
+		/// <returns>CommAgencyReport containing the response data.</returns>
+		public CommAgencyReport CommAgency(int AgencyID, Var variable)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.AgencyID = AgencyID;
+			apiParameters.Var = VarStr[(int)variable];
+
+			return this.sendRequest<CommAgencyReport>("CommAgency", apiParameters);
+		}
 		#endregion
 
 		#region TODO:CommCustomers

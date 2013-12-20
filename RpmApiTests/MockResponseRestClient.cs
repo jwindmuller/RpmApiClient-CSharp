@@ -154,6 +154,10 @@ namespace RpmApiTests
 				"CommAccounts@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"201301\"}",
 				"{\"Result\":{\"Accounts\":[{\"Account\":\"Acc\",\"AccountID\":67619,\"Value\":100},{\"Account\":\"acc00001\",\"AccountID\":67628,\"Value\":100}]}}"
 			);
+			this.fakeResponses.Add(
+				"CommAgency@{\"Key\":\"\",\"AgencyID\":1,\"Var\":\"NetBilled\"}",
+				"{\"Result\":{\"Val\":\"NetBilled\",\"Values\":[{\"Run\":\"201301\",\"Value\":200}]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)
