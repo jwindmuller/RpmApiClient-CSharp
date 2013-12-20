@@ -268,7 +268,7 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region CommAccounts
+		#region CommReports
 		/// <summary>
 		/// User facing Enum to provide the Variable to report on.
 		/// </summary>
@@ -285,7 +285,8 @@ namespace RPM.Api
 		/// User facing Enum to provide the Run types that can be reported on.
 		/// </summary>
 		/// <see cref="CommAccounts"/>
-		public enum Run {
+		public enum Run
+		{
 			/// <summary>Include all runs in the report</summary>
 			all,
 			/// <summary>Limit the report to only the current run</summary>
@@ -293,15 +294,34 @@ namespace RPM.Api
 			/// <summary>Limit the report to only the previous run</summary>
 			prev,
 			/// <summary>Limit the report to only the most recently closed run</summary>
-			closed };
+			closed
+		};
 
 		/// <summary>
 		/// Private translation of the Run Enum into string
 		/// </summary>
 		/// <see cref="CommAccounts"/>
 		public string[] RunStr = {"all", "this", "prev", "closed" };
+		private List<T> CommReport<T>(string name, Var variable, Run run)
+		{
+			string Var = VarStr[(int)variable];
+			string Run = RunStr[(int)run];
+			return this.CommReport<T>(name, Var, Run);
+		}
+		private List<T> CommReport<T>(string name, string Var, string Run)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Var = Var;
+			apiParameters.Run = Run;
 
+			string endpoint = "Comm" + name;
+			Dictionary<String, List<T>> response =
+				this.sendRequest<Dictionary<String, List<T>>>(endpoint, apiParameters);
+			return response[name];
+		}
+		#region CommAccounts
 		/// <summary>
+		/// <para>Commission report by Accounts</para>
 		/// Execute the "CommAccounts" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/CommAccounts/
 		/// </summary>
@@ -310,13 +330,11 @@ namespace RPM.Api
 		/// <returns>List of CommAccountResponse containing the reponse data.</returns>
 		public List<CommAccountResponse> CommAccounts(Var variable, Run run)
 		{
-			dynamic apiParameters = this.apiParameters();
-			apiParameters.Var = VarStr[(int)variable];
-			apiParameters.Run = RunStr[(int)run];
-			return this.CommAccounts(apiParameters);
+			return this.CommReport<CommAccountResponse>("Accounts", variable, run);
 		}
 
 		/// <summary>
+		/// <para>Commission report by Accounts</para>
 		/// Execute the "CommAccounts" API endpoint.
 		/// http://rpmsoftware.wordpress.com/api/CommAccounts/
 		/// </summary>
@@ -326,28 +344,41 @@ namespace RPM.Api
 		/// <returns>List of CommAccountResponse containing the reponse data.</returns>
 		public List<CommAccountResponse> CommAccounts(Var variable, string yyyy, string mm = "")
 		{
-			dynamic apiParameters = this.apiParameters();
-			apiParameters.Var = VarStr[(int)variable];
-			apiParameters.Run = yyyy + mm;
-			return this.CommAccounts(apiParameters);
-		}
-
-		/// <summary>
-		/// Execute the "CommAccounts" API endpoint.
-		/// http://rpmsoftware.wordpress.com/api/CommAccounts/
-		/// </summary>
-		/// <param name="apiParameters">The API parameters.</param>
-		/// <returns>List of CommAccountResponse containing the reponse data.</returns>
-		private List<CommAccountResponse> CommAccounts(dynamic apiParameters)
-		{
-			Dictionary<String, List<CommAccountResponse>> response =
-				this.sendRequest<Dictionary<String, List<CommAccountResponse>>>("CommAccounts", apiParameters);
-
-			return response["Accounts"];
+			string Var = VarStr[(int)variable];
+			string Run = yyyy + mm;
+			return this.CommReport<CommAccountResponse>("Accounts", Var, Run);
 		}
 		#endregion
 
-		#region TODO:CommAgencies
+		#region CommAgencies
+		/// <summary>
+		/// <para>Commission report by Agencies</para>
+		/// Execute the "CommAgencies" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommAgencies/
+		/// </summary>
+		/// <param name="variable">The variable to report on.</param>
+		/// <param name="run">Which run report on.</param>
+		/// <returns>List of CommAgencyResponse containing the results.</returns>
+		public List<CommAgencyResponse> CommAgencies(Var variable, Run run)
+		{
+			return this.CommReport<CommAgencyResponse>("Agencies", variable, run);
+		}
+		/// <summary>
+		///   <para>Commission report by Agencies for a specific month and year</para>
+		/// Execute the "CommAgencies" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommAgencies/
+		/// </summary>
+		/// <param name="variable">The variable to report on.</param>
+		/// <param name="yyyy">Year in yyyy format.</param>
+		/// <param name="mm">Month in mm format.</param>
+		/// <returns>List of CommAgencyResponse containing the results.</returns>
+		public List<CommAgencyResponse> CommAgencies(Var variable, string yyyy, string mm = "")
+		{
+			string Var = VarStr[(int)variable];
+			string Run = yyyy + mm;
+			return this.CommReport<CommAgencyResponse>("Agencies", Var, Run);
+		}
+		#endregion
 		#endregion
 
 		#region TODO:CommAgency

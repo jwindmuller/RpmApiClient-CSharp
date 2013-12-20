@@ -138,6 +138,22 @@ namespace RpmApiTests
 				"UserPasswordEdit@{\"Key\":\"\",\"Username\":\"Joaquin\",\"Password\":\"LePass1245\"}",
 				"{\"Result\":{\"Username\":\"Joaquin\"}}"
 			);
+			this.fakeResponses.Add(
+				"CommAgencies@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"this\"}",
+				"{\"Result\":{\"Agencies\":[{\"Agency\":\"My Agency\",\"AgencyID\":1,\"Value\":200}]}}"
+			);
+			this.fakeResponses.Add(
+				"CommAgencies@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"201301\"}",
+				"{\"Result\":{\"Agencies\":[{\"Agency\":\"My Agency\",\"AgencyID\":1,\"Value\":200}]}}"
+			);
+			this.fakeResponses.Add(
+				"CommAccounts@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"this\"}",
+				"{\"Result\":{\"Accounts\":[{\"Account\":\"Acc\",\"AccountID\":67619,\"Value\":100},{\"Account\":\"acc00001\",\"AccountID\":67628,\"Value\":100}]}}"
+			);
+			this.fakeResponses.Add(
+				"CommAccounts@{\"Key\":\"\",\"Var\":\"NetBilled\",\"Run\":\"201301\"}",
+				"{\"Result\":{\"Accounts\":[{\"Account\":\"Acc\",\"AccountID\":67619,\"Value\":100},{\"Account\":\"acc00001\",\"AccountID\":67628,\"Value\":100}]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

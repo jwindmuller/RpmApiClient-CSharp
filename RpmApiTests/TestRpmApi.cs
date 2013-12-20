@@ -137,6 +137,38 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommAccounts()
+		{
+			Client client = this.getApiClient();
+			List<CommAccountResponse> reports = client.CommAccounts(Client.Var.NetBilled, Client.Run._this); // Mocked
+			List<CommAccountResponse> reportsYYYYMM = client.CommAccounts(Client.Var.NetBilled, "2013", "01"); // Mocked
+
+			Assert.IsTrue(reports.Count == reportsYYYYMM.Count);
+			for (int i = 0; i < reports.Count; i++)
+			{
+				CommAccountResponse r1 = reports[i];
+				CommAccountResponse r2 = reportsYYYYMM[i];
+				Assert.IsTrue(r1.Equals(r2));
+			}
+		}
+
+		[TestMethod]
+		public void TestCommAgencies()
+		{
+			Client client = this.getApiClient();
+			List<CommAgencyResponse> reports = client.CommAgencies(Client.Var.NetBilled, Client.Run._this);
+			List<CommAgencyResponse> reportsYYYYMM = client.CommAgencies(Client.Var.NetBilled, "2013", "01");
+
+			Assert.IsTrue(reports.Count == reportsYYYYMM.Count);
+			for (int i = 0; i < reports.Count; i++)
+			{
+				CommAgencyResponse r1 = reports[i];
+				CommAgencyResponse r2 = reportsYYYYMM[i];
+				Assert.IsTrue(r1.Equals(r2));
+			}
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();
