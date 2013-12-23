@@ -40,6 +40,7 @@ namespace RPM.Api
 			{
 				throw new UriFormatException("Invalid URL: " + this.url);
 			}
+            this.url = url;
 			if (client == null)
 			{
 				this.client = new RestClient(url);
