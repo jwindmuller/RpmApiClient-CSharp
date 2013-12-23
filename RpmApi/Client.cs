@@ -430,7 +430,15 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CommItem
+		#region CommItem
+		public enum CommItemType { Item, Split };
+		private string[] CommItemTypeStr = {"n", "s" }; 
+		public CommItemResponse CommItem(CommItemType type, int ItemID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.itemID = String.Format("{0}{1}", this.CommItemTypeStr[(int)type], ItemID);
+			return this.sendRequest<CommItemResponse>("CommItem", apiParameters);
+		}
 		#endregion
 
 		#region TODO:CommPayments

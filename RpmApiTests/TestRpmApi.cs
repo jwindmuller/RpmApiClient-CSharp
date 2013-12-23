@@ -208,6 +208,13 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommItem()
+		{
+			Client client = this.getApiClient();
+			CommItemResponse itemInfo = client.CommItem(Client.CommItemType.Item, 60);
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();
