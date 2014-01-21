@@ -215,6 +215,20 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommPayments()
+		{
+			Client client = this.getApiClient();
+			List<CommAgencyPayment> results = client.CommPayments("201012"); // Mocked
+			Assert.IsTrue(results.Count >= 0);
+			foreach (CommAgencyPayment payment in results)
+			{
+				Assert.IsTrue(payment.Agency != null);
+				Assert.IsTrue(payment.AgencyID > 0);
+				Assert.IsTrue(payment.Payout >= 0);
+			}
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();

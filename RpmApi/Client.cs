@@ -441,7 +441,26 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CommPayments
+		#region CommPayments
+		/// <summary>
+		///   <para>Get a list of agency payout amounts for a commission run.</para>
+		/// Execute the "CommPayments" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommPayments/
+		/// </summary>
+		/// <param name="yyyymm">The Run to Report on in yyyymm format.</param>
+		/// <returns>List of CommAgencyPayment with the results</returns>
+		public List<CommAgencyPayment> CommPayments(string yyyymm)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.CommRun = yyyymm;
+			return this.CommPayments(apiParameters);
+		}
+		private List<CommAgencyPayment> CommPayments(dynamic apiParameters)
+		{
+			Dictionary<String, List<CommAgencyPayment>> response =
+				this.sendRequest<Dictionary<String, List<CommAgencyPayment>>>("CommPayments", apiParameters);
+			return response["Agencies"];
+		}
 		#endregion
 
 		#region TODO:CommRep
