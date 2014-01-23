@@ -488,7 +488,47 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CommReps
+		#region CommReps
+		/// <summary>
+		///   <para>Get a Commission metric report for all Reps.</para>
+		/// Execute the "CommReps" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommReps/
+		/// </summary>
+		/// <param name="variable">The variable.</param>
+		/// <param name="run">The run.</param>
+		/// <returns>List of CommRepResponse with the results </returns>
+		public List<CommRepResponse> CommReps(Var variable, Run run)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Var = VarStr[(int)variable];
+			apiParameters.Run = RunStr[(int)run];
+
+			return this.CommReps(apiParameters);
+		}
+
+		/// <summary>
+		///   <para>Get a Commission metric report for all Reps.</para>
+		/// Execute the "CommReps" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommReps/
+		/// </summary>
+		/// <param name="variable">The variable.</param>
+		/// <param name="yyyy">The Year in yyyy format.</param>
+		/// <param name="mm">The Month in mm format.</param>
+		/// <returns>List of CommRepResponse with the results </returns>
+		public List<CommRepResponse> CommReps(Var variable, string yyyy, string mm = "")
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Var = VarStr[(int)variable];
+			apiParameters.Run = yyyy + mm;
+
+			return this.CommReps(apiParameters);
+		}
+		private List<CommRepResponse> CommReps(dynamic apiParameters)
+		{
+			Dictionary<string, List<CommRepResponse>> response =
+				this.sendRequest<Dictionary<string, List<CommRepResponse>>>("CommReps", apiParameters);
+			return response["Reps"];
+		}
 		#endregion
 		#endregion
 

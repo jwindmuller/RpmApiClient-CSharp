@@ -241,6 +241,27 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCommReps()
+		{
+			Client client = this.getApiClient();
+			List<CommRepResponse> repsReport = client.CommReps(Client.Var.NetBilled, "2005", "01");
+
+			CommRepResponse repInfo = repsReport[0];
+
+			List<RunValuePairResponse> repReport = client.CommRep(Client.Var.NetBilled, repInfo.RepID);
+
+			foreach (RunValuePairResponse pair in repReport)
+			{
+				if (pair.Run == "200501")
+				{
+					Assert.IsTrue(pair.Value == repInfo.Value);
+					break;
+				}
+			}
+
+		}
+
+		[TestMethod]
 		public void TestCustomer()
 		{
 			SupplierResponse supplier = this.getFirstSupplier();
