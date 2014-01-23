@@ -176,7 +176,7 @@ namespace RpmApiTests
 			int AgencyID = 1; // Mocked
 			CommAgencyReport agencyReport = client.CommAgency(AgencyID, Client.Var.NetBilled);
 
-			foreach (CommAgencyRunResponse runReport in agencyReport.Values)
+			foreach (RunValuePairResponse runReport in agencyReport.Values)
 			{
 				List<CommAgencyResponse> allAgencies = client.CommAgencies(Client.Var.NetBilled, runReport.Run); // This works because Run will always be in YYYYMM format
 				int total = 0;
@@ -226,6 +226,17 @@ namespace RpmApiTests
 				Assert.IsTrue(payment.Agency != null);
 				Assert.IsTrue(payment.AgencyID > 0);
 				Assert.IsTrue(payment.Payout >= 0);
+			}
+		}
+
+		[TestMethod]
+		public void TestCommRep()
+		{
+			Client client = this.getApiClient();
+			List<RunValuePairResponse> repReport = client.CommRep(Client.Var.NetBilled, 5490);
+			foreach (RunValuePairResponse runTotal in repReport)
+			{
+				Assert.IsTrue(runTotal.Value > 0);
 			}
 		}
 

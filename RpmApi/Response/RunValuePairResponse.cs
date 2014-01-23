@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	public class CommAgencyRunResponse : Abstract.Response
+	public class RunValuePairResponse : Abstract.Response
 	{
 		private string _Run { get; set; }
 		public string Run
@@ -25,7 +25,7 @@ namespace RPM.Api.Response
 
 		public override bool Equals(object obj)
 		{
-			CommAgencyRunResponse other = obj as CommAgencyRunResponse;
+			RunValuePairResponse other = obj as RunValuePairResponse;
 			return
 				this.Run.Equals(other.Run) &&
 				this.Value == other.Value;

@@ -464,7 +464,28 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CommRep
+		#region CommRep
+		/// <summary>
+		///   <para>Get a commission metric report for a Rep for all commission months..</para>
+		/// Execute the "CommRep" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CommRep/
+		/// </summary>
+		/// <param name="variable">The variable.</param>
+		/// <param name="RepID">The rep identifier.</param>
+		/// <returns>List of RunValuePairResponse with results</returns>
+		public List<RunValuePairResponse> CommRep(Var variable, int RepID)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Var = VarStr[(int)variable];
+			apiParameters.RepID = RepID;
+			return this.CommRep(apiParameters);
+		}
+		private List<RunValuePairResponse> CommRep(dynamic apiParameters)
+		{
+			Response.CommRepReport response =
+				this.sendRequest<CommRepReport>("CommRep", apiParameters);
+			return response.Values;
+		}
 		#endregion
 
 		#region TODO:CommReps

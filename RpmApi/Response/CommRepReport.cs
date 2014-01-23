@@ -5,11 +5,13 @@ using System.Text;
 
 namespace RPM.Api.Response
 {
-	public class CommAgencyReport : Abstract.Response
+	public class CommRepReport : Abstract.Response
 	{
 		private string _Val { get; set; }
-		public string Val {
-			get {
+		public string Val
+		{
+			get
+			{
 				if (_Val == null)
 				{
 					_Val = "";
@@ -36,12 +38,10 @@ namespace RPM.Api.Response
 
 		public override bool Equals(object obj)
 		{
-			CommAgencyReport other = obj as CommAgencyReport;
+			CommRepReport other = obj as CommRepReport;
 			return
 				this.Val.Equals(other.Val) &&
 				this.CollectionsAreEqual(this.Values, other.Values);
 		}
-
-
 	}
 }
