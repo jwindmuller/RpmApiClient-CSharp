@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
+using System.Threading;
 
 namespace RPM.Api.Response
 {
@@ -114,7 +116,7 @@ namespace RPM.Api.Response
 			{
 				return default(T);
 			}
-			return (T) System.Convert.ChangeType(form.Values[index], Type.GetTypeCode(typeof(T)));
+            return (T) System.Convert.ChangeType(form.Values[index], Type.GetTypeCode(typeof(T)), new CultureInfo("en-us"));
 		}
 
 		public override bool Equals(object obj)
