@@ -170,6 +170,10 @@ namespace RpmApiTests
 				"CommPayments@{\"Key\":\"\",\"CommRun\":\"201012\"}",
 				"{\"Result\":{\"Agencies\":[{\"Agency\":\"_00000000historytesting\",\"AgencyID\":620,\"Payout\":0,\"Paid\":false},{\"Agency\":\"000111\",\"AgencyID\":556,\"Payout\":255,\"Paid\":false},{\"Agency\":\"01 A test 1\",\"AgencyID\":572,\"Payout\":58.2,\"Paid\":false},{\"Agency\":\"01 Jade\",\"AgencyID\":634,\"Payout\":0,\"Paid\":false}]}}"
 			);
+			this.fakeResponses.Add(
+				"CommItem@{\"Key\":\"\",\"itemID\":\"n77777777\"}",
+				"{\"Result\":{\"ItemID\":\"n77777777\",\"Account\":\"abc12\",\"AccountID\":115888,\"Customer\":\"\",\"CustomerID\":86006,\"Supplier\":\"abcdsessd\",\"SupplierID\":978,\"CommissionGroup\":\"\",\"CommissionGroupID\":0,\"Quantity\":1,\"CommissionRun\":\"Dec 2010\",\"Origin\":\"Imported 12:55 PM Wed, Nov 27, 2013\",\"Note\":\"\",\"NoteForAgents\":\"\",\"NetBilled\":\"$0.00\",\"Wholesale\":\"$0.00\",\"Margin\":\"$0.00\",\"GrossComm\":\"$0.00\",\"GrossCommPercent\":\"0.00 %\",\"GrossCommClaimedPercent\":\"0.00 %\",\"GrossCommExpectedPercent\":\"0.00 %\",\"Referrals\":[],\"Variables\":[],\"Splits\":{\"OriginalNetBilled\":\"\",\"Participants\":[]}}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

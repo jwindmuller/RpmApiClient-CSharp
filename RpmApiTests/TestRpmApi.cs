@@ -211,7 +211,8 @@ namespace RpmApiTests
 		public void TestCommItem()
 		{
 			Client client = this.getApiClient();
-			CommItemResponse itemInfo = client.CommItem(Client.CommItemType.Item, 60);
+			CommItemResponse itemInfo = client.CommItem(Client.CommItemType.Item, 77777777);
+			Assert.IsNotNull(itemInfo);
 		}
 
 		[TestMethod]
