@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommAgencyPayment.cs" />
-    <Compile Include="CommItemResponse.cs" />
+    <Compile Include="Response\CommAgencyPayment.cs" />
+    <Compile Include="Response\CommItemResponse.cs" />
     <Compile Include="Response\CommRepReport.cs" />
     <Compile Include="Response\CommCustomerResponse.cs" />
     <Compile Include="Response\CommAgencyReport.cs" />
