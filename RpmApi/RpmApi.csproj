@@ -90,6 +90,7 @@
     <Compile Include="SplitParticipantResponse.cs" />
     <Compile Include="SplitsResponse.cs" />
     <Compile Include="Response\UserResponse.cs" />
+    <Compile Include="Response\UPPUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

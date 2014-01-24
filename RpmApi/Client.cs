@@ -1513,7 +1513,19 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:UPPUsers
+		#region UPPUsers
+		/// <summary>
+		/// <para>Provides a list of staff users in RPM who have the UPP privilege.</para>
+		/// Execute the "UPPUsers" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/UPPUsers/
+		/// </summary>
+		/// <returns>List<UPPUser> with the reponse data</returns>
+		public List<UPPUser> UPPUsers()
+		{
+			Dictionary<String, List<UPPUser>> response =
+				this.sendRequest<Dictionary<String, List<UPPUser>>>("UPPUsers");
+			return response["UPPUsersList"];
+		}
 		#endregion
 
 		#region User

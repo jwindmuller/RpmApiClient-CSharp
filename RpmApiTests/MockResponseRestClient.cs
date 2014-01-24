@@ -186,6 +186,10 @@ namespace RpmApiTests
 				"User@{\"Key\":\"\",\"Username\":\"lochness123\",\"Password\":\"lochness123\"}",
 				"{\"Result\":{\"Username\":\"lochness123\",\"Logon\":true,\"Locked\":false,\"PasswordCheck\":true,\"StaffID\":51,\"Role\":\"X4 Sales AVP\",\"RoleID\":15,\"Added\":\"08/11/2009\",\"Modified\":\"01/24/2014\",\"Contact\":{\"ContactID\":138396,\"Salutation\":\"Ms.\",\"FirstName\":\"Kim\",\"LastName\":\"Rochel...(630) 501-1021\",\"Title\":\"\",\"Email\":\"krochel@x4communications.com_nosend_\",\"PhoneNumbers\":[{\"PhoneNumberID\":316016,\"Type\":1,\"Number\":\"(630) 501-1021\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":316017,\"Type\":6,\"Number\":\"(630) 729-4611\"}]},\"Fields\":[{\"Field\":\"test 1\",\"Value\":\"\"},{\"Field\":\"date 2\",\"Value\":\"\"},{\"Field\":\"num 1\",\"Value\":\"\"},{\"Field\":\"numberstaff fixed\",\"Value\":\"20\"}],\"LastLogon\":{\"When\":\"03/15/2011\",\"Browser\":\"Firefox3\",\"IP\":\"::1            \"}}}"
 			);
+			this.fakeResponses.Add(
+				"UPPUsers@{\"Key\":\"\"}",
+				"{\"Result\":{\"UPPUsersList\":[{\"UserID\":223423345,\"Fullname\":\"a b\",\"Role\":\"Engineer\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234089,\"Fullname\":\"aa aa\",\"Role\":\"Jade Minor\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234087,\"Fullname\":\"aaaaa aabbbbb\",\"Role\":\"Jade Minor\",\"Email\":\"ruhroh@rpmsoftware.com\",\"Logon\":false},{\"UserID\":313023474,\"Fullname\":\"abc def\",\"Role\":\"All\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313192343,\"Fullname\":\"addingfrom admin\",\"Role\":\"Engineer\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234209,\"Fullname\":\"asdfasd sdafsadfasdfs\",\"Role\":\"48471\",\"Email\":\"harharhar@rpmsoftware.com\",\"Logon\":false},{\"UserID\":323412909,\"Fullname\":\"asdfasdf asdfasd\",\"Role\":\"48471\",\"Email\":\"\",\"Logon\":true}]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

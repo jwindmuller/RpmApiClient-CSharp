@@ -817,6 +817,20 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestUPPUsers()
+		{
+			Client client = this.getApiClient();
+			List<UPPUser> users = client.UPPUsers();
+			foreach (UPPUser u in users)
+			{
+				Assert.IsTrue(u.UserID > 0);
+				Assert.IsTrue(u.Role.Length > 0);
+				Assert.IsTrue(u.Email.Trim().Length >= 0);
+				Assert.IsTrue(u.Fullname.Trim().Length >= 0);
+			}
+		}
+
+		[TestMethod]
 		public void TestUser()
 		{
 			Client client = this.getApiClient();
