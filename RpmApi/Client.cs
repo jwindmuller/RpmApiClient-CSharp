@@ -1517,6 +1517,22 @@ namespace RPM.Api
 		#endregion
 
 		#region User
+		/// <summary>
+		/// <para>Get an user's information</para>
+		/// Execute the "User" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/User/
+		/// </summary>
+		/// <param name="Username">The user's login username.</param>
+		/// <param name="Password">The user's login password.</param>
+		/// <returns>User object with all the data</returns>
+		public UserResponse User(string Username, string Password)
+		{
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Username = Username;
+			apiParameters.Password = Password;
+
+			return this.sendRequest<UserResponse>("User", apiParameters);
+		}
 		#endregion
 
 		#region UserPasswordEdit

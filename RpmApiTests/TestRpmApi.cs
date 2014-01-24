@@ -817,6 +817,16 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestUser()
+		{
+			Client client = this.getApiClient();
+			UserResponse user = client.User("lochness123", "lochness123");
+			Assert.IsTrue(user.RoleID > 0);
+			Assert.IsTrue(user.StaffID > 0);
+			Assert.AreEqual(user.Username, "lochness123");
+		}
+
+		[TestMethod]
 		public void TestUserPasswordEdit()
 		{
 			string username = "Joaquin";

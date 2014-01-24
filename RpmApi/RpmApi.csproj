@@ -51,6 +51,7 @@
     <Compile Include="Response\CommAgencyReport.cs" />
     <Compile Include="Response\AssignmentCode.cs" />
     <Compile Include="Response\CommAgencyResponse.cs" />
+    <Compile Include="Response\LastLogonInfo.cs" />
     <Compile Include="Response\RunValuePairResponse.cs" />
     <Compile Include="Response\ParticipantResponse.cs" />
     <Compile Include="Response\ProcFormResponse.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Response\WorksheetTableColumn.cs" />
     <Compile Include="SplitParticipantResponse.cs" />
     <Compile Include="SplitsResponse.cs" />
+    <Compile Include="Response\UserResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
