@@ -194,6 +194,14 @@ namespace RpmApiTests
 				"AccountAdd@{\"Key\":\"\",\"Account\":{\"Name\":\"The New Account\",\"AccountGroup\":null,\"CustomerName\":\"Mr. Customer\",\"SupplierName\":\"AT&T\",\"LocationName\":\"Primary\",\"Fields\":[]}}",
 				"{\"Result\":{\"Account\":\"The New Account\",\"AccountID\":67632,\"Customer\":\"Mr. Customer\",\"LocationName\":\"Primary\",\"LocationID\":1,\"CustomerID\":41801,\"Supplier\":\"AT\\u0026T\",\"SupplierID\":2,\"AccountGroup\":\"\",\"AccountGroupID\":0,\"Added\":\"2014-01-27\",\"Modified\":\"2014-01-27\",\"Fields\":[],\"Reps\":[]}}"
 			);
+			this.fakeResponses.Add(
+				"Customer@{\"Key\":\"\",\"Customer\":\"Gus Fring's Chicken Emporium\"}",
+				"{\"Result\":{\"CustomerID\":41802,\"Name\":\"Gus Fring\\u0027s Chicken Emporium\",\"Aliases\":[],\"Website\":\"\",\"Added\":\"2014-01-27\",\"Modified\":\"2014-01-27\",\"Locations\":[{\"IsPrimary\":true,\"LocationID\":2,\"Name\":\"Primary\",\"Address\":\"\",\"City\":\"\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"}],\"Contacts\":[{\"IsPrimary\":true,\"Contact\":{\"ContactID\":128647,\"Salutation\":\"\",\"FirstName\":\"\",\"LastName\":\"\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":0,\"Type\":1,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}],\"Fields\":[{\"Field\":\"CF1\", \"Value\": \"\"}],\"Accounts\":[],\"Notes\":[],\"NotesForStaff\":[]}}"
+			);
+			this.fakeResponses.Add(
+				"CustomerEdit@{\"Key\":\"\",\"Customer\":{\"CustomerID\":41802,\"Name\":\"Los Pollos Hermanos\",\"Website\":\"http://bit.ly/4kb77v\",\"Fields\":[{\"Field\":\"CF1\",\"Value\":\"Test\"}]}}",
+				"{\"Result\":{\"CustomerID\":41802,\"Name\":\"Los Pollos Hermanos\",\"Aliases\":[],\"Website\":\"http://bit.ly/4kb77v\",\"Added\":\"2014-01-27\",\"Modified\":\"2014-01-27\",\"Locations\":[{\"IsPrimary\":true,\"LocationID\":2,\"Name\":\"Primary\",\"Address\":\"\",\"City\":\"\",\"StateProvince\":\"n/a\",\"Country\":\"Canada\",\"ZipPostalCode\":\"\"}],\"Contacts\":[{\"IsPrimary\":true,\"Contact\":{\"ContactID\":128647,\"Salutation\":\"\",\"FirstName\":\"\",\"LastName\":\"\",\"Title\":\"\",\"Email\":\"\",\"PhoneNumbers\":[{\"PhoneNumberID\":0,\"Type\":1,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":2,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":3,\"Number\":\"\"},{\"PhoneNumberID\":0,\"Type\":6,\"Number\":\"\"}]}}],\"Fields\":[{\"Field\":\"CF1\",\"Value\":\"Test\"}],\"Accounts\":[],\"Notes\":[],\"NotesForStaff\":[]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

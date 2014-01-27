@@ -735,7 +735,26 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:CustomerEdit
+		#region CustomerEdit
+		/// <summary>
+		///   <para>Edit Customer Information: Name, Website and Custom Fields.</para>
+		///   <para>Executes the "CustomerEdit" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/CustomerEdit/ </para>
+		/// </summary>
+		/// <param name="CustomerData">The customer data to update.</param>
+		/// <returns>CustomerResponse with the entire customer's information</returns>
+		public CustomerResponse CustomerEdit(CustomerResponse CustomerData)
+		{
+			dynamic Customer = new ExpandoObject();
+			Customer.CustomerID = CustomerData.CustomerID;
+			Customer.Name = CustomerData.Customer;
+			Customer.Website = CustomerData.Website;
+			Customer.Fields = CustomerData.Fields;
+
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Customer = Customer;
+			return this.sendRequest<CustomerResponse>("CustomerEdit", apiParameters);
+		}
 		#endregion
 
 		#region CustomerLocationAdd

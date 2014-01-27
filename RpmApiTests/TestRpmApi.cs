@@ -421,6 +421,25 @@ namespace RpmApiTests
 		}
 
 		[TestMethod]
+		public void TestCustomerEdit()
+		{
+			Client client = this.getApiClient();
+			CustomerResponse customer = client.Customer("Gus Fring's Chicken Emporium");
+			Assert.AreEqual(customer.Customer, "Gus Fring's Chicken Emporium");
+			Assert.AreEqual(customer.Website, "");
+
+			customer.Customer = "Los Pollos Hermanos";
+			customer.Website = "http://bit.ly/4kb77v";
+			customer.Fields[0].Value = "Test";
+
+			CustomerResponse updated = client.CustomerEdit(customer);
+
+			Assert.IsTrue(customer.CustomerID == updated.CustomerID);
+			Assert.AreEqual(updated.Customer, "Los Pollos Hermanos");
+			Assert.AreEqual(updated.Website, "http://bit.ly/4kb77v");
+		}
+
+		[TestMethod]
 		public void TestCustomerLocationAdd()
 		{
 			int CustomerID = 77777777; // Fake ID for Mock testing
