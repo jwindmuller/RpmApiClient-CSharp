@@ -71,6 +71,27 @@ namespace RpmApiTests
 			Assert.IsTrue(firstAccount.Equals(accountByID));
 		}
 
+		[TestMethod]
+		public void TestAccountAdd()
+		{
+			AccountResponse accountToCreate = new AccountResponse();
+			accountToCreate.Account = "The New Account";
+			accountToCreate.Customer = "Mr. Customer";
+			accountToCreate.Supplier = "AT&T";
+			accountToCreate.LocationName = "Primary";
+			Client client = this.getApiClient();
+
+			AccountResponse account = client.AccountAdd(accountToCreate);
+
+			Assert.AreEqual(accountToCreate.Account, account.Account);
+			Assert.AreEqual(accountToCreate.Customer, account.Customer);
+			Assert.IsTrue(account.CustomerID > 0);
+			Assert.AreEqual(accountToCreate.Supplier, account.Supplier);
+			Assert.IsTrue(account.SupplierID > 0);
+			Assert.AreEqual(accountToCreate.LocationName, account.LocationName);
+			Assert.IsTrue(account.LocationID > 0);
+		}
+
 		private AccountResponse getFirstAccount(SupplierResponse supplier = null)
 		{
 			Client client = getApiClient();

@@ -132,7 +132,63 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:AccountAdd
+		#region AccountAdd
+		/// <para>Add and Account to a Customer</para>
+		/// Execute the "AccountAdd" API endpoint.
+		/// http://rpmsoftware.wordpress.com/api/AccountAdd/
+		/// </summary>
+		/// <param name="Account">The Account information.</param>
+		/// <param name="Fields">List of custom fields.</param>
+		/// <param name="LocationName">Identify the Account's location by name</param>
+		/// <returns>AccountResponse with the newly created Account.</returns>
+		public AccountResponse AccountAdd(AccountResponse Account)
+		{
+			dynamic Acc = new ExpandoObject();
+			if (Account.AccountID > 0)
+			{
+				Acc.AccountID = Account.AccountID;
+			}
+			else
+			{
+				Acc.Name = Account.Account;
+			}
+			if (Account.AccountGroupID > 0)
+			{
+				Acc.AccountGroupID = Account.AccountGroupID;
+			}
+			else
+			{
+				Acc.AccountGroup = Account.AccountGroup;
+			}
+			if (Account.CustomerID > 0)
+			{
+				Acc.CustomerID = Account.CustomerID;
+			}
+			else
+			{
+				Acc.CustomerName = Account.Customer;
+			}
+			if (Account.SupplierID > 0)
+			{
+				Acc.SupplierID = Account.SupplierID;
+			}
+			else
+			{
+				Acc.SupplierName = Account.Supplier;
+			}
+			if (Account.LocationID > 0)
+			{
+				Acc.LocationID = Account.LocationID;
+			}
+			else
+			{
+				Acc.LocationName = Account.LocationName;
+			}
+			Acc.Fields = Account.Fields;
+			dynamic apiParameters = this.apiParameters();
+			apiParameters.Account = Acc;
+			return this.sendRequest<AccountResponse>("AccountAdd", apiParameters);
+		}
 		#endregion
 
 		#region Accounts

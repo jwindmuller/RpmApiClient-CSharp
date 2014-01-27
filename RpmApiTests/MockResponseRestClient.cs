@@ -190,6 +190,10 @@ namespace RpmApiTests
 				"UPPUsers@{\"Key\":\"\"}",
 				"{\"Result\":{\"UPPUsersList\":[{\"UserID\":223423345,\"Fullname\":\"a b\",\"Role\":\"Engineer\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234089,\"Fullname\":\"aa aa\",\"Role\":\"Jade Minor\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234087,\"Fullname\":\"aaaaa aabbbbb\",\"Role\":\"Jade Minor\",\"Email\":\"ruhroh@rpmsoftware.com\",\"Logon\":false},{\"UserID\":313023474,\"Fullname\":\"abc def\",\"Role\":\"All\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313192343,\"Fullname\":\"addingfrom admin\",\"Role\":\"Engineer\",\"Email\":\"\",\"Logon\":true},{\"UserID\":313234209,\"Fullname\":\"asdfasd sdafsadfasdfs\",\"Role\":\"48471\",\"Email\":\"harharhar@rpmsoftware.com\",\"Logon\":false},{\"UserID\":323412909,\"Fullname\":\"asdfasdf asdfasd\",\"Role\":\"48471\",\"Email\":\"\",\"Logon\":true}]}}"
 			);
+			this.fakeResponses.Add(
+				"AccountAdd@{\"Key\":\"\",\"Account\":{\"Name\":\"The New Account\",\"AccountGroup\":null,\"CustomerName\":\"Mr. Customer\",\"SupplierName\":\"AT&T\",\"LocationName\":\"Primary\",\"Fields\":[]}}",
+				"{\"Result\":{\"Account\":\"The New Account\",\"AccountID\":67632,\"Customer\":\"Mr. Customer\",\"LocationName\":\"Primary\",\"LocationID\":1,\"CustomerID\":41801,\"Supplier\":\"AT\\u0026T\",\"SupplierID\":2,\"AccountGroup\":\"\",\"AccountGroupID\":0,\"Added\":\"2014-01-27\",\"Modified\":\"2014-01-27\",\"Fields\":[],\"Reps\":[]}}"
+			);
 		}
 
 		public override IRestResponse Execute(IRestRequest request)

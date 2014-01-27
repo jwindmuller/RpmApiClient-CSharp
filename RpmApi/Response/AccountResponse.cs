@@ -9,6 +9,17 @@ namespace RPM.Api.Response
 {
 	public class AccountResponse : Abstract.Response
 	{
+		public string Name
+		{
+			get
+			{
+				return Account;
+			}
+			set
+			{
+				Account = value;
+			}
+		}
 		public string Account { get; set; }
 		public int AccountID { get; set; }
 		public string AccountGroup { get; set; }
@@ -17,7 +28,7 @@ namespace RPM.Api.Response
 		public DateTime Modified {get; set; }
 		public string Customer { get; set; }
 		public int CustomerID { get; set; }
-		public List<FieldResponse> _Fields;
+		private List<FieldResponse> _Fields;
 		public List<FieldResponse> Fields
 		{
 			get
@@ -52,6 +63,9 @@ namespace RPM.Api.Response
 		public string Supplier { get; set; }
 		public int SupplierID { get; set; }
 
+		public string LocationName { get; set; }
+		public int LocationID { get; set; }
+
 		public override bool Equals(object obj)
 		{
 			AccountResponse other = (AccountResponse)obj;
@@ -65,6 +79,8 @@ namespace RPM.Api.Response
 				this.CustomerID == other.CustomerID &&
 				this.Supplier == other.Supplier &&
 				this.SupplierID == other.SupplierID &&
+				this.LocationName == other.LocationName &&
+				this.LocationID == other.LocationID &&
 				this.CollectionsAreEqual(this.Fields, other.Fields) &&
 				this.CollectionsAreEqual(this.Reps, other.Reps);
 
