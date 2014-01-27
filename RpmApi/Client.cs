@@ -851,7 +851,11 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:GetClassDefinition
+		#region GetClassDefinition
+		private void GetClassDefinition(dynamic apiParameters)
+		{
+			throw new NotImplementedException("GetClassDefinition not implemented");
+		}
 		#endregion
 
 		#region Info
@@ -1324,24 +1328,24 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:ProcFormUpp
+		#region ProcFormUpp
 		private void ProcFormUpp(dynamic apiParameters)
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("ProcFormUpp not implemented");
 		}
 		#endregion
 
-		#region TODO:ProcFormUppUpdate
+		#region ProcFormUppUpdate
 		private void ProcFormUppUpdate(dynamic apiParameters)
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("ProcFormUppUpdate not implemented");
 		}
 		#endregion
 
-		#region TODO:ProcFormWellDataUpdate
+		#region ProcFormWellDataUpdate
 		private void ProcFormWellDataUpdate(dynamic apiParameters)
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("ProcFormWellDataUpdate not implemented");
 		}
 		#endregion
 
@@ -1431,7 +1435,7 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:ProcRemindersEval
+		#region ProcRemindersEval
 		public void ProcRemindersEval()
 		{
 			throw new NotImplementedException("ProcRemindersEval not implemented");
@@ -1558,20 +1562,36 @@ namespace RPM.Api
 		}
 		#endregion
 
-		#region TODO:ServiceUsers
+		#region ServiceUsers
 		public void ServiceUsers()
 		{
 			throw new NotImplementedException("ServiceUsers not Implemented");
 		}
 		#endregion
 
-		#region TODO:SpectatorLogAdd
+		#region SpectatorLogAdd
+		public void SpectatorLogAdd()
+		{
+			throw new NotImplementedException("SpectatorLogAdd not Implemented");
+		}
 		#endregion
-		#region TODO:SpectatorLogClose
+		#region SpectatorLogClose
+		public void SpectatorLogClose()
+		{
+			throw new NotImplementedException("SpectatorLogClose not Implemented");
+		}
 		#endregion
-		#region TODO:SpectatorLogOpen
+		#region SpectatorLogOpen
+		public void SpectatorLogOpen()
+		{
+			throw new NotImplementedException("SpectatorLogOpen not Implemented");
+		}
 		#endregion
-		#region TODO:SpectatorLogUpdate
+		#region SpectatorLogUpdate
+		public void SpectatorLogUpdate()
+		{
+			throw new NotImplementedException("SpectatorLogUpdate not Implemented");
+		}
 		#endregion
 
 		#region Suppliers
